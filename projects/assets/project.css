@@ -30,3 +30,30 @@ h1,h2,h3{font-weight:600}
 body{font-family:Helvetica,Arial,sans-serif}
 
 .lang-switch,.participation{display:none!important}
+
+
+/* === A1 Navy editorial palette === */
+:root{
+  --bg:#F3F0E9;
+  --surface:#FBFAF6;
+  --ink:#101820;
+  --muted:#69737C;
+  --deep:#070B10;
+  --mint:#173E63;
+  --coral:#A51D2D;
+  --coral-text:#941A28;
+  --gold:#6F8292;
+  --line:rgba(16,24,32,.16);
+  --accent:#173E63;
+}
+html,body{font-family:Helvetica,"Helvetica Neue",Arial,sans-serif!important}
+header{background:rgba(243,240,233,.95)}
+.hero{background:#070B10}
+.hero:after{background:radial-gradient(circle,rgba(23,62,99,.28),transparent 36%),radial-gradient(circle at 70% 70%,rgba(165,29,45,.12),transparent 28%)}
+.hero p{color:#D8DEE3}
+.status-panel{background:rgba(255,255,255,.055)}
+.status-panel p{color:#C5CED5}
+.card.dark{background:#0B2540}
+.card.dark p{color:#C1CBD3}
+footer{background:#05080C;color:#91A3B1}
+.btn.join{background:#A51D2D;border-color:#A51D2D}
