@@ -1,0 +1,40 @@
+---
+title: "Projetos"
+subtitle: "Pesquisas em andamento e projetos selecionados"
+---
+
+## ARENAS
+
+**Sociomaterialidade e implementação de políticas públicas no Judiciário**
+
+Projeto em desenvolvimento no contexto da pesquisa pós-doutoral. Investiga infraestrutura, práticas, tecnologias e governança como dimensões constitutivas da implementação de políticas públicas.
+
+**Temas:** governança judicial · sociomaterialidade · implementação · avaliação
+
+[Repositório relacionado](https://github.com/cairesmachado-svg/sociomaterialidade-implementacao)
+
+## Regulatory Intermediaries
+
+Pesquisa sobre mecanismos de intermediação regulatória, com construção de base de episódios regulatórios e análise das relações entre regulador, intermediário e alvo.
+
+**Temas:** regulação · intermediários · governança · transição verde
+
+[Repositório](https://github.com/cairesmachado-svg/prj-intermediaries)
+
+## ARQJUD
+
+Programa originado na pesquisa doutoral sobre arquitetura judiciária e autopercepção de produtividade, com desenvolvimento de instrumento de mensuração e agenda de expansão empírica.
+
+**Temas:** arquitetura judiciária · ambiente de trabalho · avaliação pós-ocupação · produtividade
+
+## LABJUS
+
+Frente dedicada a problemas de pesquisa jurídica empírica e interfaces entre justiça, comportamento e desenho institucional.
+
+[Repositório](https://github.com/cairesmachado-svg/Labjus)
+
+## Pesquisa Científica Agentiva
+
+Desenvolvimento de um percurso de pesquisa que integra formulação do problema, revisão, APIs, coleta, análise, escrita reprodutível e produção de artefatos com apoio de agentes de IA.
+
+**Temas:** IA · métodos · APIs · Scopus · Quarto · reprodutibilidade
