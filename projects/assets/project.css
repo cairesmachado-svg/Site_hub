@@ -28,3 +28,5 @@ h1,h2,h3{font-weight:600}
 .question{font-weight:500}
 .question em{font-style:normal;color:var(--coral-text);font-weight:700}
 body{font-family:Helvetica,Arial,sans-serif}
+
+.lang-switch,.participation{display:none!important}
