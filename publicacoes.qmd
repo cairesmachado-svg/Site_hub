@@ -1,0 +1,24 @@
+---
+title: "Publicações"
+subtitle: "Produção científica, relatórios e trabalhos em desenvolvimento"
+---
+
+Esta seção será organizada por **status**, **tema**, **tipo de produto** e **projeto de origem**.
+
+## Publicado
+
+Em preparação para importação do currículo Lattes e consolidação bibliográfica.
+
+## Aceito e no prelo
+
+Trabalhos aceitos e em processo editorial serão identificados separadamente dos itens já publicados.
+
+## Working papers
+
+Manuscritos e produtos científicos em desenvolvimento poderão ser apresentados aqui quando houver versão pública disponível.
+
+## Produtos de pesquisa
+
+Além de artigos, esta seção conectará datasets, escalas, relatórios técnicos, protocolos, apresentações e outros produtos derivados dos projetos.
+
+> A próxima versão desta página será alimentada por uma base bibliográfica estruturada, permitindo filtros automáticos por tema, ano, tipo e projeto.
