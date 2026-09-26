@@ -1,0 +1,28 @@
+---
+title: "Pesquisa"
+subtitle: "Programas e eixos de investigação"
+---
+
+## Governança Judicial e Políticas Públicas
+
+Governança, implementação e avaliação de políticas públicas no Poder Judiciário, com atenção às capacidades institucionais, instrumentos regulatórios, coordenação e produção de evidências.
+
+## Arquitetura Judiciária e Sociomaterialidade
+
+Relações entre espaço, infraestrutura, práticas de trabalho, tecnologia e desempenho institucional. Este eixo reúne a trajetória iniciada com a ARQJUD e sua expansão para abordagens sociomateriais.
+
+## Regulação e Intermediação
+
+Estudo dos mecanismos de intermediação regulatória e das relações entre reguladores, intermediários e públicos-alvo, incluindo aplicações em transição verde e governança regulatória.
+
+## Direito, Justiça e Comportamento
+
+Pesquisa jurídica empírica, heurísticas, vieses, desenho institucional, produção de evidências e interfaces entre direito, comportamento e administração da justiça.
+
+## Métodos, Dados e Pesquisa Agentiva
+
+Fluxos de pesquisa mediados por agentes de IA, APIs científicas, bibliometria, ciência reprodutível, Quarto, automação e curadoria metodológica.
+
+## Educação e Inovação no Judiciário
+
+Pesquisa aplicada à formação judicial, desenho educacional, trilhas de aprendizagem, inovação, gestão do conhecimento e articulação entre escolas judiciais.
