@@ -38,6 +38,7 @@ jobs:
           for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus; do
             mkdir -p "_site/projects/$slug/en"
             cp "projects/$slug/en/index.html" "_site/projects/$slug/en/index.html"
+            sed -i -E 's|href="mailto:[^"]+"|href="../../../#contato"|g' "_site/projects/$slug/en/index.html"
 
             mkdir -p "_site/projects/$slug"
             cat > "_site/projects/$slug/index.html" <<EOF
