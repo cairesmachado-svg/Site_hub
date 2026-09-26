@@ -499,3 +499,45 @@ blockquote em{color:#D8E2EA;font-style:normal}
   .pub-section-head,.pub-item{grid-template-columns:1fr}
   .pub-actions{justify-content:flex-start}
 }
+
+/* Final academic blue-black palette */
+:root{
+  --bg:#EEF2F5;
+  --surface:#FAFBFC;
+  --ink:#0D1720;
+  --ink-2:#233342;
+  --muted:#5C6873;
+  --deep:#050B12;
+  --deep-2:#0B1B2B;
+  --mint:#567B9A;
+  --sage:#DCE4EA;
+  --coral:#A91F2C;
+  --coral-text:#921A25;
+  --coral-soft:#E8D7DA;
+  --gold:#7A8C9C;
+  --line:rgba(13,23,32,.15);
+}
+.hero{background:#050B12}
+.hero-aurora{
+  background:
+    radial-gradient(circle at 45% 38%,rgba(55,91,122,.34),transparent 30%),
+    radial-gradient(circle at 68% 58%,rgba(169,31,44,.18),transparent 25%),
+    radial-gradient(circle at 42% 78%,rgba(33,61,86,.20),transparent 25%);
+}
+.cursor-glow{background:radial-gradient(circle,rgba(61,99,132,.14),rgba(169,31,44,.04) 45%,transparent 70%)}
+.eyebrow{color:#D7E0E7}
+.hero-lead{color:#C5D0D8}
+.hero-context{color:#A8B5BF}
+.hero-meta span{color:#B6C2CB}
+.theme-marquee span{color:#93A8B8}
+.map-node circle{fill:#10253A}
+.map-node .node-sub{fill:#9CB0C0}
+.map-node:hover circle,.map-node.active circle{fill:#173A58}
+.map-explainer{background:#F1F4F7;color:#142433}
+.map-explainer p{color:#5F6D79}
+.project-card-main{background:#07111B}
+.project-card-main p{color:#B8C6D0}
+.quote-section{background:#07111B}
+.contact-section{background:#050B12}
+.contact-copy p{color:#B6C5CF}
+footer{background:#02060A;color:#8FA2B1}
