@@ -10,9 +10,10 @@ https://cairesmachado-svg.github.io/Site_hub/
 | `en/index.html` | Página inicial (publicada como raiz do site) |
 | `publications/index.html` | Lista completa de publicações, com PDFs quando há arquivo público verificado |
 | `projects/<projeto>/en/index.html` | Páginas dos projetos: arenas, regulatory-intermediaries, arqjud, pesquisa-agentiva, labjus |
-| `styles.css` | Sistema visual único para todas as páginas (paleta A1 Navy editorial, Helvetica) |
+| `styles.css` | Sistema visual único para todas as páginas (barra marinho #05336B, fundo branco, Source Sans 3) |
 | `script.js` | Menu no celular e status do repositório nas páginas de projeto |
 | `assets/qr-digital-card.svg` | QR code local do cartão digital |
+| `assets/fonts/` | Fonte Source Sans 3 hospedada no site (licença OFL) |
 | `.github/workflows/publish.yml` | Build e deploy: copia os arquivos acima para `_site/` e publica |
 
 ## Arquivos legados
