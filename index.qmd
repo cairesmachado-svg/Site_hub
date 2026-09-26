@@ -3,130 +3,206 @@ title: false
 page-layout: full
 ---
 
-::: {.hero}
-::: {.hero-copy}
-<p class="eyebrow">PESQUISA · GESTÃO PÚBLICA · JUSTIÇA</p>
-
-# Igor Caires Machado
-
-<p class="hero-lead">Pesquisador e gestor público dedicado à investigação das relações entre instituições, espaços, tecnologias, regulação e implementação de políticas públicas no sistema de justiça.</p>
-
-<div class="hero-actions">
-<a class="btn-primary" href="pesquisa.html">Agenda de pesquisa</a>
-<a class="btn-secondary" href="publicacoes.html">Publicações</a>
-<a class="btn-secondary" href="projetos.html">Projetos</a>
+::: {.home-hero}
+::: {.home-photo-col}
+<div class="portrait-wrap">
+<img class="portrait" src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Igor Caires Machado">
 </div>
 
-<div class="hero-links">
-<a href="https://www.linkedin.com/in/igorcairesmachado">LinkedIn</a>
-<span>·</span>
+<div class="identity-mini">
+<span>IGOR CAIRES MACHADO</span>
+<strong>Pesquisador · Gestor público</strong>
+<small>Brasília, Brasil</small>
+</div>
+:::
+
+::: {.home-copy}
+<p class="kicker">GOVERNANÇA JUDICIAL · POLÍTICAS PÚBLICAS · REGULAÇÃO</p>
+
+# Pesquisa para compreender como instituições realmente funcionam.
+
+<p class="lead">Sou pesquisador e gestor público. Investigo como regras, espaços, tecnologias, capacidades institucionais e formas de coordenação moldam a implementação de políticas públicas no sistema de justiça.</p>
+
+<p>Minha trajetória conecta <strong>arquitetura judiciária</strong>, <strong>sociomaterialidade</strong>, <strong>governança regulatória</strong>, <strong>educação judicial</strong> e <strong>métodos de pesquisa aplicada</strong>. Atuo na Escola Nacional do Judiciário, no Conselho Nacional de Justiça, e desenvolvo pesquisa pós-doutoral na ENAP.</p>
+
+<div class="social-row">
+<a href="https://www.linkedin.com/in/igorcairesmachado/">LinkedIn</a>
 <a href="https://github.com/cairesmachado-svg">GitHub</a>
-<span>·</span>
-<a href="sobre.html">Currículo e trajetória</a>
+<a href="https://orcid.org/0009-0008-9547-5223">ORCID</a>
+<a href="mailto:igor.machado@cnj.jus.br">E-mail</a>
 </div>
-:::
 
-::: {.identity-card}
-<img class="profile-photo" src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Igor Caires Machado">
-
-<div class="identity-name">Igor Caires Machado</div>
-<div class="identity-role">Coordenador · ENAJU/CNJ</div>
-<div class="identity-unit">Desenvolvimento Educacional, Pesquisa e Inovação</div>
-
-<div class="qr-wrap">
-<img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code para o cartão digital de Igor Caires Machado">
+<div class="contact-chip">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code do cartão digital">
 <div>
-<strong>Cartão digital</strong><br>
-<span>Aponte a câmera para salvar o contato.</span>
+<span>CARTÃO DIGITAL</span>
+<strong>Salve meu contato</strong>
+<small>Escaneie ou <a href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/">abra o cartão institucional</a>.</small>
 </div>
 </div>
-
-<a class="contact-link" href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/">Abrir cartão de visitas ↗</a>
 :::
 :::
 
-::: {.section-intro}
-## Agenda de pesquisa
+::: {.statement}
+<p class="kicker">A QUESTÃO QUE CONECTA MINHA AGENDA</p>
 
-Minha produção se organiza em programas de pesquisa conectados por um problema comum: compreender como estruturas institucionais, ambientes, tecnologias, evidências e arranjos regulatórios moldam a ação pública e a justiça.
+## Como instituições transformam normas e políticas em práticas concretas?
+
+Meu trabalho observa esse processo por diferentes lentes. O espaço físico interfere na implementação. Regras circulam por intermediários. Indicadores produzem visibilidade e poder. Capacidades locais condicionam resultados. A formação profissional pode alterar a própria capacidade institucional de aprender.
 :::
 
-::: {.research-grid}
-::: {.research-card}
-### Governança Judicial e Políticas Públicas
-Implementação, avaliação, governança regulatória e capacidades institucionais no Poder Judiciário.
+## Sobre minha trajetória {.section-heading}
 
-[Explorar eixo →](pesquisa.qmd#governança-judicial-e-políticas-públicas)
+::: {.bio-grid}
+::: {.bio-block}
+### Da arquitetura à implementação
+
+Minha pesquisa doutoral partiu da arquitetura judiciária e da relação entre ambiente construído, trabalho e produtividade. Desse percurso nasceu a **ARQJUD**, com uma escala própria organizada em reconhecimento, acesso e funcionalidade.
+
+A pergunta se ampliou: se o espaço condiciona o trabalho, ele também participa da implementação das políticas. Essa passagem conduziu ao estudo da **sociomaterialidade** e, hoje, ao projeto **ARENAS**, desenvolvido no pós-doutorado na ENAP.
 :::
 
-::: {.research-card}
-### Arquitetura Judiciária e Sociomaterialidade
-Espaço, trabalho, infraestrutura judicial, avaliação pós-ocupação e dimensões sociomateriais da implementação.
+::: {.bio-block}
+### Da gestão à governança
 
-[Explorar eixo →](pesquisa.qmd#arquitetura-judiciária-e-sociomaterialidade)
-:::
+Minha trajetória profissional no sistema de justiça reúne planejamento, projetos, infraestrutura, administração, pesquisa judiciária e gestão institucional.
 
-::: {.research-card}
-### Regulação e Intermediação
-Intermediários regulatórios, governança regulatória, transição verde e desenho de relações regulador–intermediário–alvo.
-
-[Explorar eixo →](pesquisa.qmd#regulação-e-intermediação)
-:::
-
-::: {.research-card}
-### Direito, Justiça e Comportamento
-Pesquisa jurídica empírica, vieses, decisão, desenho institucional e produção de evidências para o sistema de justiça.
-
-[Explorar eixo →](pesquisa.qmd#direito-justiça-e-comportamento)
-:::
-
-::: {.research-card}
-### Métodos, Dados e Pesquisa Agentiva
-APIs científicas, bibliometria, Quarto, ciência reprodutível e uso de agentes de IA em fluxos de pesquisa.
-
-[Explorar eixo →](pesquisa.qmd#métodos-dados-e-pesquisa-agentiva)
-:::
-
-::: {.research-card}
-### Educação e Inovação no Judiciário
-Formação judicial, desenho de experiências de aprendizagem, pesquisa aplicada e inovação institucional.
-
-[Explorar eixo →](pesquisa.qmd#educação-e-inovação-no-judiciário)
+Na **ENAJU/CNJ**, coordeno desenvolvimento educacional, pesquisa e inovação. Essa experiência alimenta uma agenda de pesquisa aplicada interessada em governança, capacidades institucionais, educação judicial e produção de evidências úteis à decisão pública.
 :::
 :::
 
-## Em andamento {.section-title}
+<div class="credentials-strip">
+<span><strong>Doutor</strong><br>Ciências Empresariais e Sociais</span>
+<span><strong>Pós-doutorado</strong><br>ENAP · 2026–2027</span>
+<span><strong>Formação</strong><br>Arquitetura · Gestão · Direito</span>
+<span><strong>Atuação</strong><br>ENAJU · CNJ</span>
+</div>
 
-::: {.current-grid}
-::: {.current-item}
-<span class="status">EM ANDAMENTO</span>
+## Agenda de pesquisa {.section-heading}
+
+<div class="agenda-list">
+<div><span>01</span><strong>Governança Judicial e Políticas Públicas</strong><p>Implementação, capacidades institucionais, coordenação, avaliação e governança regulatória no sistema de justiça.</p></div>
+<div><span>02</span><strong>Sociomaterialidade e Arquitetura Judiciária</strong><p>Como espaços, objetos, tecnologias e arranjos materiais participam da prática institucional.</p></div>
+<div><span>03</span><strong>Regulação e Intermediação</strong><p>Reguladores, intermediários, targets, mecanismos de intermediação e arquitetura relacional da regulação.</p></div>
+<div><span>04</span><strong>Educação Judicial e Métodos de Pesquisa</strong><p>Formação profissional, inovação pedagógica, bibliometria, revisão de literatura e pesquisa científica mediada por agentes.</p></div>
+</div>
+
+## Escritos selecionados {.section-heading}
+
+<p class="section-intro-text">Uma seleção de textos que melhor representam a evolução recente da minha agenda acadêmica. O conjunto percorre regulação, governança judicial, sociomaterialidade, métodos e educação judicial. Meu LinkedIn reúne atualmente uma série continuada de artigos nesses temas. </p>
+
+<div class="writing-list">
+
+<a class="writing-item featured-writing" href="https://www.linkedin.com/pulse/between-rules-behavior-igor-caires-machado-0tfgf?trk=public_post">
+<span class="writing-no">01</span>
+<div>
+<span class="writing-meta">REGULAÇÃO · 2026</span>
+<h3>Between Rules and Behavior</h3>
+<p>Dos atores aos mecanismos: uma leitura do modelo RIT e da arquitetura relacional da intermediação regulatória.</p>
+</div>
+<span class="writing-arrow">↗</span>
+</a>
+
+<a class="writing-item" href="https://www.linkedin.com/pulse/when-judiciary-regulates-brazils-cnj-expansion-igor-caires-m-phd--bjvgf?trk=public_post">
+<span class="writing-no">02</span>
+<div>
+<span class="writing-meta">JUDICIAL REGULATORY GOVERNANCE · 2026</span>
+<h3>When the Judiciary Regulates</h3>
+<p>O CNJ como caso para uma agenda comparada sobre conselhos judiciais, coordenação nacional, regulação e implementação.</p>
+</div>
+<span class="writing-arrow">↗</span>
+</a>
+
+<a class="writing-item" href="https://pt.linkedin.com/pulse/edi%C3%A7%C3%A3o-02-o-pr%C3%A9dio-tamb%C3%A9m-implementa-pol%C3%ADtica-igor-caires-machado-eozef">
+<span class="writing-no">03</span>
+<div>
+<span class="writing-meta">SOCIOMATERIALIDADE · 2026</span>
+<h3>O prédio também implementa a política</h3>
+<p>Uma proposição simples com consequências importantes: a configuração física participa da execução da política pública.</p>
+</div>
+<span class="writing-arrow">↗</span>
+</a>
+
+<a class="writing-item" href="https://pt.linkedin.com/pulse/tipos-de-revis%C3%A3o-literatura-em-pol%C3%ADticas-p%C3%BAblicas-do-caires-machado-9bztf?trk=public_post">
+<span class="writing-no">04</span>
+<div>
+<span class="writing-meta">MÉTODOS · 2026</span>
+<h3>Tipos de revisão de literatura em políticas públicas</h3>
+<p>Critérios para escolher desenho de revisão, técnica de síntese e estratégia metodológica conforme o problema de pesquisa.</p>
+</div>
+<span class="writing-arrow">↗</span>
+</a>
+
+<a class="writing-item" href="https://pt.linkedin.com/posts/igorcairesmachado_educa%C3%A7%C3%A3ojudicial-escolasjudiciais-inova%C3%A7%C3%A3opedag%C3%B3gica-activity-7495238026126868480-rw0a">
+<span class="writing-no">05</span>
+<div>
+<span class="writing-meta">EDUCAÇÃO JUDICIAL · ARTIGO PUBLICADO · 2026</span>
+<h3>Educação Judicial e Inovação Pedagógica</h3>
+<p>Evidências bibliométricas para compreender tendências, temas e oportunidades de pesquisa aplicadas às escolas judiciais.</p>
+</div>
+<span class="writing-arrow">↗</span>
+</a>
+
+</div>
+
+## Projetos em curso {.section-heading}
+
+::: {.project-showcase}
+::: {.project-main}
+<span class="project-label">PÓS-DOUTORADO · ENAP</span>
 
 ### ARENAS
-Sociomaterialidade, implementação de políticas públicas e governança judicial.
 
-[Ver projeto →](projetos.qmd#arenas)
+**Sociomaterialidade e implementação de políticas públicas no Judiciário**
+
+O projeto articula infraestrutura, práticas, tecnologia e governança para investigar como políticas públicas são materialmente implementadas. Ele representa a continuidade e a expansão da agenda iniciada com a ARQJUD.
+
+[Conhecer o projeto →](projetos.html#arenas)
 :::
 
-::: {.current-item}
-<span class="status">PESQUISA INTERNACIONAL</span>
+::: {.project-side}
+<div>
+<span class="project-label">PESQUISA INTERNACIONAL</span>
+<h3>Regulatory Intermediaries</h3>
+<p>Intermediação regulatória, mecanismos, Green Transition e construção de dataset empírico.</p>
+<a href="https://github.com/cairesmachado-svg/prj-intermediaries">GitHub →</a>
+</div>
 
-### Regulatory Intermediaries
-Intermediação regulatória, desenho institucional e transição verde.
+<div>
+<span class="project-label">PROGRAMA DE PESQUISA</span>
+<h3>ARQJUD</h3>
+<p>Arquitetura judiciária, ambiente de trabalho, avaliação pós-ocupação e produtividade.</p>
+<a href="projetos.html#arqjud">Ver percurso →</a>
+</div>
 
-[Ver projeto →](projetos.qmd#regulatory-intermediaries)
+<div>
+<span class="project-label">MÉTODOS</span>
+<h3>Pesquisa Científica Agentiva</h3>
+<p>Agentes de IA, APIs, bibliometria, Quarto e workflows reprodutíveis.</p>
+<a href="projetos.html#pesquisa-científica-agentiva">Explorar →</a>
+</div>
+:::
 :::
 
-::: {.current-item}
-<span class="status">MÉTODOS</span>
+::: {.academic-note}
+<p class="kicker">EM FOCO</p>
 
-### Pesquisa Científica Agentiva
-Do problema ao produto: agentes, dados, APIs e reprodutibilidade científica.
+## Uma agenda acadêmica em construção contínua.
 
-[Ver projeto →](projetos.qmd#pesquisa-científica-agentiva)
-:::
+A produção apresentada neste site não se limita a artigos concluídos. Ela inclui manuscritos, datasets, escalas, relatórios técnicos, apresentações, projetos metodológicos e produtos de pesquisa aplicada. O objetivo é tornar visível o percurso da pergunta ao produto.
 :::
 
-::: {.closing-statement}
-> **Pesquisa como prática de construção institucional.**  
-> O site funciona como hub da produção acadêmica, dos projetos em curso, dos produtos de pesquisa, dos dados e das experiências profissionais que dialogam com essa agenda.
+::: {.footer-contact}
+<div>
+<p class="kicker">CONTATO</p>
+## Vamos conversar sobre pesquisa.
+<p>Governança judicial, sociomaterialidade, regulação, educação judicial e métodos de pesquisa aplicada.</p>
+<div class="social-row">
+<a href="mailto:igor.machado@cnj.jus.br">E-mail</a>
+<a href="https://www.linkedin.com/in/igorcairesmachado/">LinkedIn</a>
+<a href="https://github.com/cairesmachado-svg">GitHub</a>
+<a href="https://orcid.org/0009-0008-9547-5223">ORCID</a>
+</div>
+</div>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code do cartão digital">
 :::
