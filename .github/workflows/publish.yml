@@ -1,9 +1,11 @@
-name: Publish Static Site
+name: Publish English Site
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 8 * * *"
 
 permissions:
   contents: read
@@ -21,11 +23,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare static site
+      - name: Prepare English-only static site
+        shell: bash
         run: |
+          rm -rf _site
           mkdir -p _site
-          cp index.html styles.css script.js _site/\n          cp -r projects _site/
-          cp -r en _site/
+          cp en/index.html _site/index.html
+          cp styles.css script.js _site/
+          cp -r publications _site/publications
+
+          mkdir -p _site/projects/assets
+          cp projects/assets/project.css projects/assets/project.js _site/projects/assets/
+
+          for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus; do
+            mkdir -p "_site/projects/$slug/en"
+            cp "projects/$slug/en/index.html" "_site/projects/$slug/en/index.html"
+
+            mkdir -p "_site/projects/$slug"
+            cat > "_site/projects/$slug/index.html" <<EOF
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=en/">
+            <link rel="canonical" href="en/">
+            <title>Project</title>
+          </head>
+          <body></body>
+          </html>
+          EOF
+          done
+
           touch _site/.nojekyll
 
       - name: Setup Pages
