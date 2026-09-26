@@ -607,3 +607,45 @@ footer{background:#02060A}
 .pub-item{grid-template-columns:90px 1fr auto;padding:1.65rem 0}.pub-section-head{grid-template-columns:.55fr 1.45fr}
 @media(max-width:1000px){.personal-cross{right:78px}.hero-content{grid-template-columns:1fr;gap:3rem;text-align:left}.hero-copy{align-items:flex-start}.hero-actions,.hero-meta{justify-content:flex-start}.hero-visual{justify-items:start}.portrait-stage,.qr-card{width:min(420px,100%)}.manifesto{grid-template-columns:1fr;gap:1.2rem}}
 @media(max-width:650px){.personal-cross{right:76px;top:29px;width:13px;height:13px}.hero-content{width:min(100% - 30px,1260px);padding-top:4.6rem}.hero h1{font-size:clamp(3.55rem,17vw,5.35rem)}.hero-lead{font-size:1.08rem}.editorial-index .marquee-track{justify-content:flex-start;padding:0 1rem}.manifesto{padding:5rem 0}.manifesto-text{font-size:clamp(2.4rem,11vw,3.6rem)}.pub-item{grid-template-columns:1fr}}
+
+
+/* === A1 Navy editorial palette === */
+:root{
+  --bg:#F3F0E9;
+  --surface:#FBFAF6;
+  --ink:#101820;
+  --ink-2:#22313D;
+  --muted:#69737C;
+  --deep:#070B10;
+  --deep-2:#0B2540;
+  --mint:#173E63;
+  --sage:#E3E7E8;
+  --coral:#A51D2D;
+  --coral-text:#941A28;
+  --coral-soft:#E8D8DB;
+  --gold:#6F8292;
+  --line:rgba(16,24,32,.16);
+  --white:#FFFFFF;
+}
+html,body{font-family:Helvetica,"Helvetica Neue",Arial,sans-serif!important}
+.site-header.scrolled{background:rgba(243,240,233,.95)}
+.hero{background:#070B10}
+.editorial-code{color:#8EA1B1}
+.serif-accent{color:#F4F1EA}
+.hero-lead{color:#D8DEE3}.hero-context{color:#A8B3BC}
+.hero-meta span{color:#B8C2CA}
+.editorial-index{background:#05080C}
+.editorial-index .marquee-track span{color:#91A3B1}
+.editorial-index .marquee-track i{color:#526A7E}
+.research-section,.writing-section{background:#FBFAF6}
+.research-map{background:#0B2540}
+.map-explainer{background:#F3F0E9;color:#101820}
+.methods-band{background:#F3F0E9}
+.project-card-main{background:#0B2540}
+.accent-card{background:#E8EBEC}
+.writing-row:hover{background:#ECE9E3}
+.quote-section{background:#0B2540}
+.contact-section{background:#070B10}
+.publications-header{background:#0B2540}
+footer{background:#05080C}
+.personal-cross{color:#A51D2D}
