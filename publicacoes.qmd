@@ -1,24 +1,55 @@
 ---
-title: "Publicações"
-subtitle: "Produção científica, relatórios e trabalhos em desenvolvimento"
+title: "Produção"
+subtitle: "Artigos, escritos, trabalhos em andamento e produtos de pesquisa"
 ---
 
-Esta seção será organizada por **status**, **tema**, **tipo de produto** e **projeto de origem**.
+Minha produção é organizada por **programa de pesquisa**, e não apenas por tipo documental. A página reúne artigos científicos, ensaios, relatórios, apresentações, datasets e produtos aplicados.
 
-## Publicado
+## Escritos selecionados no LinkedIn
 
-Em preparação para importação do currículo Lattes e consolidação bibliográfica.
+### Governança regulatória
 
-## Aceito e no prelo
+**[Between Rules and Behavior: The Mechanisms of Regulatory Intermediation](https://www.linkedin.com/pulse/between-rules-behavior-igor-caires-machado-0tfgf?trk=public_post)**  
+2026 · Regulatory Intermediaries · RIT Model
 
-Trabalhos aceitos e em processo editorial serão identificados separadamente dos itens já publicados.
+Texto sobre os mecanismos pelos quais intermediários transformam regras em informação, interpretação, monitoramento, verificação, confiança e consequências regulatórias.
 
-## Working papers
+**[When the Judiciary Regulates: Brazil’s CNJ and the Expansion of Regulatory Governance](https://www.linkedin.com/pulse/when-judiciary-regulates-brazils-cnj-expansion-igor-caires-m-phd--bjvgf?trk=public_post)**  
+2026 · Judicial Regulatory Governance
 
-Manuscritos e produtos científicos em desenvolvimento poderão ser apresentados aqui quando houver versão pública disponível.
+Proposição do Judiciário, e particularmente dos conselhos judiciais, como objeto de uma agenda própria de governança regulatória.
 
-## Produtos de pesquisa
+**[Where Are the Courts in Regulatory Governance?](https://www.linkedin.com/pulse/where-courts-regulatory-governance-igor-caires-machado-2dvbf?trk=public_post)**  
+2026 · Courts · Regulation · Comparative agenda
 
-Além de artigos, esta seção conectará datasets, escalas, relatórios técnicos, protocolos, apresentações e outros produtos derivados dos projetos.
+Texto que formula a pergunta de pesquisa sobre a posição dos tribunais na literatura de regulatory governance.
 
-> A próxima versão desta página será alimentada por uma base bibliográfica estruturada, permitindo filtros automáticos por tema, ano, tipo e projeto.
+### Sociomaterialidade e implementação
+
+**[Edição 02 — O prédio também implementa a política](https://pt.linkedin.com/pulse/edi%C3%A7%C3%A3o-02-o-pr%C3%A9dio-tamb%C3%A9m-implementa-pol%C3%ADtica-igor-caires-machado-eozef)**  
+2026 · Sociomaterialidade · Policy implementation
+
+Argumenta que a infraestrutura predial integra a cadeia causal da implementação e condiciona as práticas de atendimento e os resultados da política.
+
+**[A Matéria Escura e os Cavalos de Troia](https://pt.linkedin.com/pulse/mat%C3%A9ria-escura-e-os-cavalos-de-troia-igor-caires-machado-sfvuf)**  
+2026 · Behavioral Public Administration · Design estratégico
+
+Articulação entre matéria escura institucional, arquitetura de escolha, nudges, vieses e mudança organizacional.
+
+### Métodos
+
+**[Tipos de revisão de literatura em políticas públicas: critérios para a escolha do método](https://pt.linkedin.com/pulse/tipos-de-revis%C3%A3o-literatura-em-pol%C3%ADticas-p%C3%BAblicas-do-caires-machado-9bztf?trk=public_post)**  
+2026 · Revisão de literatura · Métodos
+
+Sistematização de desenhos de revisão e critérios para escolha metodológica.
+
+### Educação judicial
+
+**[Educação Judicial e Inovação Pedagógica: evidências bibliométricas para escolas judiciais](https://pt.linkedin.com/posts/igorcairesmachado_educa%C3%A7%C3%A3ojudicial-escolasjudiciais-inova%C3%A7%C3%A3opedag%C3%B3gica-activity-7495238026126868480-rw0a)**  
+2026 · Artigo publicado · Bibliometria
+
+Estudo sobre a produção científica em educação judicial e inovação pedagógica, com implicações para escolas judiciais e políticas de formação.
+
+## Em desenvolvimento
+
+A próxima etapa desta página será a consolidação da bibliografia completa, com DOI, BibTeX, status editorial, projeto de origem e links para versões públicas quando disponíveis.
