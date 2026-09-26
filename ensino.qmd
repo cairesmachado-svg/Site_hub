@@ -1,0 +1,22 @@
+---
+title: "Ensino"
+---
+
+## Pesquisa Científica Agentiva
+
+Proposta de formação orientada ao ciclo completo da pesquisa: do problema científico à produção de artigos, dados, visualizações e produtos aplicados.
+
+O percurso reúne:
+
+- formulação e arquitetura do problema de pesquisa;
+- revisão de literatura e estratégias de busca;
+- APIs e extração de dados científicos;
+- organização de projetos no VS Code;
+- agentes de IA como apoio metodológico;
+- análise e documentação reprodutível;
+- escrita em Quarto;
+- produção, revisão e publicação de artefatos científicos.
+
+## Formação judicial
+
+Esta página também reunirá cursos, experiências formativas, materiais de aula e projetos relacionados à educação e inovação no Judiciário.
