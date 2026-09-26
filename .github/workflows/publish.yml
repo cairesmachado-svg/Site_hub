@@ -1,4 +1,4 @@
-name: Publish Quarto Site
+name: Publish Static Site
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -21,11 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Render
-        uses: quarto-dev/quarto-actions/render@v2
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          cp index.html styles.css script.js _site/
+          touch _site/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
