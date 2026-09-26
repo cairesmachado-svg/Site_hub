@@ -7,9 +7,11 @@ https://cairesmachado-svg.github.io/Site_hub/
 
 | Arquivo | Função |
 |---|---|
-| `en/index.html` | Página inicial (publicada como raiz do site) |
+| `index.html` | Página inicial (raiz do site) |
+| `en/index.html` | Redireciona para a raiz (mantém links antigos) |
 | `publications/index.html` | Lista completa de publicações, com PDFs quando há arquivo público verificado |
 | `projects/<projeto>/en/index.html` | Páginas dos projetos: arenas, regulatory-intermediaries, arqjud, pesquisa-agentiva, labjus |
+| `projects/<projeto>/index.html` | Redireciona para a página do projeto |
 | `styles.css` | Sistema visual único para todas as páginas (barra marinho #05336B, fundo branco, Source Sans 3) |
 | `script.js` | Menu no celular e status do repositório nas páginas de projeto |
 | `assets/qr-digital-card.svg` | QR code local do cartão digital |
@@ -18,8 +20,11 @@ https://cairesmachado-svg.github.io/Site_hub/
 
 ## Arquivos legados
 
-Não entram no deploy: `index.html` da raiz, `*.qmd`, `_quarto.yml`, as páginas em português
-`projects/<projeto>/index.html` e `projects/assets/`.
+Não entram no deploy: `*.qmd`, `_quarto.yml` e `projects/assets/`. A antiga página inicial em português
+e as páginas de projeto em português continuam no histórico do Git.
+
+A raiz do repositório é o próprio site. Assim, a publicação pelo GitHub Actions e a publicação
+direta pela branch `main` geram o mesmo resultado.
 
 ## Estrutura da página inicial
 

@@ -26,34 +26,17 @@ jobs:
       - name: Prepare English-only static site
         shell: bash
         run: |
+          # The repository root is the site. Copy only the public files.
           rm -rf _site
           mkdir -p _site
-          cp en/index.html _site/index.html
-          cp styles.css script.js _site/
-          cp -r assets _site/assets
-          cp -r publications _site/publications
-
+          cp index.html styles.css script.js .nojekyll _site/
+          cp -r assets publications _site/
+          mkdir -p _site/en && cp en/index.html _site/en/
           for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus; do
             mkdir -p "_site/projects/$slug/en"
+            cp "projects/$slug/index.html" "_site/projects/$slug/index.html"
             cp "projects/$slug/en/index.html" "_site/projects/$slug/en/index.html"
-            # In the repository the English home lives in en/; on the site it is the root.
-            sed -i 's|\.\./\.\./\.\./en/|../../../|g' "_site/projects/$slug/en/index.html"
-
-            cat > "_site/projects/$slug/index.html" <<EOF
-          <!doctype html>
-          <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta http-equiv="refresh" content="0; url=en/">
-            <link rel="canonical" href="en/">
-            <title>Project</title>
-          </head>
-          <body><a href="en/">Continue to the project page</a></body>
-          </html>
-          EOF
           done
-
-          touch _site/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
