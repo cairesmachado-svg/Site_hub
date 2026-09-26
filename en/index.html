@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07111B">
-  <meta name="description" content="Igor Caires Machado — research on judicial governance, public policy implementation, sociomateriality, regulation, and judicial education.">
+  <meta name="theme-color" content="#070B10">
+  <meta name="description" content="Igor Caires Machado. Research on how public institutions transform rules and policies into practice: judicial governance, policy implementation, sociomateriality, regulation, and judicial education.">
   <meta property="og:title" content="Igor Caires Machado · Researcher">
-  <meta property="og:description" content="Judicial governance, public policy, sociomateriality, regulation, and applied research.">
+  <meta property="og:description" content="Research on how public institutions transform rules and policies into practice through people, spaces, technologies, and professional learning.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/274884145?v=4">
   <title>Igor Caires Machado · Researcher</title>
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
   <script defer src="script.js"></script>
   <script type="application/ld+json">
   {
@@ -28,367 +29,395 @@
   </script>
 </head>
 <body>
-  <div class="cursor-glow" aria-hidden="true"></div>
-  <div class="scroll-progress" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Home">
-      <span class="brand-mark">ICM</span>
-      <span class="brand-text">Igor Caires Machado</span>
-    </a>
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#pesquisa">Research</a>
-      <a href="#projetos">Projects</a>
-    <a href="publications/">Publications</a>
-      <a href="publications/">Publications</a>
-      <a href="#escritos">Writing</a>
-      <a href="#trajetoria">Trajectory</a>
-      <a href="#contato">Contact</a>
-    </nav>
-    <span class="personal-cross" aria-hidden="true">
-      <svg viewBox="0 0 24 24" focusable="false"><path d="M12 1.8 9.8 7 4.2 4.2 7 9.8 1.8 12 7 14.2 4.2 19.8 9.8 17 12 22.2 14.2 17 19.8 19.8 17 14.2 22.2 12 17 9.8 19.8 4.2 14.2 7Z"/></svg>
-    </span>
-    <div class="header-actions">
-      <button id="themeToggle" class="icon-button" aria-label="Toggle theme" title="Toggle theme">
-        <span class="theme-icon">◐</span>
-      </button>
-      <button id="menuToggle" class="menu-button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Igor Caires Machado, top of page">
+        <span class="brand-mark" aria-hidden="true">ICM</span>
+        <span class="brand-name">Igor Caires Machado</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="publications/">Publications</a></li>
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#trajectory">Trajectory</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <span class="personal-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false"><path d="M12 1.8 9.8 7 4.2 4.2 7 9.8 1.8 12 7 14.2 4.2 19.8 9.8 17 12 22.2 14.2 17 19.8 19.8 17 14.2 22.2 12 17 9.8 19.8 4.2 14.2 7Z"/></svg>
+      </span>
     </div>
   </header>
 
-  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-    <a href="#pesquisa">Research</a>
-    <a href="#projetos">Projects</a>
-    <a href="publications/">Publications</a>
-    <a href="#escritos">Writing</a>
-    <a href="#trajetoria">Trajectory</a>
-    <a href="#contato">Contact</a>
-  </div>
-
-  <main>
-    <section id="inicio" class="hero">
-      <div class="hero-aurora" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="hero-copy reveal">
-          <div class="eyebrow editorial-code">
-            ICM___RESEARCH___2026
-          </div>
-          <h1>
-            <span class="serif-accent">Public institutions</span><br>
-            in practice.
-          </h1>
-          <p class="hero-lead">
-            Research on how public institutions transform <strong>rules and policies into practice</strong> through people, spaces, technologies, capacities, and professional learning.
-          </p>
-          <p class="hero-context">
-            The research agenda connects judicial architecture, sociomateriality, regulation, judicial education, and applied research methods.
-            Projects combine institutional analysis, empirical data, and the development of research instruments, datasets, and outputs.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#pesquisa">Research agenda <span>↓</span></a>
-            <a class="button button-ghost" href="publications/">Publications · PDFs & records ↗</a>
-            <a class="button button-ghost" href="https://www.linkedin.com/in/igorcairesmachado/" target="_blank" rel="noopener">LinkedIn ↗</a>
-          </div>
-          <a class="publication-brief" href="publications/">
-            <small>PUBLICATIONS</small>
-            <strong>Peer-reviewed article · doctoral thesis · book · accepted conference papers · working papers</strong>
-            <span>Browse records and available PDF downloads →</span>
-          </a>
-          <div class="hero-meta">
-            <span>PhD · UCES</span>
-            <span>Postdoctoral researcher · ENAP</span>
-            <span>ENAJU · CNJ</span>
-            <span>Brasília</span>
+  <main id="main">
+    <!-- Hero ------------------------------------------------------------ -->
+    <section id="top" class="hero on-dark" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="code">ICM___RESEARCH___2026</p>
+          <h1 id="hero-title">Public institutions<br> in practice.</h1>
+          <p class="lead">Research on how public institutions transform <strong>rules and policies into practice</strong> through people, spaces, technologies, and professional learning.</p>
+          <dl class="facts">
+            <div><dt>Affiliation</dt><dd>ENAJU · CNJ</dd></div>
+            <div><dt>Postdoc</dt><dd>ENAP, 2026–2027</dd></div>
+            <div><dt>PhD</dt><dd>UCES, 2024</dd></div>
+            <div><dt>Based</dt><dd>Brasília, Brazil</dd></div>
+          </dl>
+          <div class="actions">
+            <a class="btn btn--primary" href="publications/">Publications and PDFs</a>
+            <a class="btn" href="#research">Research agenda</a>
+            <a class="btn" href="https://www.linkedin.com/in/igorcairesmachado/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
           </div>
         </div>
+        <figure class="portrait">
+          <div class="portrait-frame">
+            <img src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Portrait of Igor Caires Machado" width="460" height="460">
+          </div>
+          <figcaption>IGOR CAIRES MACHADO___BRASÍLIA</figcaption>
+        </figure>
+      </div>
+      <div class="index-strip">
+        <ol class="wrap" aria-label="Research dimensions">
+          <li><b>01</b>IMPLEMENTATION</li>
+          <li><b>02</b>GOVERNANCE</li>
+          <li><b>03</b>REGULATION</li>
+          <li><b>04</b>SOCIOMATERIALITY</li>
+          <li><b>05</b>JUDICIAL EDUCATION</li>
+        </ol>
+      </div>
+    </section>
 
-        <div class="hero-visual reveal">
-          <figure class="portrait-stage editorial-portrait" id="portraitStage">
-            <div class="portrait-frame">
-              <img src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Portrait of Igor Caires Machado">
+    <!-- 01 Research ----------------------------------------------------- -->
+    <section id="research" class="section" aria-labelledby="research-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">01</span> Research</p>
+          <div>
+            <h2 id="research-title">How rules become practice.</h2>
+            <p class="section-intro">The object is the passage from rules and institutional decisions to concrete practice. Implementation is the analytical core. Governance, regulation, sociomateriality, and judicial education are the dimensions through which it is examined.</p>
+          </div>
+        </header>
+
+        <div class="agenda">
+          <div class="agenda-diagram" aria-hidden="true">
+            <svg viewBox="0 0 480 400" focusable="false">
+              <path class="link" d="M240 200 L95 80 M240 200 L385 80 M240 200 L95 320 M240 200 L385 320"/>
+              <circle class="core" cx="240" cy="200" r="66"/>
+              <text x="240" y="197" text-anchor="middle">IMPLEMENTATION</text>
+              <text x="240" y="216" text-anchor="middle" class="sub">core</text>
+              <circle class="node" cx="95" cy="80" r="52"/>
+              <text x="95" y="84" text-anchor="middle">GOVERNANCE</text>
+              <circle class="node" cx="385" cy="80" r="52"/>
+              <text x="385" y="84" text-anchor="middle">REGULATION</text>
+              <circle class="node" cx="95" cy="320" r="52"/>
+              <text x="95" y="316" text-anchor="middle">SOCIO-</text>
+              <text x="95" y="332" text-anchor="middle">MATERIALITY</text>
+              <circle class="node" cx="385" cy="320" r="52"/>
+              <text x="385" y="316" text-anchor="middle">JUDICIAL</text>
+              <text x="385" y="332" text-anchor="middle">EDUCATION</text>
+            </svg>
+          </div>
+
+          <ol class="dimension-list">
+            <li class="dimension">
+              <span class="num">01</span>
+              <div><h3>Implementation<small>Core</small></h3><p>Where rules, capacities, spaces, technologies, and practice meet.</p></div>
+            </li>
+            <li class="dimension">
+              <span class="num">02</span>
+              <div><h3>Judicial governance</h3><p>How do coordination, institutional capacities, and governance instruments shape implementation in justice systems?</p></div>
+            </li>
+            <li class="dimension">
+              <span class="num">03</span>
+              <div><h3>Regulation</h3><p>How do intermediaries translate, certify, monitor, and transform rules into behavior?</p></div>
+            </li>
+            <li class="dimension">
+              <span class="num">04</span>
+              <div><h3>Sociomateriality</h3><p>What do buildings, technologies, documents, and infrastructures do to policy in practice?</p></div>
+            </li>
+            <li class="dimension">
+              <span class="num">05</span>
+              <div><h3>Judicial education</h3><p>How do education, knowledge, and learning expand or constrain institutional capacity?</p></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="band">
+          <div>
+            <p class="meta accent">Cross-cutting capability</p>
+            <h3>Methods and AI</h3>
+          </div>
+          <p>Bibliometrics, APIs, Quarto, reproducible workflows, and AI agents. They serve as research infrastructure for producing traceable evidence.</p>
+          <a href="projects/pesquisa-agentiva/">Agentic Scientific Research <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Projects ----------------------------------------------------- -->
+    <section id="projects" class="section section--alt" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">02</span> Projects</p>
+          <div>
+            <h2 id="projects-title">Research projects.</h2>
+            <p class="section-intro">Completed and ongoing projects, with stage and status. Each project page lists its question, design, and outputs.</p>
+          </div>
+        </header>
+
+        <ul class="rows">
+          <li>
+            <a class="row project-row" href="projects/arenas/">
+              <span class="project-code">ARENAS</span>
+              <span>
+                <span class="row-title">Sociomateriality and policy implementation in the judiciary</span>
+                <span class="row-desc">The role of spaces, systems, infrastructure, and organizational practices in public policy implementation within justice institutions.</span>
+              </span>
+              <dl class="project-status"><dt>Stage</dt><dd>Postdoctoral research, ENAP</dd><dt>Status</dt><dd>2026–2027 · in development</dd></dl>
+              <span class="row-go">Project <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="row project-row" href="projects/regulatory-intermediaries/">
+              <span class="project-code">RIT</span>
+              <span>
+                <span class="row-title">Regulatory Intermediaries</span>
+                <span class="row-desc">Intermediation mechanisms and relationships among regulators, intermediaries, and targets in regulatory processes.</span>
+              </span>
+              <dl class="project-status"><dt>Stage</dt><dd>International collaboration</dd><dt>Status</dt><dd>Ongoing · dataset and analysis</dd></dl>
+              <span class="row-go">Project <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="row project-row" href="projects/arqjud/">
+              <span class="project-code">ARQJUD</span>
+              <span>
+                <span class="row-title">Judicial Architecture</span>
+                <span class="row-desc">Relationships between the built environment, workplace experience, and self-perceived productivity in justice institutions.</span>
+              </span>
+              <dl class="project-status"><dt>Stage</dt><dd>PhD research, UCES</dd><dt>Status</dt><dd>Completed 2024 · article in preparation</dd></dl>
+              <span class="row-go">Project <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="row project-row" href="projects/pesquisa-agentiva/">
+              <span class="project-code">AI</span>
+              <span>
+                <span class="row-title">Agentic Scientific Research</span>
+                <span class="row-desc">A reproducible research workflow combining AI agents, APIs, bibliometrics, Quarto, and provenance controls.</span>
+              </span>
+              <dl class="project-status"><dt>Stage</dt><dd>Methods, cross-cutting</dd><dt>Status</dt><dd>In development</dd></dl>
+              <span class="row-go">Project <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 Publications ------------------------------------------------- -->
+    <section id="publications" class="section" aria-labelledby="publications-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">03</span> Publications</p>
+          <div>
+            <h2 id="publications-title">Selected publications.</h2>
+            <p class="section-intro">Published works with verified records. The full list also covers accepted papers, presentations, and working papers.</p>
+          </div>
+        </header>
+
+        <ul class="rows">
+          <li class="row pub-row">
+            <span class="pub-year">2026</span>
+            <div>
+              <p class="row-kicker">Journal article · Revista do Serviço Público</p>
+              <h3 class="pub-title">Equidade racial no Poder Judiciário: um estudo de caso sobre o programa do CNJ</h3>
+              <p class="pub-authors">Igor Caires Machado · Karen Luise · Fábio Ramos · Antônio Melo · Cristina Winckler</p>
             </div>
-            <figcaption>IGOR CAIRES MACHADO___BRASÍLIA</figcaption>
-          </figure>
+            <div class="pub-actions"><a class="pdf" href="https://revista.enap.gov.br/index.php/RSP/article/download/10693/7311/38125" target="_blank" rel="noopener">PDF</a><a href="https://doi.org/10.21874/tqqbh966" target="_blank" rel="noopener">DOI</a></div>
+          </li>
+          <li class="row pub-row">
+            <span class="pub-year">2026</span>
+            <div>
+              <p class="row-kicker">Conference proceedings · III COBPIT</p>
+              <h3 class="pub-title">Educação Judicial e Inovação Pedagógica: Evidências Bibliométricas para Escolas Judiciais</h3>
+              <p class="pub-authors">Igor Caires Machado · Fabio Lopes Fernandes Ramos · Juliana Cronemberger</p>
+            </div>
+            <div class="pub-actions"><a class="pdf" href="https://static.even3.com/anais/1610194.pdf?v=639231157227053273" target="_blank" rel="noopener">PDF</a></div>
+          </li>
+          <li class="row pub-row">
+            <span class="pub-year">2024</span>
+            <div>
+              <p class="row-kicker">Doctoral thesis · UCES</p>
+              <h3 class="pub-title">Un modelo funcional de arquitectura judicial: estudio de caso en la Central de Juizados Especiales de la ciudad de Salvador, en Bahia, Brasil</h3>
+              <p class="pub-authors">Igor Caires Machado</p>
+            </div>
+            <div class="pub-actions"><a class="pdf" href="https://dspace.uces.edu.ar/bitstream/123456789/6985/1/Modelo_Caires-Machado.pdf" target="_blank" rel="noopener">PDF</a></div>
+          </li>
+          <li class="row pub-row">
+            <span class="pub-year">2019</span>
+            <div>
+              <p class="row-kicker">Journal article · Revista CNJ</p>
+              <h3 class="pub-title">Modelos de avaliação de qualidade: um estudo sobre o Prêmio CNJ de Qualidade</h3>
+              <p class="pub-authors">Igor Caires Machado · Marcos Abreu Torres</p>
+            </div>
+            <div class="pub-actions"><a class="pdf" href="https://www.cnj.jus.br/ojs/revista-cnj/article/download/81/20/440" target="_blank" rel="noopener">PDF</a><a href="https://doi.org/10.54829/revistacnj.v3i2.81" target="_blank" rel="noopener">DOI</a></div>
+          </li>
+        </ul>
 
-          <a class="qr-card" href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/" target="_blank" rel="noopener">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code for digital business card">
-            <span>
-              <small>digital card</small>
-              <strong>Save contact</strong>
-              <em>Scan or click ↗</em>
-            </span>
-          </a>
-        </div>
-      </div>
+        <div class="subhead subhead--spaced"><h3>In preparation and presented</h3></div>
+        <ul class="rows">
+          <li class="row pub-row">
+            <span class="pub-year">Draft</span>
+            <div>
+              <p class="row-kicker">Manuscript · editorial preparation</p>
+              <h3 class="pub-title">Arquitectura Judicial y Desempeño en el Poder Judicial Brasileño</h3>
+              <p class="pub-citation">Article derived from the ARQJUD research.</p>
+            </div>
+            <div class="pub-actions"><a href="projects/arqjud/">Project</a></div>
+          </li>
+          <li class="row pub-row">
+            <span class="pub-year">2026</span>
+            <div>
+              <p class="row-kicker">Academic presentation · FGV Direito SP / ESPCA</p>
+              <h3 class="pub-title">Governance of Judicial Infrastructure in Brazil</h3>
+              <p class="pub-citation">From judicial architecture to sociomaterial implementation arenas.</p>
+            </div>
+            <div class="pub-actions"><a href="https://cairesmachado-svg.github.io/arenas-flash-talk-v5/" target="_blank" rel="noopener">Slides <span aria-hidden="true">↗</span></a></div>
+          </li>
+        </ul>
 
-      <div class="theme-marquee editorial-index" aria-label="Research themes">
-        <div class="marquee-track">
-          <span>01___IMPLEMENTATION</span><i>/</i>
-          <span>02___GOVERNANCE</span><i>/</i>
-          <span>03___SOCIOMATERIALITY</span><i>/</i>
-          <span>04___REGULATION</span><i>/</i>
-          <span>05___JUDICIAL EDUCATION</span>
-        </div>
+        <a class="more-link" href="publications/">Full list: articles, proceedings, thesis, book, accepted and working papers <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
-    <section class="manifesto section-shell">
-      <div class="section-kicker reveal">RESEARCH PROBLEM</div>
-      <p class="manifesto-text reveal">
-        How rules and institutional decisions are transformed into practice through
-        <em>people, spaces, technologies, capacities, and intermediaries</em>.
-      </p>
-    </section>
-
-    <section id="pesquisa" class="research-section">
-      <div class="section-shell">
-        <div class="section-heading reveal">
+    <!-- 04 Writing ------------------------------------------------------ -->
+    <section id="writing" class="section section--alt" aria-labelledby="writing-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">04</span> Writing</p>
           <div>
-            <span class="section-kicker">RESEARCH AGENDA</span>
-            <h2>Structure of the research agenda.</h2>
+            <h2 id="writing-title">Essays and public writing.</h2>
+            <p class="section-intro">Short texts that connect ongoing research to current debates. Published on LinkedIn.</p>
           </div>
-          <p>Implementation is the analytical core. Governance, regulation, sociomateriality, and judicial education are complementary dimensions of the problem.</p>
-        </div>
+        </header>
 
-        <div class="research-map reveal" id="researchMap">
-          <svg viewBox="0 0 1000 520" role="img" aria-label="Conceptual map of the research agenda">
-            <defs>
-              <linearGradient id="lineGradient" x1="0" x2="1">
-                <stop offset="0%" stop-color="#466D8D"/>
-                <stop offset="100%" stop-color="#A61E2C"/>
-              </linearGradient>
-            </defs>
-            <g class="connections">
-              <path d="M500 260 C360 140 250 140 155 120"/>
-              <path d="M500 260 C640 130 740 130 840 118"/>
-              <path d="M500 260 C350 330 260 390 150 410"/>
-              <path d="M500 260 C650 340 750 390 850 405"/>
-            </g>
-            <g class="map-node node-center" data-title="Implementation" data-text="Where rules, capacities, spaces, technologies, and practice meet.">
-              <circle cx="500" cy="260" r="82"/>
-              <text x="500" y="254" text-anchor="middle">IMPLEMENTATION</text>
-              <text x="500" y="280" text-anchor="middle" class="node-sub">core of the agenda</text>
-            </g>
-            <g class="map-node" data-title="Judicial governance" data-text="How do coordination, institutional capacities, and governance instruments shape implementation in justice systems?">
-              <circle cx="155" cy="120" r="70"/><text x="155" y="115" text-anchor="middle">GOVERNANCE</text><text x="155" y="137" text-anchor="middle" class="node-sub">capacities</text>
-            </g>
-            <g class="map-node" data-title="Regulation" data-text="How do intermediaries translate, certify, monitor, and transform rules into behavior?">
-              <circle cx="840" cy="118" r="70"/><text x="840" y="113" text-anchor="middle">REGULATION</text><text x="840" y="135" text-anchor="middle" class="node-sub">intermediation</text>
-            </g>
-            <g class="map-node" data-title="Sociomateriality" data-text="What do buildings, technologies, documents, and infrastructures do to policy in practice?">
-              <circle cx="150" cy="410" r="70"/><text x="150" y="405" text-anchor="middle">SOCIOMATERIAL</text><text x="150" y="427" text-anchor="middle" class="node-sub">spaces & technology</text>
-            </g>
-            <g class="map-node" data-title="Judicial education" data-text="How do education, knowledge, and learning expand or constrain institutional capacity?">
-              <circle cx="850" cy="405" r="70"/><text x="850" y="400" text-anchor="middle">EDUCATION</text><text x="850" y="422" text-anchor="middle" class="node-sub">learning</text>
-            </g>
-          </svg>
-          <div class="map-explainer" id="mapExplainer">
-            <span>hover over the nodes</span>
-            <strong>Implementation</strong>
-            <p>Where rules, capacities, spaces, technologies, and practice meet.</p>
-          </div>
-        </div>
+        <ul class="rows">
+          <li><a class="row text-row" href="https://www.linkedin.com/pulse/between-rules-behavior-igor-caires-machado-0tfgf?trk=public_post" target="_blank" rel="noopener">
+            <span class="num">01</span>
+            <span><span class="row-kicker">Regulation · 2026</span><span class="lang" title="Language">EN</span>
+              <span class="row-title">Between Rules and Behavior</span>
+              <span class="row-desc">From actors to mechanisms: a reading of regulatory intermediation through the RIT model.</span></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </a></li>
+          <li><a class="row text-row" href="https://www.linkedin.com/pulse/when-judiciary-regulates-brazils-cnj-expansion-igor-caires-m-phd--bjvgf?trk=public_post" target="_blank" rel="noopener">
+            <span class="num">02</span>
+            <span><span class="row-kicker">Judicial regulatory governance · 2026</span><span class="lang" title="Language">EN</span>
+              <span class="row-title">When the Judiciary Regulates</span>
+              <span class="row-desc">Brazil’s CNJ as a case for a comparative agenda on judicial councils, coordination, and regulation.</span></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </a></li>
+          <li><a class="row text-row" href="https://pt.linkedin.com/pulse/edi%C3%A7%C3%A3o-02-o-pr%C3%A9dio-tamb%C3%A9m-implementa-pol%C3%ADtica-igor-caires-machado-eozef" target="_blank" rel="noopener">
+            <span class="num">03</span>
+            <span><span class="row-kicker">Sociomateriality · 2026</span><span class="lang" title="Language">PT</span>
+              <span class="row-title">The building also implements policy</span>
+              <span class="row-desc">Built infrastructure as part of the causal chain of implementation.</span></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </a></li>
+          <li><a class="row text-row" href="https://pt.linkedin.com/pulse/tipos-de-revis%C3%A3o-literatura-em-pol%C3%ADticas-p%C3%BAblicas-do-caires-machado-9bztf?trk=public_post" target="_blank" rel="noopener">
+            <span class="num">04</span>
+            <span><span class="row-kicker">Methods · 2026</span><span class="lang" title="Language">PT</span>
+              <span class="row-title">Types of literature review in public policy</span>
+              <span class="row-desc">Criteria for connecting research questions, review design, and synthesis technique.</span></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </a></li>
+          <li><a class="row text-row" href="https://pt.linkedin.com/posts/igorcairesmachado_educa%C3%A7%C3%A3ojudicial-escolasjudiciais-inova%C3%A7%C3%A3opedag%C3%B3gica-activity-7495238026126868480-rw0a" target="_blank" rel="noopener">
+            <span class="num">05</span>
+            <span><span class="row-kicker">Judicial education · 2026</span><span class="lang" title="Language">PT</span>
+              <span class="row-title">Judicial Education and Pedagogical Innovation</span>
+              <span class="row-desc">Bibliometric evidence for judicial schools and professional education policies.</span></span>
+            <span class="row-arrow" aria-hidden="true">↗</span>
+          </a></li>
+        </ul>
+      </div>
+    </section>
 
-        <div class="methods-band reveal">
+    <!-- 05 Trajectory --------------------------------------------------- -->
+    <section id="trajectory" class="section" aria-labelledby="trajectory-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">05</span> Trajectory</p>
           <div>
-            <span class="section-kicker">CROSS-CUTTING CAPABILITY</span>
-            <h3>Methods & AI</h3>
+            <h2 id="trajectory-title">Development of the agenda.</h2>
+            <p class="section-intro">From studies of judicial architecture to the material, organizational, and regulatory conditions of policy implementation.</p>
           </div>
-          <p>Bibliometrics, APIs, Quarto, reproducible science, and AI agents operate as research infrastructure: tools for producing traceable evidence rather than a substantive research field equivalent to implementation, governance, or regulation.</p>
-          <a href="projects/pesquisa-agentiva/">View Agentic Scientific Research →</a>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <p class="row-kicker">Background</p>
+            <h3>Architecture and infrastructure</h3>
+            <p>Relationships between the built environment, work flows, and institutional functioning.</p>
+          </li>
+          <li class="step">
+            <p class="row-kicker">PhD research · 2024</p>
+            <h3>ARQJUD</h3>
+            <p>Empirical research on judicial architecture, workplace experience, recognition, access, and functionality.</p>
+          </li>
+          <li class="step">
+            <p class="row-kicker">Postdoctoral research · ENAP</p>
+            <h3>Sociomateriality and implementation</h3>
+            <p>The unit of analysis extends to arrangements of people, rules, technologies, documents, and infrastructure.</p>
+          </li>
+          <li class="step">
+            <p class="row-kicker">Current agenda</p>
+            <h3>Governance, regulation, and education</h3>
+            <p>Regulation, intermediation, institutional capacity, coordination, and professional learning within the implementation agenda.</p>
+          </li>
+        </ol>
+
+        <div class="fact-line">
+          <div><strong>25+</strong><span>years working in the justice system</span></div>
+          <div><strong>2026–27</strong><span>postdoctoral research at ENAP</span></div>
         </div>
       </div>
     </section>
 
-    <section id="projetos" class="projects-section section-shell">
-      <div class="section-heading reveal">
-        <div>
-          <span class="section-kicker">PROJECTS</span>
-          <h2>Research projects.</h2>
-        </div>
-        <p>Completed and ongoing projects organized by research object, stage, and connection to the core agenda.</p>
-      </div>
-
-      <div class="bento">
-        <article class="project-card project-card-main reveal spotlight-card">
-          <div class="card-topline"><span>POSTDOCTORAL RESEARCH · ENAP</span><b>2026—2027</b></div>
-          <div class="project-symbol">A</div>
-          <h3>ARENAS</h3>
-          <p>Examines the role of spaces, systems, infrastructure, and organizational practices in public policy implementation within justice institutions.</p>
-          <div class="tag-row"><span>sociomateriality</span><span>policy implementation</span><span>judiciary</span></div>
-          <a href="projects/arenas/">Explore project →</a>
-        </article>
-
-        <article class="project-card reveal spotlight-card">
-          <div class="card-topline"><span>REGULATION</span><b>INTERNATIONAL</b></div>
-          <div class="project-symbol small-symbol">RIT</div>
-          <h3>Regulatory Intermediaries</h3>
-          <p>Examines intermediation mechanisms and relationships among regulators, intermediaries, and targets in regulatory processes.</p>
-          <a href="projects/regulatory-intermediaries/">View project →</a>
-        </article>
-
-        <article class="project-card accent-card reveal spotlight-card">
-          <div class="card-topline"><span>PHD RESEARCH</span><b>ARQJUD</b></div>
-          <div class="project-symbol small-symbol">3F</div>
-          <h3>Judicial Architecture</h3>
-          <p>Investigates relationships between the built environment, workplace experience, and self-perceived productivity in justice institutions.</p>
-          <a href="projects/arqjud/">View project →</a>
-        </article>
-
-        <article class="project-card reveal spotlight-card">
-          <div class="card-topline"><span>CROSS-CUTTING CAPABILITY</span><b>IN DEVELOPMENT</b></div>
-          <div class="project-symbol small-symbol">AI</div>
-          <h3>Agentic Scientific Research</h3>
-          <p>Develops a reproducible research workflow combining AI agents, APIs, bibliometrics, Quarto, and provenance controls.</p>
-          <a href="projects/pesquisa-agentiva/">View project →</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="escritos" class="writing-section">
-      <div class="section-shell">
-        <div class="section-heading reveal">
+    <!-- 06 Contact ------------------------------------------------------ -->
+    <section id="contact" class="section section--dark on-dark" aria-labelledby="contact-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label meta"><span class="num">06</span> Contact</p>
           <div>
-            <span class="section-kicker">OUTPUTS & WRITING</span>
-            <h2>Outputs with clear status.</h2>
+            <h2 id="contact-title">Contact and collaboration.</h2>
+            <p class="section-intro">Research contact on judicial governance, policy implementation, regulation, sociomateriality, judicial education, and applied research methods. For project participation, send the project name, your affiliation, and the proposed contribution.</p>
           </div>
-          <p>Academic outputs and public writing are shown separately to preserve the distinction between manuscripts, presentations, and public-facing essays.</p>
-        </div>
+        </header>
 
-        <div class="academic-production reveal">
-          <div class="production-head">
-            <span>ACADEMIC OUTPUTS</span>
-            <p>Explicit editorial status, without treating manuscripts and presentations as equivalent to published articles.</p>
-          </div>
-          <div class="academic-grid">
-            <a href="projects/arqjud/" class="academic-item">
-              <small>MANUSCRIPT · EDITORIAL PREPARATION</small>
-              <strong>Arquitectura Judicial y Desempeño en el Poder Judicial Brasileño</strong>
-              <span>Article derived from the ARQJUD agenda →</span>
-            </a>
-            <a href="https://cairesmachado-svg.github.io/arenas-flash-talk-v5/pt.html" target="_blank" rel="noopener" class="academic-item">
-              <small>ACADEMIC PRESENTATION · 2026</small>
-              <strong>Governance of Judicial Infrastructure in Brazil</strong>
-              <span>From Judicial Architecture to Sociomaterial Implementation Arenas →</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="public-writing-label reveal">
-          <span>ESSAYS & PUBLIC WRITING</span>
-          <p>Public-facing texts that make the evolution of the agenda visible and connect ongoing research to contemporary debates.</p>
-        </div>
-
-        <div class="writing-stack">
-          <a class="writing-row reveal" href="https://www.linkedin.com/pulse/between-rules-behavior-igor-caires-machado-0tfgf?trk=public_post" target="_blank" rel="noopener">
-            <span class="write-index">01</span>
-            <div><small>REGULATION · 2026</small><h3>Between Rules and Behavior</h3><p>From actors to mechanisms: a reading of regulatory intermediation through the RIT model.</p></div>
-            <span class="write-arrow">↗</span>
-          </a>
-          <a class="writing-row reveal" href="https://www.linkedin.com/pulse/when-judiciary-regulates-brazils-cnj-expansion-igor-caires-m-phd--bjvgf?trk=public_post" target="_blank" rel="noopener">
-            <span class="write-index">02</span>
-            <div><small>JUDICIAL REGULATORY GOVERNANCE · 2026</small><h3>When the Judiciary Regulates</h3><p>Brazil’s CNJ as a case for a comparative agenda on judicial councils, coordination, and regulation.</p></div>
-            <span class="write-arrow">↗</span>
-          </a>
-          <a class="writing-row reveal" href="https://pt.linkedin.com/pulse/edi%C3%A7%C3%A3o-02-o-pr%C3%A9dio-tamb%C3%A9m-implementa-pol%C3%ADtica-igor-caires-machado-eozef" target="_blank" rel="noopener">
-            <span class="write-index">03</span>
-            <div><small>SOCIOMATERIALIDADE · 2026</small><h3>The building also implements policy</h3><p>Built infrastructure as part of the causal chain of implementation.</p></div>
-            <span class="write-arrow">↗</span>
-          </a>
-          <a class="writing-row reveal" href="https://pt.linkedin.com/pulse/tipos-de-revis%C3%A3o-literatura-em-pol%C3%ADticas-p%C3%BAblicas-do-caires-machado-9bztf?trk=public_post" target="_blank" rel="noopener">
-            <span class="write-index">04</span>
-            <div><small>METHODS · 2026</small><h3>Types of literature review in public policy</h3><p>Criteria for connecting research questions, review design, and synthesis technique.</p></div>
-            <span class="write-arrow">↗</span>
-          </a>
-          <a class="writing-row reveal" href="https://pt.linkedin.com/posts/igorcairesmachado_educa%C3%A7%C3%A3ojudicial-escolasjudiciais-inova%C3%A7%C3%A3opedag%C3%B3gica-activity-7495238026126868480-rw0a" target="_blank" rel="noopener">
-            <span class="write-index">05</span>
-            <div><small>JUDICIAL EDUCATION · 2026</small><h3>Judicial Education and Pedagogical Innovation</h3><p>Bibliometric evidence for judicial schools and professional education policies.</p></div>
-            <span class="write-arrow">↗</span>
+        <div class="contact-grid">
+          <ul class="link-list">
+            <li><a href="mailto:igorcaires@hotmail.com"><span class="link-label">Email</span><span class="link-value">igorcaires@hotmail.com</span><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.linkedin.com/in/igorcairesmachado/" target="_blank" rel="noopener"><span class="link-label">LinkedIn</span><span class="link-value">in/igorcairesmachado</span><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://orcid.org/0009-0008-9547-5223" target="_blank" rel="noopener"><span class="link-label">ORCID</span><span class="link-value">0009-0008-9547-5223</span><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/cairesmachado-svg" target="_blank" rel="noopener"><span class="link-label">GitHub</span><span class="link-value">cairesmachado-svg</span><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+          </ul>
+          <a class="qr" href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/" target="_blank" rel="noopener">
+            <div class="qr-box"><img src="assets/qr-digital-card.svg" alt="QR code linking to the digital business card" width="200" height="200"></div>
+            <span>Digital business card <span aria-hidden="true">↗</span></span>
           </a>
         </div>
-      </div>
-    </section>
-
-    <section id="trajetoria" class="trajectory-section section-shell">
-      <div class="section-heading reveal">
-        <div>
-          <span class="section-kicker">TRAJECTORY</span>
-          <h2>Development of the research agenda.</h2>
-        </div>
-        <p>The agenda develops from studies of judicial architecture toward a broader investigation of the material, organizational, and regulatory conditions of public policy implementation.</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-line" aria-hidden="true"></div>
-        <article class="timeline-item reveal">
-          <span class="time-dot"></span><small>BACKGROUND</small>
-          <h3>Architecture and infrastructure</h3>
-          <p>Initial research axis: relationships between the built environment, work flows, and institutional functioning.</p>
-        </article>
-        <article class="timeline-item reveal">
-          <span class="time-dot"></span><small>PHD RESEARCH · 2024</small>
-          <h3>ARQJUD</h3>
-          <p>Formalization of the problem through empirical research on judicial architecture, workplace experience, recognition, access, and functionality.</p>
-        </article>
-        <article class="timeline-item reveal">
-          <span class="time-dot"></span><small>POSTDOCTORAL RESEARCH · ENAP</small>
-          <h3>Sociomateriality and implementation</h3>
-          <p>Expansion of the unit of analysis to arrangements of people, rules, technologies, documents, and infrastructure involved in policy execution.</p>
-        </article>
-        <article class="timeline-item reveal">
-          <span class="time-dot"></span><small>CURRENT AGENDA</small>
-          <h3>Governance, regulation, and education</h3>
-          <p>Integration of regulation, intermediation, institutional capacity, coordination, and professional learning into the implementation agenda for justice systems.</p>
-        </article>
-      </div>
-
-      <div class="numbers-grid reveal">
-        <div><strong>25+</strong><span>years working in the justice system</span></div>
-        <div><strong>3</strong><span>core ARQJUD factors</span></div>
-        <div><strong>2026–27</strong><span>postdoctoral research at ENAP</span></div>
-        <div><strong>PT · EN</strong><span>international output and collaboration</span></div>
-      </div>
-    </section>
-
-    <section class="quote-section">
-      <div class="section-shell reveal">
-        <span class="section-kicker">ANALYTICAL SUMMARY</span>
-        <blockquote>
-          Implementation is treated as an outcome of interactions among
-          <em>rules, capacities, infrastructure, technology, actors, and learning processes.</em>
-        </blockquote>
-      </div>
-    </section>
-
-    <section id="contato" class="contact-section">
-      <div class="contact-shell">
-        <div class="contact-copy reveal">
-          <span class="section-kicker">CONTACT & COLLABORATION</span>
-          <h2>Contact and collaboration.</h2>
-          <p>Research contact: judicial governance, policy implementation, regulation, sociomateriality, judicial education, and applied research methods. For project participation, send an email with the project name, affiliation, and proposed contribution.</p>
-          <div class="contact-links">
-            <a href="mailto:igorcaires@hotmail.com">igorcaires@hotmail.com ↗</a>
-            <a href="https://www.linkedin.com/in/igorcairesmachado/" target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a href="https://github.com/cairesmachado-svg" target="_blank" rel="noopener">GitHub ↗</a>
-            <a href="https://orcid.org/0009-0008-9547-5223" target="_blank" rel="noopener">ORCID ↗</a>
-          </div>
-        </div>
-        <a class="contact-qr reveal" href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/" target="_blank" rel="noopener">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code do digital card">
-          <span>digital card ↗</span>
-        </a>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div>
-      <strong>Igor Caires Machado</strong>
-      <span>Judicial governance · Public policy · Sociomateriality · Regulation</span>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span><strong>Igor Caires Machado</strong> · Judicial governance · Public policy · Sociomateriality · Regulation</span>
+      <span>© 2026</span>
     </div>
-    <span>© 2026</span>
   </footer>
 </body>
 </html>

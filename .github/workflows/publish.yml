@@ -30,22 +30,15 @@ jobs:
           mkdir -p _site
           cp en/index.html _site/index.html
           cp styles.css script.js _site/
+          cp -r assets _site/assets
           cp -r publications _site/publications
-
-          mkdir -p _site/projects/assets
-          cp projects/assets/project.css projects/assets/project.js _site/projects/assets/
 
           for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus; do
             mkdir -p "_site/projects/$slug/en"
             cp "projects/$slug/en/index.html" "_site/projects/$slug/en/index.html"
-            sed -i -E 's|href="mailto:[^"]+"|href="../../../#contato"|g' "_site/projects/$slug/en/index.html"
-            sed -i 's|href="../assets/project.css"|href="../../assets/project.css"|g' "_site/projects/$slug/en/index.html"
-            sed -i 's|src="../assets/project.js"|src="../../assets/project.js"|g' "_site/projects/$slug/en/index.html"
-            sed -i 's|href="../../../en/"|href="../../../"|g' "_site/projects/$slug/en/index.html"
-            sed -i 's|<a class="brand" href="../../">|<a class="brand" href="../../../">|g' "_site/projects/$slug/en/index.html"
-            perl -0pi -e 's|<div class="lang-switch">.*?</div>||gs' "_site/projects/$slug/en/index.html"
+            # In the repository the English home lives in en/; on the site it is the root.
+            sed -i 's|\.\./\.\./\.\./en/|../../../|g' "_site/projects/$slug/en/index.html"
 
-            mkdir -p "_site/projects/$slug"
             cat > "_site/projects/$slug/index.html" <<EOF
           <!doctype html>
           <html lang="en">
@@ -55,7 +48,7 @@ jobs:
             <link rel="canonical" href="en/">
             <title>Project</title>
           </head>
-          <body></body>
+          <body><a href="en/">Continue to the project page</a></body>
           </html>
           EOF
           done
