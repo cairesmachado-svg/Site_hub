@@ -1,0 +1,47 @@
+project:
+  type: website
+
+website:
+  title: "Igor Caires Machado"
+  description: "Pesquisa, governança judicial, políticas públicas, sociomaterialidade, regulação e inovação."
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: Início
+      - href: sobre.qmd
+        text: Sobre
+      - href: pesquisa.qmd
+        text: Pesquisa
+      - href: projetos.qmd
+        text: Projetos
+      - href: publicacoes.qmd
+        text: Publicações
+      - href: profissional.qmd
+        text: Profissional
+      - href: ensino.qmd
+        text: Ensino
+      - href: contato.qmd
+        text: Contato
+    right:
+      - icon: github
+        href: https://github.com/cairesmachado-svg
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/igorcairesmachado
+        aria-label: LinkedIn
+  page-footer:
+    left: "© 2026 Igor Caires Machado"
+    right: "Pesquisa · Justiça · Governança · Inovação"
+  search: true
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    smooth-scroll: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto
