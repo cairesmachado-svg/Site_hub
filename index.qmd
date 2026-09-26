@@ -1,0 +1,132 @@
+---
+title: false
+page-layout: full
+---
+
+::: {.hero}
+::: {.hero-copy}
+<p class="eyebrow">PESQUISA · GESTÃO PÚBLICA · JUSTIÇA</p>
+
+# Igor Caires Machado
+
+<p class="hero-lead">Pesquisador e gestor público dedicado à investigação das relações entre instituições, espaços, tecnologias, regulação e implementação de políticas públicas no sistema de justiça.</p>
+
+<div class="hero-actions">
+<a class="btn-primary" href="pesquisa.html">Agenda de pesquisa</a>
+<a class="btn-secondary" href="publicacoes.html">Publicações</a>
+<a class="btn-secondary" href="projetos.html">Projetos</a>
+</div>
+
+<div class="hero-links">
+<a href="https://www.linkedin.com/in/igorcairesmachado">LinkedIn</a>
+<span>·</span>
+<a href="https://github.com/cairesmachado-svg">GitHub</a>
+<span>·</span>
+<a href="sobre.html">Currículo e trajetória</a>
+</div>
+:::
+
+::: {.identity-card}
+<img class="profile-photo" src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Igor Caires Machado">
+
+<div class="identity-name">Igor Caires Machado</div>
+<div class="identity-role">Coordenador · ENAJU/CNJ</div>
+<div class="identity-unit">Desenvolvimento Educacional, Pesquisa e Inovação</div>
+
+<div class="qr-wrap">
+<img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code para o cartão digital de Igor Caires Machado">
+<div>
+<strong>Cartão digital</strong><br>
+<span>Aponte a câmera para salvar o contato.</span>
+</div>
+</div>
+
+<a class="contact-link" href="https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/">Abrir cartão de visitas ↗</a>
+:::
+:::
+
+::: {.section-intro}
+## Agenda de pesquisa
+
+Minha produção se organiza em programas de pesquisa conectados por um problema comum: compreender como estruturas institucionais, ambientes, tecnologias, evidências e arranjos regulatórios moldam a ação pública e a justiça.
+:::
+
+::: {.research-grid}
+::: {.research-card}
+### Governança Judicial e Políticas Públicas
+Implementação, avaliação, governança regulatória e capacidades institucionais no Poder Judiciário.
+
+[Explorar eixo →](pesquisa.qmd#governança-judicial-e-políticas-públicas)
+:::
+
+::: {.research-card}
+### Arquitetura Judiciária e Sociomaterialidade
+Espaço, trabalho, infraestrutura judicial, avaliação pós-ocupação e dimensões sociomateriais da implementação.
+
+[Explorar eixo →](pesquisa.qmd#arquitetura-judiciária-e-sociomaterialidade)
+:::
+
+::: {.research-card}
+### Regulação e Intermediação
+Intermediários regulatórios, governança regulatória, transição verde e desenho de relações regulador–intermediário–alvo.
+
+[Explorar eixo →](pesquisa.qmd#regulação-e-intermediação)
+:::
+
+::: {.research-card}
+### Direito, Justiça e Comportamento
+Pesquisa jurídica empírica, vieses, decisão, desenho institucional e produção de evidências para o sistema de justiça.
+
+[Explorar eixo →](pesquisa.qmd#direito-justiça-e-comportamento)
+:::
+
+::: {.research-card}
+### Métodos, Dados e Pesquisa Agentiva
+APIs científicas, bibliometria, Quarto, ciência reprodutível e uso de agentes de IA em fluxos de pesquisa.
+
+[Explorar eixo →](pesquisa.qmd#métodos-dados-e-pesquisa-agentiva)
+:::
+
+::: {.research-card}
+### Educação e Inovação no Judiciário
+Formação judicial, desenho de experiências de aprendizagem, pesquisa aplicada e inovação institucional.
+
+[Explorar eixo →](pesquisa.qmd#educação-e-inovação-no-judiciário)
+:::
+:::
+
+## Em andamento {.section-title}
+
+::: {.current-grid}
+::: {.current-item}
+<span class="status">EM ANDAMENTO</span>
+
+### ARENAS
+Sociomaterialidade, implementação de políticas públicas e governança judicial.
+
+[Ver projeto →](projetos.qmd#arenas)
+:::
+
+::: {.current-item}
+<span class="status">PESQUISA INTERNACIONAL</span>
+
+### Regulatory Intermediaries
+Intermediação regulatória, desenho institucional e transição verde.
+
+[Ver projeto →](projetos.qmd#regulatory-intermediaries)
+:::
+
+::: {.current-item}
+<span class="status">MÉTODOS</span>
+
+### Pesquisa Científica Agentiva
+Do problema ao produto: agentes, dados, APIs e reprodutibilidade científica.
+
+[Ver projeto →](projetos.qmd#pesquisa-científica-agentiva)
+:::
+:::
+
+::: {.closing-statement}
+> **Pesquisa como prática de construção institucional.**  
+> O site funciona como hub da produção acadêmica, dos projetos em curso, dos produtos de pesquisa, dos dados e das experiências profissionais que dialogam com essa agenda.
+:::
