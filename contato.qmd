@@ -1,0 +1,28 @@
+---
+title: "Contato"
+---
+
+::: {.contact-page}
+::: {.contact-profile}
+<img class="profile-photo profile-photo-small" src="https://avatars.githubusercontent.com/u/274884145?v=4" alt="Igor Caires Machado">
+
+## Igor Caires Machado
+
+**ENAJU · Conselho Nacional de Justiça**  
+Coordenadoria de Desenvolvimento Educacional, Pesquisa e Inovação
+
+[LinkedIn](https://www.linkedin.com/in/igorcairesmachado)  
+[GitHub](https://github.com/cairesmachado-svg)  
+[Cartão digital institucional](https://cnj-proj-icm.github.io/enaju-contato/contatos/igor-machado/)
+:::
+
+::: {.contact-qr}
+<img class="qr-code qr-code-large" src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https%3A%2F%2Fcnj-proj-icm.github.io%2Fenaju-contato%2Fcontatos%2Figor-machado%2F" alt="QR code para o cartão digital">
+
+**Salvar contato**
+
+Escaneie o QR code para abrir o cartão digital institucional.
+:::
+:::
+
+O cartão digital utilizado aqui referencia a versão institucional mantida no repositório da ENAJU.
