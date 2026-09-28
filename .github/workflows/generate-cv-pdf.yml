@@ -1,4 +1,5 @@
 name: Generate full academic profile PDF
+# CV source: current public site without postdoctoral references
 
 on:
   push:
