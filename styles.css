@@ -325,3 +325,14 @@ a.row:hover .row-title{text-decoration:underline}
   a{color:#111!important;text-decoration:none}
   a[href^="http"]::after{content:"";} 
 }
+
+.pdf-generate{display:inline-flex;align-items:center;gap:.4rem;background:var(--navy);border-color:var(--navy);color:#fff}
+.pdf-generate:hover{background:var(--navy-hover);color:#fff}
+.pdf-generate span{font-size:1.05em}
+@media print{
+  .cv-section::before{content:"IGOR CAIRES MACHADO  ·  CURRICULUM VITAE";display:block;font-size:7.5pt;font-weight:700;letter-spacing:.12em;margin-bottom:4mm;padding-bottom:2mm;border-bottom:1px solid #111}
+  .cv-section .code{display:none}
+  .cv-section .section-head h2{font-size:17pt;line-height:1.1}
+  .cv-section .section-intro{font-size:8.5pt}
+  .cv-secondary h3{font-size:8.5pt}
+}
