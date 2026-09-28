@@ -356,3 +356,14 @@ a.row:hover .row-title{text-decoration:underline}
   .cv-links{grid-template-columns:1fr}
   .cv-links .pdf-generate{grid-column:auto}
 }
+
+/* 18. CV header mobile layout correction ---------------------------------------- */
+.cv-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 2rem;align-items:end}
+.cv-intro{min-width:0;max-width:100%}
+.cv-intro .section-intro{width:auto;max-width:48rem;margin-right:0}
+@media(max-width:760px){
+  .cv-head{grid-template-columns:minmax(0,1fr);align-items:start}
+  .cv-intro,.cv-intro .section-intro{display:block;width:100%;max-width:100%;min-width:0}
+  .cv-intro h2{max-width:100%;overflow-wrap:normal;word-break:normal}
+  .cv-links{justify-self:stretch}
+}
