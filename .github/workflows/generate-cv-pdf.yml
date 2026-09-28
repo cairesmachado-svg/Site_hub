@@ -1,36 +1,64 @@
-name: Generate CV PDF
+name: Build CV and deploy Pages
 
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - 'Igor_Caires_Machado_CV.pdf'
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  pdf:
+  build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Start local site
+
+      - name: Start site for PDF rendering
         run: |
           python3 -m http.server 8000 >/tmp/site.log 2>&1 &
-          echo $! > /tmp/site.pid
           sleep 2
-      - name: Generate current CV PDF
+
+      - name: Generate CV PDF
         run: |
           chromium --headless --no-sandbox --disable-gpu \
             --print-to-pdf="$GITHUB_WORKSPACE/Igor_Caires_Machado_CV.pdf" \
             --print-to-pdf-no-header \
             "http://127.0.0.1:8000/#cv"
-      - name: Commit generated PDF
+          test -s "$GITHUB_WORKSPACE/Igor_Caires_Machado_CV.pdf"
+
+      - name: Commit refreshed PDF
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Igor_Caires_Machado_CV.pdf
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Update generated CV PDF"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Update generated CV PDF"
+            git push
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload complete site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
