@@ -10,6 +10,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   generate:
@@ -90,3 +96,21 @@ jobs:
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update validated CV PDF"
           git push
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload complete site including validated PDF
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
