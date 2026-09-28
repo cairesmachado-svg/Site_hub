@@ -19,51 +19,7 @@
     });
   }
 
-  // 2. Generate and download current CV as a real PDF --------------------------
-  document.querySelectorAll('[data-generate-cv]').forEach(btn=>{
-    btn.addEventListener('click',async()=>{
-      const cv=document.getElementById('cv');
-      if(!cv)return;
-      if(typeof window.html2pdf!=='function'){
-        window.print();
-        return;
-      }
-      const original=btn.textContent;
-      document.body.classList.add('pdf-exporting');
-      document.querySelectorAll('[data-generate-cv]').forEach(b=>{b.disabled=true});
-      btn.textContent='Generating PDF…';
-      try{
-        const clone=cv.cloneNode(true);
-        clone.id='cv-pdf-export';
-        clone.querySelectorAll('button,.cv-card-actions').forEach(el=>el.remove());
-        const shell=document.createElement('div');
-        shell.className='pdf-export-shell';
-        const identity=document.createElement('div');
-        identity.className='pdf-export-identity';
-        identity.innerHTML='<strong>Igor Caires Machado</strong><span>Curriculum Vitae</span>';
-        shell.append(identity,clone);
-        document.body.appendChild(shell);
-        await window.html2pdf().set({
-          margin:[10,10,12,10],
-          filename:'Igor_Caires_Machado_CV.pdf',
-          image:{type:'jpeg',quality:0.98},
-          html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',windowWidth:1100},
-          jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-          pagebreak:{mode:['css','legacy'],avoid:['li','.cv-secondary > div']}
-        }).from(shell).save();
-        shell.remove();
-      }catch(err){
-        console.error('PDF generation failed',err);
-        window.print();
-      }finally{
-        document.body.classList.remove('pdf-exporting');
-        document.querySelectorAll('[data-generate-cv]').forEach(b=>{b.disabled=false});
-        btn.textContent=original;
-      }
-    });
-  });
-
-  // 3. Repository status --------------------------------------------------------
+  // 2. CV PDF is generated automatically by GitHub Actions and linked directly.\n\n  // 3. Repository status --------------------------------------------------------
   const repo=document.body.dataset.repo;
   if(!repo)return;
   const fmt=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'});
