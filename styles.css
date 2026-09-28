@@ -336,3 +336,23 @@ a.row:hover .row-title{text-decoration:underline}
   .cv-section .section-intro{font-size:8.5pt}
   .cv-secondary h3{font-size:8.5pt}
 }
+
+/* 17. Mobile CV overflow fix ----------------------------------------------------- */
+.cv-section,.cv-section *{min-width:0}
+.cv-head>*,.cv-grid>*,.cv-secondary>*{min-width:0}
+.cv-section .section-intro,
+.cv-list strong,.cv-list span,.cv-list small,
+.cv-secondary p{overflow-wrap:anywhere;word-break:normal}
+@media(max-width:640px){
+  .cv-head{display:block}
+  .cv-head .section-intro{width:100%;max-width:100%;margin-bottom:1rem}
+  .cv-links{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:.5rem}
+  .cv-links a,.cv-links .print-btn{width:100%;max-width:100%;min-width:0;text-align:center;white-space:normal;overflow-wrap:anywhere}
+  .cv-links .pdf-generate{grid-column:1/-1;justify-content:center;padding:.65rem .8rem}
+  .cv-list li{width:100%}
+  .cv-list li>div{min-width:0}
+}
+@media(max-width:380px){
+  .cv-links{grid-template-columns:1fr}
+  .cv-links .pdf-generate{grid-column:auto}
+}
