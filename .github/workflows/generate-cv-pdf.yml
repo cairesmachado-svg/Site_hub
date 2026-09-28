@@ -1,10 +1,12 @@
-name: Generate CV PDF
+name: Generate full academic profile PDF
 
 on:
   push:
     branches: [main]
     paths:
       - 'index.html'
+      - 'styles.css'
+      - 'assets/**'
       - '.github/workflows/generate-cv-pdf.yml'
   workflow_dispatch:
 
@@ -22,84 +24,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install PDF dependency
-        run: pip install reportlab
-      - name: Generate validated CV PDF
-        run: |
-          cat > /tmp/make_cv.py <<'PY'
-          from reportlab.lib.pagesizes import A4
-          from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
-          from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-          from reportlab.lib import colors
-          from reportlab.lib.units import mm
 
-          out='Igor_Caires_Machado_CV.pdf'
-          ss=getSampleStyleSheet()
-          ss.add(ParagraphStyle(name='N',parent=ss['Title'],fontName='Helvetica-Bold',fontSize=22,leading=25,spaceAfter=8))
-          ss.add(ParagraphStyle(name='H',parent=ss['Heading2'],fontName='Helvetica-Bold',fontSize=13,leading=16,spaceBefore=8,spaceAfter=6))
-          ss.add(ParagraphStyle(name='B',parent=ss['BodyText'],fontName='Helvetica',fontSize=8.7,leading=11.2))
-          ss.add(ParagraphStyle(name='D',parent=ss['BodyText'],fontName='Helvetica-Bold',fontSize=7.7,leading=10))
-          doc=SimpleDocTemplate(out,pagesize=A4,rightMargin=14*mm,leftMargin=14*mm,topMargin=13*mm,bottomMargin=13*mm,title='Igor Caires Machado - Curriculum Vitae')
-          story=[Paragraph('Igor Caires Machado',ss['N'])]
-          edu=[
-          ('2019-2024','PhD in Business and Social Sciences','Universidad de Ciencias Empresariales y Sociales (UCES), Buenos Aires','Thesis: <i>Un Modelo Funcional de Arquitetura Judiciária</i>'),
-          ('2025-','Law studies','Anhanguera Educacional, Brasília','Undergraduate studies in progress'),
-          ('2008-2010','Specialization in Project Management','Centro Universitário Jorge Amado (UNIJORGE), Salvador',''),
-          ('2007-2008','MBA in Project Management','Centro Universitário Jorge Amado (UNIJORGE), Salvador','392 hours'),
-          ('1999-2007',"Bachelor's degree in Architecture and Urbanism",'Universidade Federal da Bahia (UFBA), Salvador','Final project: <i>Fórum de Família</i>')]
-          exp=[
-          ('2026-','Coordinator, Educational Development, Research and Innovation','Escola Nacional do Judiciário (ENAJU) - Conselho Nacional de Justiça',''),
-          ('2020-2026','Institutional Projects Consultant / Researcher','Conselho Nacional de Justiça (CNJ), Brasília','Institutional projects and research at the Department of Judicial Research.'),
-          ('2018-2020','Director of Projects, Department of Judicial Research','Conselho Nacional de Justiça (CNJ), Brasília',''),
-          ('2018','Project Coordinator','Corregedoria Geral da Justiça - Tribunal de Justiça do Estado da Bahia',''),
-          ('2016-2018','Secretary for Planning and Budget','Tribunal de Justiça do Estado da Bahia (TJBA)',''),
-          ('2012-2015','President, FECOM','Fundo Especial de Compensação da Bahia',''),
-          ('2010-2015','Secretary of Administration','Tribunal de Justiça do Estado da Bahia (TJBA)',''),
-          ('2010-2011','Works Manager','Tribunal de Justiça do Estado da Bahia (TJBA)',''),
-          ('2010','Administrative Director / Superintendent of IPRAJ','Tribunal de Justiça do Estado da Bahia',''),
-          ('2008-2010','Supervisor, Project Development and Monitoring','Tribunal de Justiça do Estado da Bahia (TJBA)',''),
-          ('2006-2008','Planning Advisor','Tribunal de Justiça do Estado da Bahia (TJBA)',''),
-          ('1999-','Career public servant in the Bahia State Judiciary','Tribunal de Justiça do Estado da Bahia','Career origin: court officer; subsequent work in planning, projects, infrastructure and administration.')]
-          def section(title,data):
-              story.append(Paragraph(title,ss['H']))
-              rows=[]
-              for date,t,org,note in data:
-                  body=f'<b>{t}</b><br/>{org}'+(f"<br/><font color='#555555'>{note}</font>" if note else '')
-                  rows.append([Paragraph(date,ss['D']),Paragraph(body,ss['B'])])
-              tab=Table(rows,colWidths=[23*mm,150*mm],hAlign='LEFT')
-              tab.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),0),('RIGHTPADDING',(0,0),(-1,-1),3),('TOPPADDING',(0,0),(-1,-1),2),('BOTTOMPADDING',(0,0),(-1,-1),4),('LINEBELOW',(0,0),(-1,-2),.25,colors.HexColor('#dddddd'))]))
-              story.append(tab)
-          section('Academic background',edu)
-          section('Professional experience',exp)
-          extras=[
-          ('Editorial & academic service','Editorial board, <i>Revista Eletrônica do CNJ</i> (since 2018) and <i>Justiça Pesquisa</i> (since 2018). Reviewer, <i>THEMIS - Revista da ESMEC</i> (since 2024) and <i>Revista CNJ</i> (since 2026).'),
-          ('Research profile','Judicial governance, public policy implementation, sociomateriality, regulatory intermediation, judicial education and applied research methods.'),
-          ('Books & literary publications','<b><i>Arquitetura Judiciária</i></b>. Brasília: Ed. do Autor, 2024, 255 p. Literary publications: <i>A Última Dança do Oficial</i>, short story, Bookaria, 2025; <i>O Quintal dos Condenados</i>, fiction, Quimera Antologia, 2025.'),
-          ('Literary interests','Literature as a parallel field of reading and writing, with particular interest in fiction, the classics and literature as a mode of inquiry into human experience.')]
-          for h,b in extras:
-              story += [Paragraph(h,ss['H']),Paragraph(b,ss['B'])]
-          doc.build(story)
-          PY
-          python /tmp/make_cv.py
+      - name: Start local site
+        run: |
+          python3 -m http.server 8000 >/tmp/site.log 2>&1 &
+          sleep 2
+
+      - name: Generate full academic profile PDF from current site
+        run: |
+          chromium --headless --no-sandbox --disable-gpu \
+            --print-to-pdf="$GITHUB_WORKSPACE/Igor_Caires_Machado_CV.pdf" \
+            --print-to-pdf-no-header \
+            "http://127.0.0.1:8000/"
+
+      - name: Validate PDF
+        run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('Igor_Caires_Machado_CV.pdf')
-          assert p.exists() and p.stat().st_size > 4000
+          assert p.exists() and p.stat().st_size > 10000
           assert p.read_bytes()[:5] == b'%PDF-'
-          print('Valid PDF:', p.stat().st_size, 'bytes')
+          print('Validated academic profile PDF:', p.stat().st_size, 'bytes')
           PY
-      - name: Commit PDF
+
+      - name: Commit refreshed PDF
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Igor_Caires_Machado_CV.pdf
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Update validated CV PDF"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Update full academic profile PDF"
+            git push
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload complete site including validated PDF
+      - name: Upload complete site including PDF
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
