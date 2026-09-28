@@ -12,7 +12,6 @@
   <link rel="preload" href="assets/fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.replace('no-js','js')</script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script defer src="script.js"></script>
   <script type="application/ld+json">
   {
@@ -37,7 +36,7 @@
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#top">Igor Caires Machado</a>
-      <button class="header-pdf" type="button" data-generate-cv aria-label="Generate curriculum vitae as PDF">PDF CV</button>
+      <a class="header-pdf" href="Igor_Caires_Machado_CV.pdf" download>PDF CV</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
@@ -338,7 +337,7 @@
           <h2 id="cv-title">Academic background &amp; professional experience</h2>
           <p>A concise academic CV integrated into this site. Generate a fresh PDF at any time from the current version of the curriculum.</p>
           <div class="cv-card-actions">
-            <button class="print-btn pdf-generate" type="button" data-generate-cv><span aria-hidden="true">↓</span> Generate CV · PDF</button>
+            <a class="print-btn pdf-generate" href="Igor_Caires_Machado_CV.pdf" download><span aria-hidden="true">↓</span> Download CV · PDF</a>
             <a href="https://lattes.cnpq.br/3152460228110340" target="_blank" rel="noopener">Lattes</a>
             <a href="https://orcid.org/0009-0008-9547-5223" target="_blank" rel="noopener">ORCID</a>
             <a href="publications/">Publications</a>
