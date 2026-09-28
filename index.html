@@ -36,6 +36,7 @@
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#top">Igor Caires Machado</a>
+      <button class="header-pdf" type="button" data-generate-cv aria-label="Generate curriculum vitae as PDF">PDF CV</button>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
@@ -331,17 +332,15 @@
     <!-- Curriculum vitae --------------------------------------------------- -->
     <section id="cv" class="section cv-section" aria-labelledby="cv-title">
       <div class="wrap">
-        <div class="section-head cv-head">
-          <div class="cv-intro">
-            <p class="code">Curriculum vitae</p>
-            <h2 id="cv-title">Academic background &amp; professional experience</h2>
-            <p class="section-intro">A concise academic CV integrated into this site. Generate a fresh PDF at any time from the current version of the curriculum.</p>
-          </div>
-          <div class="cv-links">
+        <div class="cv-card">
+          <p class="code">Curriculum vitae</p>
+          <h2 id="cv-title">Academic background &amp; professional experience</h2>
+          <p>A concise academic CV integrated into this site. Generate a fresh PDF at any time from the current version of the curriculum.</p>
+          <div class="cv-card-actions">
+            <button class="print-btn pdf-generate" type="button" data-generate-cv><span aria-hidden="true">↓</span> Generate CV · PDF</button>
             <a href="https://lattes.cnpq.br/3152460228110340" target="_blank" rel="noopener">Lattes</a>
             <a href="https://orcid.org/0009-0008-9547-5223" target="_blank" rel="noopener">ORCID</a>
             <a href="publications/">Publications</a>
-            <button class="print-btn pdf-generate" type="button" data-generate-cv><span aria-hidden="true">↓</span> Generate CV · PDF</button>
           </div>
         </div>
 
