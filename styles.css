@@ -257,3 +257,71 @@ a.row:hover .row-title{text-decoration:underline}
 @media print{
   .site-header,.nav-toggle,.skip-link,.qr{display:none}
 }
+
+
+/* 16. Integrated curriculum vitae ---------------------------------------------- */
+.cv-head{align-items:end}
+.cv-links{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:flex-end}
+.cv-links a,.print-btn{font:inherit;font-size:.92rem;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--border);border-radius:20px;padding:.35rem .8rem;text-decoration:none;cursor:pointer}
+.cv-links a:hover,.print-btn:hover{border-color:var(--navy)}
+.cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem 3.5rem}
+.cv-list{border-top:1px solid var(--border)}
+.cv-list li{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.cv-date{font-size:.9rem;font-weight:600;color:var(--navy)}
+.cv-list strong,.cv-list span,.cv-list small{display:block}
+.cv-list strong{color:var(--heading);line-height:1.3}
+.cv-list div>span{margin-top:.12rem;color:var(--text);font-size:.96rem}
+.cv-list small{margin-top:.18rem;color:var(--muted);font-size:.88rem;line-height:1.4}
+.cv-secondary{display:grid;grid-template-columns:1fr 1fr;gap:2rem 3.5rem;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.cv-secondary h3{font-size:1rem;color:var(--navy);margin-bottom:.3rem}
+.cv-secondary p{font-size:.96rem;color:var(--muted)}
+@media(max-width:900px){.cv-grid,.cv-secondary{grid-template-columns:1fr}.cv-links{justify-content:flex-start}}
+@media(max-width:640px){.cv-list li{grid-template-columns:1fr;gap:.15rem}}
+
+@media print{
+  @page{size:A4;margin:14mm 15mm 15mm}
+  html{font-size:9.5pt}
+  body{background:#fff;color:#111;line-height:1.35}
+  .site-header,.nav-toggle,.skip-link,.qr,.actions,.print-btn,.site-footer{display:none!important}
+  .wrap{width:100%;max-width:none}
+  .hero{padding:0 0 6mm;border:0;background:#fff}
+  .hero-grid{grid-template-columns:28mm 1fr;gap:6mm;align-items:start}
+  .portrait{max-width:28mm}
+  .portrait img{border-radius:0}
+  .hero h1{font-size:22pt;margin:0 0 2mm}
+  .role{gap:1mm;font-size:9pt}
+  .lead{font-size:10pt!important;max-width:none}
+  .profile-links{margin-top:2mm;font-size:8.5pt}
+  .profile-links a{padding:0;border:0}
+  .section{padding:5mm 0;border-top:1px solid #bbb}
+  .section--alt{background:#fff}
+  .section-head{margin-bottom:3mm}
+  .section-head h2{font-size:14pt}
+  .section-intro{font-size:9pt;max-width:none}
+  .dimensions,.card-grid,.card-grid--2{grid-template-columns:1fr 1fr;gap:2mm}
+  .dimension,.card{padding:3mm;break-inside:avoid}
+  .dimension p,.card-text{font-size:8.5pt}
+  .pub-row{grid-template-columns:14mm 1fr 28mm;gap:2mm;padding:2.5mm 0;break-inside:avoid}
+  .pub-title{font-size:9.5pt}
+  .pub-authors,.pub-citation,.pub-actions{font-size:8pt}
+  .pub-actions a,.pub-actions>span{padding:0;border:0;font-size:8pt}
+  #writing{display:none}
+  .timeline li{padding-bottom:2mm}
+  .facts-inline{margin-top:3mm;padding-top:2mm}
+  .cv-section{break-before:page}
+  .cv-head{display:block}
+  .cv-links{margin-top:2mm;justify-content:flex-start}
+  .cv-links a{padding:0;border:0;font-size:8pt}
+  .cv-grid{grid-template-columns:1fr 1fr;gap:5mm}
+  .cv-list li{grid-template-columns:18mm 1fr;gap:2mm;padding:2mm 0;break-inside:avoid}
+  .cv-list strong{font-size:8.8pt}
+  .cv-list div>span,.cv-list small,.cv-date{font-size:7.8pt}
+  .cv-secondary{grid-template-columns:1fr 1fr;gap:5mm;margin-top:4mm;padding-top:3mm}
+  .cv-secondary p{font-size:8pt}
+  #contact{padding-bottom:0}
+  #contact .section-intro{font-size:8.5pt}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-list{grid-template-columns:20mm 1fr;gap:1mm 2mm;margin-top:2mm;font-size:8.5pt}
+  a{color:#111!important;text-decoration:none}
+  a[href^="http"]::after{content:"";} 
+}
