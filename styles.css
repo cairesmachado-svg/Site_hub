@@ -406,8 +406,49 @@ a.row:hover .row-title{text-decoration:underline}
   .header-pdf{font-size:.75rem;padding:.3rem .5rem}
 }
 @media print{
-  .header-pdf,.cv-card-actions{display:none!important}
-  .cv-card{border:0;background:#fff;padding:0;margin:0 0 4mm}
+  @page{size:A4;margin:12mm 13mm 14mm}
+  html{font-size:9pt}
+  body{background:#fff!important;color:#111!important;font-family:Arial,Helvetica,sans-serif!important}
+  .site-header,.site-footer,.skip-link,.nav-toggle,.header-pdf,.actions,.cv-card-actions,.personal-mark{display:none!important}
+  .wrap{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+  main{display:block!important}
+  .hero,.section{padding:7mm 0!important;margin:0!important;background:#fff!important;color:#111!important}
+  .hero{padding-top:0!important;border-bottom:1.2pt solid #174f55!important}
+  .hero-grid{display:grid!important;grid-template-columns:42mm 1fr!important;gap:8mm!important;align-items:start!important}
+  .portrait{margin:0!important}.portrait img{display:block!important;width:38mm!important;height:48mm!important;object-fit:cover!important;filter:grayscale(100%)!important}
+  h1{font-size:28pt!important;line-height:.95!important;margin:0 0 4mm!important}
+  h2{font-size:19pt!important;line-height:1.05!important;margin:0 0 4mm!important}
+  h3{break-after:avoid}
+  .role,.lead,.section-intro{max-width:none!important}
+  .lead{font-size:11pt!important;line-height:1.35!important;color:#174f55!important}
+  .profile-links{font-size:8pt!important}
+  .profile-links a,.contact-list a{color:#111!important;text-decoration:none!important}
+  #research{break-before:page}
+  #publications{break-before:page}
+  #trajectory{break-before:page}
+  #cv{break-before:page}
+  #contact{break-before:page}
+  .section-head{display:block!important;margin-bottom:4mm!important}
+  .dimensions{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:3mm!important}
+  .dimension{padding:4mm!important;border:1px solid #c9c4b8!important;break-inside:avoid}
+  .dimension--core{grid-column:1/-1!important;background:#174f55!important;color:#fff!important}
+  .dimension--core h3,.dimension--core p{color:#fff!important}
+  .aside-note{padding:3mm 0!important}
+  .card-grid,.card-grid--2{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4mm!important}
+  .card{padding:4mm!important;border:1px solid #c9c4b8!important;background:#f3f0e8!important;color:#111!important;break-inside:avoid;min-height:0!important}
+  .card-title{font-size:10pt!important}.card-text{font-size:8pt!important}
+  .pub-list{margin:0!important}.pub-row{display:grid!important;grid-template-columns:15mm 1fr!important;gap:3mm!important;padding:3mm 0!important;border-bottom:.5pt solid #c9c4b8!important;break-inside:avoid}
+  .pub-actions{display:none!important}.pub-title{font-size:9pt!important;line-height:1.15!important}.pub-authors,.pub-citation{font-size:7.5pt!important;line-height:1.25!important}
+  #writing{display:block!important}.timeline li{break-inside:avoid}
+  .cv-card{border:0!important;background:#fff!important;padding:0!important;margin:0 0 5mm!important}
+  .cv-card .code{color:#b84d2f!important}.cv-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7mm!important}
+  .cv-list li{display:grid!important;grid-template-columns:18mm 1fr!important;gap:2mm!important;padding:2.5mm 0!important;break-inside:avoid;border-bottom:.4pt solid #ddd!important}
+  .cv-list strong{font-size:8.5pt!important}.cv-list span,.cv-list small,.cv-date{font-size:7.3pt!important;line-height:1.25!important}
+  .cv-secondary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4mm!important;margin-top:5mm!important}
+  .cv-secondary>div{break-inside:avoid}
+  .contact-grid{display:grid!important;grid-template-columns:1fr 42mm!important;gap:8mm!important}
+  .qr{color:#111!important;text-decoration:none!important}.qr img{width:32mm!important;height:32mm!important}
+  a[href^="http"]::after{content:""!important}
 }
 
 /* 21. Client-side PDF export ---------------------------------------------------- */
