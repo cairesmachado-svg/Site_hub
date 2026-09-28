@@ -380,3 +380,32 @@ a.row:hover .row-title{text-decoration:underline}
   #cv .cv-intro .section-intro{font-size:1rem!important;line-height:1.55!important;overflow-wrap:normal!important;word-break:normal!important;white-space:normal!important}
   #cv .cv-links{width:100%!important;max-width:none!important}
 }
+
+/* 20. Standalone CV card + persistent PDF action ------------------------------- */
+.header-pdf{font:inherit;font-size:.82rem;font-weight:700;letter-spacing:.02em;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.55);border-radius:18px;padding:.3rem .65rem;cursor:pointer;white-space:nowrap}
+.header-pdf:hover{background:rgba(255,255,255,.1)}
+.cv-card{display:block;width:100%;max-width:none;box-sizing:border-box;padding:clamp(1.15rem,3vw,1.75rem);margin:0 0 2rem;background:var(--banner);border:1px solid var(--border);border-radius:var(--radius)}
+.cv-card .code{margin:0 0 .35rem}
+.cv-card h2{margin:0;max-width:24em;font-size:clamp(1.6rem,4vw,2.25rem);line-height:1.08}
+.cv-card>p:not(.code){margin:.75rem 0 0;max-width:46rem;color:var(--muted);font-size:1.05rem;line-height:1.55}
+.cv-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-top:1.1rem}
+.cv-card-actions a,.cv-card-actions .print-btn{font:inherit;font-size:.92rem;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--border);border-radius:20px;padding:.42rem .8rem;text-decoration:none}
+.cv-card-actions .pdf-generate{color:#fff;background:var(--navy);border-color:var(--navy)}
+@media(max-width:640px){
+  .site-header .wrap{gap:.45rem}
+  .brand{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .header-pdf{margin-left:auto}
+  .cv-card{width:100%;padding:1.1rem}
+  .cv-card h2,.cv-card>p:not(.code){width:100%;max-width:100%;overflow-wrap:normal;word-break:normal;white-space:normal}
+  .cv-card-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .cv-card-actions .pdf-generate{grid-column:1/-1}
+  .cv-card-actions a,.cv-card-actions button{width:100%;text-align:center;justify-content:center}
+}
+@media(max-width:430px){
+  .site-header .wrap{grid-template-columns:minmax(0,1fr) auto auto}
+  .header-pdf{font-size:.75rem;padding:.3rem .5rem}
+}
+@media print{
+  .header-pdf,.cv-card-actions{display:none!important}
+  .cv-card{border:0;background:#fff;padding:0;margin:0 0 4mm}
+}
