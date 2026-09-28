@@ -367,3 +367,16 @@ a.row:hover .row-title{text-decoration:underline}
   .cv-intro h2{max-width:100%;overflow-wrap:normal;word-break:normal}
   .cv-links{justify-self:stretch}
 }
+
+/* 19. Definitive narrow-screen CV header fix ----------------------------------- */
+@media screen and (max-width:760px){
+  #cv .wrap{display:block!important;width:min(100% - 2rem,var(--max))!important}
+  #cv .section-head.cv-head{display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;max-width:none!important;gap:1rem!important}
+  #cv .cv-intro{display:block!important;width:100%!important;max-width:none!important;min-width:100%!important}
+  #cv .cv-intro .code,
+  #cv .cv-intro h2,
+  #cv .cv-intro .section-intro{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin-left:0!important;margin-right:0!important}
+  #cv .cv-intro h2{font-size:clamp(1.75rem,8vw,2.25rem)!important;line-height:1.08!important}
+  #cv .cv-intro .section-intro{font-size:1rem!important;line-height:1.55!important;overflow-wrap:normal!important;word-break:normal!important;white-space:normal!important}
+  #cv .cv-links{width:100%!important;max-width:none!important}
+}
