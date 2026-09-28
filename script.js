@@ -19,7 +19,18 @@
     });
   }
 
-  // 2. Repository status --------------------------------------------------------
+  // 2. Generate current CV as PDF ---------------------------------------------
+  document.querySelectorAll('[data-generate-cv]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const old=document.title;
+      document.title='Igor_Caires_Machado_CV';
+      const restore=()=>{document.title=old;window.removeEventListener('afterprint',restore)};
+      window.addEventListener('afterprint',restore);
+      window.print();
+    });
+  });
+
+  // 3. Repository status --------------------------------------------------------
   const repo=document.body.dataset.repo;
   if(!repo)return;
   const fmt=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'});
