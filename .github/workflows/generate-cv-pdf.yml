@@ -1,13 +1,9 @@
-name: Generate full academic profile PDF
-# CV source: current public site without postdoctoral references
+name: Publish fixed color CV PDF
 
 on:
   push:
     branches: [main]
     paths:
-      - 'index.html'
-      - 'styles.css'
-      - 'assets/**'
       - '.github/workflows/generate-cv-pdf.yml'
   workflow_dispatch:
 
@@ -25,42 +21,73 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Start local site
+      - name: Restore the original color CV source
         run: |
-          python3 -m http.server 8000 >/tmp/site.log 2>&1 &
-          sleep 2
+          git show f8be301ab0322698ae21499277faeadd6bf5a576:Igor_Caires_Machado_CV.pdf > /tmp/cv-source.pdf
 
-      - name: Generate full academic profile PDF from current site
+      - name: Remove only postdoctoral references
         run: |
-          chromium --headless --no-sandbox --disable-gpu \
-            --print-to-pdf="$GITHUB_WORKSPACE/Igor_Caires_Machado_CV.pdf" \
-            --print-to-pdf-no-header \
-            "http://127.0.0.1:8000/"
+          pip install --quiet pymupdf
+          cat > /tmp/fix_cv.py <<'PY'
+          import fitz
+          src="/tmp/cv-source.pdf"
+          out="Igor_Caires_Machado_CV.pdf"
+          doc=fitz.open(src)
 
-      - name: Validate PDF
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('Igor_Caires_Machado_CV.pdf')
-          assert p.exists() and p.stat().st_size > 10000
-          assert p.read_bytes()[:5] == b'%PDF-'
-          print('Validated academic profile PDF:', p.stat().st_size, 'bytes')
+          # page index, exact text, replacement, fontsize, bold
+          edits=[
+            (0, "Postdoctoral researcher, ENAP (2026–2027)", "", 8.0, False),
+            (0, "Postdoctoral research · ENAP · 2026–2027", "Research project · Public policy implementation", 7.5, False),
+            (2, "2026–27 postdoctoral research at ENAP", "", 8.0, False),
+            (2, "Sociomateriality and implementation · Postdoctoral research, ENAP", "Sociomateriality and implementation", 9.0, True),
+            (3, "2026–2027 Postdoctoral research in Public Policy", "", 8.0, False),
+            (3, "Escola Nacional de Administração Pública (ENAP), Brasília", "", 8.0, False),
+            (3, "Public Policy / Political Science · in progress", "", 8.0, False),
+          ]
+
+          for pno, needle, replacement, size, bold in edits:
+              page=doc[pno]
+              rects=page.search_for(needle)
+              if not rects:
+                  print("WARN not found:", pno+1, needle)
+                  continue
+              for r in rects:
+                  rr=fitz.Rect(r.x0-1, r.y0-1, r.x1+2, r.y1+1)
+                  page.add_redact_annot(rr, fill=(1,1,1))
+              page.apply_redactions()
+              if replacement:
+                  r=rects[0]
+                  font="helvB" if bold else "helv"
+                  page.insert_text((r.x0, r.y1-1.5), replacement, fontsize=size, fontname=font, color=(0.28,0.31,0.34))
+
+          doc.save(out, garbage=4, deflate=True)
+          doc.close()
+
+          check=fitz.open(out)
+          text="\n".join(p.get_text() for p in check).lower()
+          assert "postdoctoral" not in text
+          assert "enap" not in text
+          assert len(check)==5
+          print("Validated:", out, len(check), "pages")
           PY
+          python /tmp/fix_cv.py
 
-      - name: Commit refreshed PDF
+      - name: Commit fixed PDF
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Igor_Caires_Machado_CV.pdf
           if ! git diff --cached --quiet; then
-            git commit -m "Update full academic profile PDF"
+            git commit -m "Publish color CV without postdoctoral references"
             git push
           fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload complete site including PDF
+      - name: Upload site including fixed PDF
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
