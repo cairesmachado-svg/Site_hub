@@ -467,3 +467,11 @@ a.row:hover .row-title{text-decoration:underline}
 .pdf-export-shell .cv-secondary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:5mm!important;margin-top:5mm!important}
 .pdf-export-shell .cv-secondary p{font-size:8pt!important}
 .pdf-exporting [data-generate-cv]{cursor:wait;opacity:.65}
+
+/* Preserve the site's visual identity in the downloadable CV PDF. */
+@media print {
+  html, body, main, section, article, .card, .dimension, .tag, .btn, .cv-card {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
