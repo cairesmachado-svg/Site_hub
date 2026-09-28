@@ -409,3 +409,20 @@ a.row:hover .row-title{text-decoration:underline}
   .header-pdf,.cv-card-actions{display:none!important}
   .cv-card{border:0;background:#fff;padding:0;margin:0 0 4mm}
 }
+
+/* 21. Client-side PDF export ---------------------------------------------------- */
+.pdf-export-shell{position:fixed;left:-20000px;top:0;width:190mm;background:#fff;color:#111;padding:0;font-family:Arial,Helvetica,sans-serif}
+.pdf-export-identity{display:flex;justify-content:space-between;align-items:baseline;padding:0 0 5mm;margin:0 0 5mm;border-bottom:1px solid #222}
+.pdf-export-identity strong{font-size:18pt}.pdf-export-identity span{font-size:9pt;text-transform:uppercase;letter-spacing:.12em}
+.pdf-export-shell #cv-pdf-export{padding:0!important;border:0!important;background:#fff!important}
+.pdf-export-shell #cv-pdf-export>.wrap{width:100%!important;max-width:none!important}
+.pdf-export-shell .cv-card{padding:0 0 5mm!important;margin:0 0 5mm!important;border:0!important;background:#fff!important}
+.pdf-export-shell .cv-card .code{display:none}
+.pdf-export-shell .cv-card h2{font-size:18pt!important;max-width:none!important}
+.pdf-export-shell .cv-card>p{font-size:9pt!important}
+.pdf-export-shell .cv-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6mm!important}
+.pdf-export-shell .cv-list li{grid-template-columns:18mm 1fr!important;gap:2mm!important;padding:2mm 0!important;break-inside:avoid}
+.pdf-export-shell .cv-list strong{font-size:8.7pt!important}.pdf-export-shell .cv-list span,.pdf-export-shell .cv-list small,.pdf-export-shell .cv-date{font-size:7.7pt!important}
+.pdf-export-shell .cv-secondary{display:grid!important;grid-template-columns:1fr 1fr!important;gap:5mm!important;margin-top:5mm!important}
+.pdf-export-shell .cv-secondary p{font-size:8pt!important}
+.pdf-exporting [data-generate-cv]{cursor:wait;opacity:.65}
