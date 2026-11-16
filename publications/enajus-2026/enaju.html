@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; base-uri 'none'; form-action 'none'">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENAJU no ENAJUS</title>
+<style>
+  :root{
+    --bg:#ffffff; --bg-soft:#f4f5f6; --chip-bg:#eceeef;
+    --text:#2b333b; --text-strong:#20262c; --text-muted:#6b7680;
+    --border:#d9dbdd; --accent:#36454f; --accent-2:#708090;
+    --dark-bg:#242c33; --on-dark:#f4f5f6; --on-dark-muted:#a9b2ba;
+    --font:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1b2126; --bg-soft:#222930; --chip-bg:#262e35;
+      --text:#e6e8ea; --text-strong:#f5f6f7; --text-muted:#a3adb5;
+      --border:#3a444c; --accent:#c7ccd1; --accent-2:#95a0a9;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1b2126; --bg-soft:#222930; --chip-bg:#262e35;
+    --text:#e6e8ea; --text-strong:#f5f6f7; --text-muted:#a3adb5;
+    --border:#3a444c; --accent:#c7ccd1; --accent-2:#95a0a9;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:max(11px,min(1.13vw,2.01vh));}
+  html,body{height:100%;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);overflow:hidden;}
+  .deck{position:relative;width:100vw;height:100vh;height:100dvh;}
+  .slide{display:none;position:absolute;inset:0;padding:2rem 5.5rem 5.2rem;flex-direction:column;justify-content:center;overflow-y:auto;}
+  .slide.active{display:flex;}
+  .slide-inner{width:100%;max-width:70rem;margin:0 auto;}
+  .notes{display:none;}
+
+  .eyebrow{display:flex;align-items:center;gap:10px;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;flex-wrap:wrap;}
+  .part-tag{background:var(--chip-bg);color:var(--text-strong);border:1px solid var(--border);padding:4px 10px;border-radius:999px;font-weight:700;}
+  .sep{opacity:.5;}
+  h1,h2,h3{color:var(--text-strong);margin:0;font-weight:800;}
+  .slide-title{font-size:2.05rem;line-height:1.2;margin-bottom:1rem;letter-spacing:-.01em;}
+  .slide-kicker{font-weight:700;color:var(--accent);font-size:.95rem;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;}
+  p{line-height:1.55;color:var(--text);margin:0;}
+  .lede{font-size:1rem;color:var(--text-muted);max-width:75ch;margin-bottom:14px;}
+  .tagline{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);border:1px dashed var(--border);border-radius:6px;padding:3px 9px;margin-bottom:14px;}
+
+  ul.bullets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.9rem;}
+  ul.bullets li{position:relative;padding-left:26px;line-height:1.5;font-size:1.12rem;}
+  ul.bullets li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--accent);}
+  ul.bullets li strong{color:var(--text-strong);}
+  ul.bullets.compact{gap:10px;}
+  ul.bullets.compact li{font-size:1rem;}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+  @media (max-width:760px){.grid-2{grid-template-columns:1fr;}}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin-top:10px;}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px;}
+  thead th{background:var(--bg-soft);font-weight:700;color:var(--text-strong);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);}
+  tbody td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+
+  .stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;}
+  .stat{flex:1 1 160px;background:var(--bg-soft);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .stat .num{font-weight:800;font-size:1.7rem;color:var(--text-strong);line-height:1.1;}
+  .stat .label{color:var(--text-muted);font-size:.84rem;margin-top:5px;line-height:1.35;}
+
+  /* progressive steps */
+  .step{opacity:0;transform:translateY(8px);transition:opacity .35s ease,transform .35s ease;pointer-events:none;}
+  .step.on{opacity:1;transform:none;pointer-events:auto;}
+  svg .step{transform:none;}
+  @media (prefers-reduced-motion: reduce){.step{transition:none;}}
+
+  /* cover / divider */
+  .slide--dark{background:var(--dark-bg);color:var(--on-dark);}
+  .slide--dark h1,.slide--dark h2{color:var(--on-dark);}
+  .cover-eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:var(--on-dark-muted);margin-bottom:22px;}
+  .cover-title{font-size:2.7rem;line-height:1.12;font-weight:800;letter-spacing:-.015em;margin-bottom:20px;max-width:18ch;}
+  .cover-sub{font-size:1.1rem;color:var(--on-dark-muted);max-width:56ch;line-height:1.5;margin-bottom:34px;}
+  .cover-meta{display:flex;flex-direction:column;gap:6px;font-size:.92rem;color:var(--on-dark-muted);border-top:1px solid rgba(255,255,255,.14);padding-top:20px;max-width:62ch;}
+  .cover-meta strong{color:var(--on-dark);}
+  .divider-num{font-weight:800;font-size:clamp(3.5rem,9vw,7rem);line-height:1;color:rgba(255,255,255,.16);margin-bottom:4px;}
+  .divider-title{font-size:2.2rem;font-weight:800;letter-spacing:-.01em;margin-bottom:16px;max-width:20ch;color:var(--on-dark);}
+  .divider-sub{font-size:1.05rem;color:var(--on-dark-muted);max-width:54ch;line-height:1.55;}
+  .divider-speaker{margin-top:28px;display:inline-flex;font-size:.85rem;letter-spacing:.05em;text-transform:uppercase;color:var(--on-dark);border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:999px;}
+
+  .road-col{background:var(--bg-soft);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
+  .road-col h3{font-size:1.02rem;margin-bottom:4px;}
+  .road-col .who{color:var(--text-muted);font-size:.85rem;margin-bottom:12px;}
+  .road-col ol{margin:0;padding-left:20px;font-size:.9rem;line-height:1.75;}
+
+  /* ===== roadmap ===== */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--text-muted);margin:2px 0 10px;}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .mk{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;}
+  .mk-m{background:var(--accent);}
+  .mk-s{background:var(--accent-2);}
+  .mk-a{background:var(--bg);border:2.5px solid var(--accent);}
+  .rm-axis{width:100%;height:auto;display:block;}
+  .rm-axis .ax{stroke:var(--border);stroke-width:2;fill:none;}
+  .rm-axis .yr{fill:var(--text-muted);font:600 12px var(--font);text-anchor:middle;}
+  .rm-axis .cyc{fill:var(--bg-soft);stroke:var(--border);}
+  .rm-axis .cyc-t{fill:var(--text-muted);font:600 11.5px var(--font);text-anchor:middle;}
+  .rm-axis .d-m{fill:var(--accent);}
+  .rm-axis .d-s{fill:var(--accent-2);}
+  .rm-axis .d-a{fill:var(--bg);stroke:var(--accent);stroke-width:3;}
+  .rm-axis .d-now{fill:var(--bg);stroke:var(--text-strong);stroke-width:4;}
+  .rm-cols{display:grid;grid-template-columns:.8fr 1.1fr 1.2fr 1.1fr 1.3fr;gap:14px;margin-top:10px;}
+  @media (max-width:900px){.rm-cols{grid-template-columns:1fr 1fr;}}
+  .rm-col{border-top:2px solid var(--accent);padding-top:8px;}
+  .rm-col h3{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:9px;font-weight:700;}
+  .rm-it{display:grid;grid-template-columns:auto 1fr;gap:3px 8px;margin-bottom:9px;font-size:.86rem;line-height:1.35;}
+  .rm-it .mk{margin-top:4px;}
+  .rm-it b{color:var(--text-strong);}
+  .rm-it.now{background:var(--chip-bg);border:1px solid var(--text-strong);border-radius:8px;padding:6px 8px;}
+
+  /* ===== svg boxes ===== */
+  .svgv{width:100%;height:auto;display:block;}
+  .svgv .bx{fill:var(--bg-soft);stroke:var(--border);stroke-width:1.5;}
+  .svgv .bx-hl{fill:var(--chip-bg);stroke:var(--accent);stroke-width:2.5;}
+  .svgv .t1{fill:var(--text-strong);font:700 19px var(--font);text-anchor:middle;}
+  .svgv .t2{fill:var(--text-muted);font:500 14.5px var(--font);text-anchor:middle;}
+  .svgv .t3{fill:var(--text-muted);font:600 13px var(--font);text-anchor:middle;}
+  .svgv .ln{stroke:var(--accent);stroke-width:2;fill:none;}
+  .svgv .ln-d{stroke:var(--accent-2);stroke-width:2;fill:none;stroke-dasharray:7 6;}
+  .svgv .ln-k{stroke:var(--accent);stroke-width:5;fill:none;}
+  .svgv .ah{fill:var(--accent);}
+
+  /* ===== numbers ===== */
+  .big-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10px;}
+  @media (max-width:900px){.big-grid{grid-template-columns:1fr 1fr;}}
+  .big{background:var(--bg-soft);border:1px solid var(--border);border-radius:16px;padding:26px 20px;}
+  .big .n{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:800;color:var(--text-strong);line-height:1;letter-spacing:-.02em;}
+  .big .l{margin-top:12px;font-size:.95rem;color:var(--text-muted);line-height:1.4;}
+
+  /* ===== verbs ===== */
+  .verbs{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:8px;}
+  @media (max-width:900px){.verbs{grid-template-columns:1fr 1fr;}}
+  .verb{border:1px solid var(--border);border-radius:14px;padding:1rem .9rem;background:var(--bg-soft);}
+  .verb svg{width:2.4rem;height:2.4rem;stroke:var(--accent);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;margin-bottom:12px;}
+  .verb h3{font-size:1.1rem;margin-bottom:7px;}
+  .verb p{font-size:.82rem;color:var(--text-muted);line-height:1.45;}
+  .foot-note{margin-top:16px;font-size:.92rem;color:var(--text-muted);border-left:3px solid var(--accent);padding-left:12px;}
+
+  /* ===== funnel ===== */
+  .fn{display:flex;flex-direction:column;gap:14px;margin-top:6px;}
+  .fn-row{display:grid;grid-template-columns:1fr 300px;gap:22px;align-items:center;}
+  @media (max-width:900px){.fn-row{grid-template-columns:1fr;}}
+  .fn-area{display:flex;justify-content:center;}
+  .fn-bar{border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:16px;background:var(--bg-soft);border:1px solid var(--border);}
+  .fn-bar .n{font-size:clamp(1.8rem,3.4vw,2.8rem);font-weight:800;color:var(--text-strong);line-height:1;white-space:nowrap;}
+  .fn-bar .l{font-size:.95rem;color:var(--text);line-height:1.35;}
+  .fn-bar.w1{width:100%;}
+  .fn-bar.w2{width:68%;background:var(--chip-bg);}
+  .fn-bar.w3{width:42%;background:var(--accent);border-color:var(--accent);}
+  .fn-bar.w3 .n,.fn-bar.w3 .l{color:var(--bg);}
+  .fn-out{font-size:.86rem;color:var(--text-muted);line-height:1.4;border-left:3px solid var(--border);padding-left:12px;}
+  .fn-out b{color:var(--text-strong);}
+
+  /* ===== criteria matrix ===== */
+  .mx{display:grid;grid-template-columns:1.55fr repeat(4,5rem) 2.3fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:.92rem;}
+  .mx>div,.mx>.mxrow>div{padding:.55rem .9rem;border-bottom:1px solid var(--border);display:flex;align-items:center;}
+  .mx>.mxrow>div:first-child{font-weight:700;color:var(--text-strong);}
+  .mx .h{background:var(--bg-soft);font-weight:700;color:var(--text-strong);font-size:.82rem;}
+  .mx .c{justify-content:center;}
+  .mx .last{border-bottom:none;}
+  .mx .hl{background:var(--chip-bg);}
+  .sym{width:26px;height:26px;display:block;}
+  .mx .res{color:var(--text-muted);font-size:.9rem;line-height:1.35;}
+  .mx .hl.res{color:var(--text-strong);font-weight:600;}
+  .mxrow{display:contents;}
+  .mxrow.step{display:contents;opacity:1;transform:none;}
+  .mxrow.step>div{opacity:0;transition:opacity .35s ease;}
+  .mxrow.step.on>div{opacity:1;}
+  .keyrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:.84rem;color:var(--text-muted);}
+  .keyrow span{display:inline-flex;align-items:center;gap:7px;}
+  .keyrow .sym{width:18px;height:18px;}
+
+  /* ===== staircase ===== */
+  .stairs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:end;height:15rem;margin-top:6px;}
+  .stair{border-radius:10px 10px 0 0;padding:.6rem .65rem;background:var(--bg-soft);border:1px solid var(--border);display:flex;flex-direction:column;gap:6px;}
+  .stair .no{font-size:.78rem;font-weight:800;color:var(--text-muted);}
+  .stair .tt{font-size:.9rem;font-weight:700;color:var(--text-strong);line-height:1.2;}
+  .stair .ds{font-size:.74rem;color:var(--text-muted);line-height:1.35;}
+  .stair.in{background:var(--accent);border-color:var(--accent);}
+  .stair.in .no,.stair.in .tt,.stair.in .ds{color:var(--bg);}
+  .stair.part{background:var(--chip-bg);border:2px dashed var(--accent);}
+  .stair:nth-child(1){height:34%;} .stair:nth-child(2){height:46%;} .stair:nth-child(3){height:58%;}
+  .stair:nth-child(4){height:70%;} .stair:nth-child(5){height:84%;} .stair:nth-child(6){height:98%;}
+  .reach{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;font-size:.88rem;color:var(--text-muted);}
+  .reach span{display:inline-flex;align-items:center;gap:8px;}
+  .sw{width:16px;height:16px;border-radius:4px;display:inline-block;}
+  .sw-in{background:var(--accent);}
+  .sw-part{background:var(--chip-bg);border:2px dashed var(--accent);}
+  .sw-out{background:var(--bg-soft);border:1px solid var(--border);}
+
+  /* ===== mechanisms ===== */
+  .mc{display:grid;grid-template-columns:1.6fr repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:1rem;}
+  .mc>div,.mc>.mcrow>div{padding:.8rem .9rem;border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
+  .mc>div:nth-child(5n),.mc>.mcrow>div:last-child{border-right:none;}
+  .mc .h{background:var(--bg-soft);font-weight:700;color:var(--text-strong);font-size:.88rem;}
+  .mc .nm{font-weight:700;color:var(--text-strong);}
+  .mc .cell{display:flex;gap:8px;align-items:flex-start;color:var(--text);line-height:1.3;}
+  .mc .cell .mk{margin-top:3px;}
+  .mc .cell.none{color:var(--text-muted);}
+  .mcrow{display:contents;}
+  .mcrow.step{display:contents;opacity:1;transform:none;}
+  .mcrow.step>div{opacity:0;transition:opacity .35s ease;}
+  .mcrow.step.on>div{opacity:1;}
+  .mc .lastr{border-bottom:none;}
+
+  /* ===== layers ===== */
+  .lay-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:34px;align-items:center;}
+  @media (max-width:900px){.lay-wrap{grid-template-columns:1fr;}}
+  .conv{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .conv .box{flex:1 1 140px;border:1.5px solid var(--border);border-radius:14px;padding:18px 16px;background:var(--bg-soft);}
+  .conv .box.to{background:var(--accent);border-color:var(--accent);}
+  .conv .box.to h3,.conv .box.to p{color:var(--bg);}
+  .conv .box h3{font-size:1.15rem;margin-bottom:4px;}
+  .conv .box p{font-size:.84rem;color:var(--text-muted);}
+  .conv .arrow{font-size:1.8rem;color:var(--accent);font-weight:700;}
+  .cap{margin-top:12px;font-size:.92rem;color:var(--text-muted);line-height:1.45;}
+  .layers{display:flex;flex-direction:column;gap:8px;}
+  .layer{border-radius:10px;padding:12px 16px;border:1px solid var(--border);background:var(--bg-soft);display:flex;justify-content:space-between;gap:14px;align-items:center;}
+  .layer b{color:var(--text-strong);font-size:.95rem;}
+  .layer span{font-size:.8rem;color:var(--text-muted);white-space:nowrap;}
+  .layer.top{background:var(--accent);border-color:var(--accent);}
+  .layer.top b,.layer.top span{color:var(--bg);}
+  .defs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+  @media (max-width:760px){.defs{grid-template-columns:1fr;}}
+  .def{border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:var(--bg-soft);}
+  .def h3{font-size:.95rem;margin-bottom:5px;}
+  .def p{font-size:.88rem;color:var(--text-muted);line-height:1.45;}
+
+  /* ===== logic model ===== */
+  .lm-row{display:flex;align-items:stretch;gap:0;margin-bottom:6px;}
+  .lm-b{flex:1;border:1.5px solid var(--border);border-radius:12px;padding:15px 8px;text-align:center;font-weight:700;font-size:1rem;color:var(--text-strong);background:var(--bg-soft);display:flex;align-items:center;justify-content:center;min-height:62px;}
+  .lm-ar{flex:none;width:30px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.3rem;font-weight:700;}
+  .lm-group{flex:3;display:flex;align-items:stretch;border:4px solid var(--accent);border-radius:16px;padding:8px;position:relative;margin-top:22px;}
+  .lm-group .lbl{position:absolute;top:-22px;left:10px;font-size:.78rem;font-weight:700;color:var(--accent);background:var(--bg);padding:0 6px;}
+  .lm-down{display:flex;justify-content:flex-end;padding-right:calc(12.5% - 14px);color:var(--accent);font-size:1.3rem;font-weight:700;line-height:1;margin:2px 0;}
+  .lm-cap{display:flex;gap:0;margin-top:2px;}
+  .lm-cap div{flex:1;text-align:center;font-size:.84rem;color:var(--text-muted);line-height:1.3;padding:0 6px;}
+  .lm-cap .sp{flex:none;width:30px;padding:0;}
+  .lm-b.fut{background:var(--bg);border-style:dashed;}
+  .lm-extra{font-size:.78rem;font-weight:700;color:var(--text-muted);text-align:right;margin-bottom:2px;}
+
+  /* ===== board ===== */
+  .bd{display:grid;grid-template-columns:1.5fr repeat(5,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:.78rem;line-height:1.3;}
+  .bd>div{padding:.3rem .55rem;border-bottom:1px solid var(--border);border-right:1px solid var(--border);display:flex;align-items:center;}
+  .bd>div:nth-child(6n){border-right:none;}
+  .bd .h{background:var(--bg-soft);font-weight:700;color:var(--text-strong);font-size:.74rem;}
+  .bd .dm{font-weight:700;color:var(--text-strong);justify-content:space-between;gap:6px;font-size:.8rem;}
+  .bd .md{font-size:.66rem;font-weight:800;border:1px solid var(--border);border-radius:5px;padding:1px 5px;color:var(--text-muted);white-space:nowrap;background:var(--bg);}
+  .bd .an{background:var(--chip-bg);color:var(--text-strong);}
+  .bd .tbd{border:1px dashed var(--border);color:var(--text-muted);font-style:italic;font-size:.7rem;}
+  .bd .lastc{border-bottom:none;}
+  .bd .step{transform:none;}
+  .doc-cond{margin-top:10px;font-size:.8rem;color:var(--text-muted);}
+
+
+  /* ===== v3 additions ===== */
+  .sub-h{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin:.2rem 0 .5rem;}
+  .facts{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:.9rem;margin-bottom:1rem;}
+  .facts .stat{margin:0;}
+  .facts .stat .num{font-size:1.7rem;}
+  .qa{display:grid;grid-template-columns:1fr 1.8rem 1fr;align-items:stretch;gap:.5rem;margin-bottom:.7rem;}
+  .qa-box{border:1px solid var(--border);border-radius:.8rem;padding:.8rem 1.05rem;background:var(--bg-soft);}
+  .qa-box.q{background:var(--chip-bg);border-color:var(--accent);}
+  .qa-box h3{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.3rem;font-weight:700;}
+  .qa-box p{font-size:1rem;line-height:1.4;color:var(--text-strong);}
+  .qa-ar{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.4rem;font-weight:700;}
+  .thesis{background:var(--accent);border-radius:.9rem;padding:.9rem 1.2rem;}
+  .thesis h3{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);opacity:.75;margin-bottom:.3rem;}
+  .thesis p{color:var(--bg);font-size:1.02rem;line-height:1.4;font-weight:600;}
+  .met{display:grid;grid-template-columns:.85fr 1.5fr;gap:1.6rem;align-items:start;}
+  .crit{display:flex;flex-direction:column;gap:.5rem;}
+  .crit-i{display:grid;grid-template-columns:2.4rem 1fr;gap:.6rem;align-items:start;border:1px solid var(--border);border-radius:.7rem;padding:.6rem .85rem;background:var(--bg-soft);}
+  .crit-i .cn{font-weight:800;font-size:1.05rem;color:var(--accent);}
+  .crit-i b{display:block;color:var(--text-strong);font-size:.95rem;margin-bottom:.1rem;}
+  .crit-i span{font-size:.85rem;color:var(--text-muted);line-height:1.35;}
+  ul.bullets.sm li{font-size:.92rem;}
+  .strip{display:flex;align-items:stretch;gap:.5rem;margin-bottom:.8rem;}
+  .strip .ar{display:flex;align-items:center;color:var(--accent);font-weight:700;font-size:1.2rem;}
+  .chip-n{flex:1;border:1px solid var(--border);border-radius:.8rem;padding:.5rem .9rem;background:var(--bg-soft);display:flex;align-items:center;gap:.7rem;}
+  .chip-n .n{font-size:1.8rem;font-weight:800;color:var(--text-strong);line-height:1;}
+  .chip-n .l{font-size:.82rem;color:var(--text-muted);line-height:1.3;}
+  .chip-n.hl{background:var(--accent);border-color:var(--accent);}
+  .chip-n.hl .n,.chip-n.hl .l{color:var(--bg);}
+  .recs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.65rem;}
+  .recs li{display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:center;border:1px solid var(--border);border-radius:.8rem;padding:.7rem 1rem;background:var(--bg-soft);font-size:1.08rem;color:var(--text-strong);line-height:1.35;}
+  .recs .rn{font-weight:800;font-size:1.5rem;color:var(--accent);}
+  .stair:nth-child(1){height:42%;} .stair:nth-child(2){height:52%;} .stair:nth-child(3){height:62%;}
+  .stair:nth-child(4){height:74%;} .stair:nth-child(5){height:87%;} .stair:nth-child(6){height:100%;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.8rem;}
+  .two .road-col{padding:.8rem 1rem;}
+  .two .road-col h3{font-size:.95rem;margin-bottom:.5rem;}
+
+  /* ===== nav ===== */
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:20;transition:width .25s ease;}
+  .navbar{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(18px,4vw,40px);z-index:20;pointer-events:none;gap:10px;}
+  .navbar>*{pointer-events:auto;}
+  .nav-btns{display:flex;gap:8px;}
+  .nav-btn{font-family:var(--font);font-weight:700;font-size:.85rem;background:var(--bg);color:var(--text-strong);border:1px solid var(--border);padding:8px 16px;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  .nav-btn:hover{background:var(--bg-soft);}
+  .nav-btn:disabled{opacity:.35;cursor:default;}
+  .counter{font-size:.8rem;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:7px 14px;border-radius:999px;}
+  .hint{font-size:.74rem;color:var(--text-muted);background:var(--bg);border:1px solid var(--border);padding:7px 12px;border-radius:999px;}
+  @media (max-width:640px){.hint{display:none;}}
+  #notesPanel{position:fixed;left:0;right:0;bottom:62px;max-height:42vh;overflow:auto;z-index:19;background:var(--dark-bg);color:var(--on-dark);padding:16px clamp(20px,6vw,100px);display:none;border-top:3px solid var(--accent-2);}
+  #notesPanel.open{display:block;}
+  #notesPanel h4{margin:0 0 6px;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-muted);}
+  #notesPanel p{color:var(--on-dark);font-size:.98rem;margin-bottom:6px;max-width:100ch;}
+  #sprite{position:absolute;width:0;height:0;overflow:hidden;}
+
+  /* ===== Parte II ===== */
+  .pcs{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;}
+  .pc{border:1px solid var(--border);border-radius:.9rem;background:var(--bg-soft);padding:1rem 1.1rem;box-shadow:0 1px 3px rgba(27,42,94,.07);}
+  .pc.q{background:var(--hl);border-color:var(--accent);}
+  .pc h3{font-size:1.08rem;margin:.1rem 0 .5rem;color:var(--text-strong);line-height:1.25;}
+  .pc p{font-size:.88rem;line-height:1.5;color:var(--text);}
+  .map3{display:grid;grid-template-columns:1fr 1.5rem 1fr 1.5rem 1fr;gap:.45rem 0;align-items:stretch;}
+  .map3 .mh{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:700;padding:0 .2rem;}
+  .m3row{display:contents;}
+  .m3row.step{display:contents;opacity:1;transform:none;}
+  .m3row.step>div{opacity:0;transition:none;}
+  .m3row.step.on>div{opacity:1;}
+  .mb{border:1px solid var(--border);border-radius:.8rem;background:var(--bg-soft);padding:.7rem .9rem;font-size:.88rem;line-height:1.42;color:var(--text);display:flex;align-items:center;}
+  .mb.q{background:var(--hl);border-color:var(--accent);}
+  .mb b{color:var(--text-strong);margin-right:.35rem;white-space:nowrap;}
+  .mb.q{display:block;}
+  .ma{display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700;}
+  table.lit{min-width:0;font-size:.86rem;}
+  table.lit td:first-child{font-weight:700;color:var(--text-strong);width:24%;}
+  table.lit td{padding:.5rem .8rem;line-height:1.35;}
+  table.lit thead th{padding:.5rem .8rem;}
+  .jx{display:grid;grid-template-columns:1fr 1.5fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;font-size:.88rem;background:var(--bg-soft);}
+  .jx .jh{background:var(--chip-bg);color:var(--text-strong);font-weight:700;font-size:.8rem;padding:.45rem .9rem;border-bottom:1px solid var(--border);}
+  .jxrow{display:contents;}
+  .jxrow.step{display:contents;opacity:1;transform:none;}
+  .jxrow.step>div{opacity:0;transition:none;}
+  .jxrow.step.on>div{opacity:1;}
+  .jxrow>div{padding:.5rem .9rem;border-bottom:1px solid var(--border);line-height:1.35;display:flex;align-items:center;}
+  .jxrow>div:first-child{font-weight:700;color:var(--text-strong);}
+  .jxrow:last-child>div{border-bottom:none;}
+  .mc{font-size:.84rem;}
+  .mc>div,.mc>.mcrow>div{padding:.5rem .7rem;}
+  .mc .h small{display:block;font-weight:400;font-size:.7rem;color:var(--text-muted);margin-top:.15rem;line-height:1.25;}
+  .stairs.flat{height:auto;align-items:stretch;gap:.45rem;}
+  .stairs.flat .stair{height:auto !important;border-radius:10px;}
+  .rc{margin:0;padding-left:1.25rem;font-size:.84rem;line-height:1.45;color:var(--text);}
+  .rc li{margin-bottom:.15rem;}
+  .two .road-col h3{font-size:.95rem;margin-bottom:.4rem;}
+  .atr{display:grid;grid-template-columns:1.9fr 1fr;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg-soft);font-size:.9rem;}
+  .atr .ah{background:var(--chip-bg);color:var(--text-strong);font-weight:700;font-size:.78rem;padding:.4rem .8rem;border-bottom:1px solid var(--border);}
+  .atrrow{display:contents;}
+  .atrrow.step{display:contents;opacity:1;transform:none;}
+  .atrrow.step>div{opacity:0;transition:none;}
+  .atrrow.step.on>div{opacity:1;}
+  .atrrow>div{padding:.45rem .8rem;border-bottom:1px solid var(--border);line-height:1.35;display:flex;align-items:center;}
+  .atrrow:last-of-type>div{border-bottom:none;}
+  .cp{display:inline-block;border:1px solid var(--accent);color:var(--text-strong);background:var(--hl);border-radius:999px;padding:.12rem .6rem;font-size:.78rem;font-weight:700;white-space:nowrap;}
+  .lv{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;}
+  .lv .lvl{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-right:.3rem;}
+  .lv .lvc{border:1px solid var(--accent);background:var(--hl);color:var(--text-strong);border-radius:.6rem;padding:.3rem .6rem;font-size:.8rem;font-weight:700;}
+  .lv i{font-style:normal;color:var(--accent);font-weight:700;}
+  .slide--refs{padding-top:3.4rem;}
+  .rfcols{columns:2;column-gap:1.6rem;font-size:.62rem;line-height:1.3;color:var(--text);}
+  .rf{margin:0 0 .35rem;padding-left:1.1em;text-indent:-1.1em;break-inside:avoid;overflow-wrap:anywhere;}
+
+  /* ===== identidade institucional ENAJU ===== */
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"],:root[data-theme="light"]{
+    --page-a:#4568AD; --page-b:#3A5A9C; --hl:#5276BB;
+    --bg:#3A5A9C; --bg-soft:#34528F; --chip-bg:#4F70B4;
+    --text:#FFFFFF; --text-strong:#FFFFFF; --text-muted:#E3EBF8;
+    --border:#8FA8D8; --accent:#CDEFFC; --accent-2:#7FD3F5;
+    --dark-bg:#2F4B86; --on-dark:#ffffff; --on-dark-muted:#E1E9F7;
+    --font:Arial,'Helvetica Neue',Helvetica,'Liberation Sans',sans-serif;
+  }
+  /* cartoes brancos: tokens claros dentro dos componentes */
+  .pc,.mb,.jx,.atr,.table-wrap,.mx,.mc,.bd,.stat,.chip-n,.def,.road-col,.recs li,.verb,.layer,.qa-box,.thesis,.crit-i,.gh-card,.conv .box,.stair,.ask,.lm-b,.big,.archwrap,.lyr.past,.lyr.cur,.qa-box.q{
+    --text:#3F4650; --text-strong:#1B2A5E; --text-muted:#5B6676; --border:#C6D5EA;
+    --bg:#ffffff; --bg-soft:#ffffff; --chip-bg:#DCE6F2; --accent:#25397F; --accent-2:#00A5DE; --hl:#E3ECF8;
+    color:var(--text);
+  }
+  .archwrap{background:#fff;border-radius:1rem;padding:.7rem 1rem;box-shadow:0 1px 3px rgba(27,42,94,.1);}
+  body{background:linear-gradient(180deg,var(--page-a),var(--page-b));background-attachment:fixed;}
+  .slide{background:transparent;padding-top:3.6rem;}
+  .slide--dark{background:transparent;color:#fff;}
+  .progress{background:#00A5DE;height:4px;}
+  h1,h2,h3{font-weight:700;}
+  .slide-title,.divider-title,.cover-title{font-weight:700;}
+  .part-tag{border-color:transparent;letter-spacing:.08em;}
+  .part-tag.p1{background:#25397F;color:#fff;}
+  .part-tag.p2{background:#00A5DE;color:#0F1B4A;}
+  .part-tag.pr{background:var(--chip-bg);color:var(--text-strong);border:1px solid var(--border);}
+
+  .table-wrap,.mx,.mc,.bd{background:var(--bg-soft);box-shadow:0 1px 3px rgba(27,42,94,.08);}
+  .mx .h,.mc .h,.bd .h,thead th{background:#E3ECF8;color:#1B2A5E;}
+
+  .stat,.big,.verb,.road-col,.qa-box,.crit-i,.chip-n,.recs li,.def,.conv .box,.layer,.stair{box-shadow:0 1px 3px rgba(27,42,94,.07);}
+  .stair.part,.qa-box.q,.mx .hl,.rm-it.now{background:var(--hl);}
+  .rm-it.now{border-color:var(--accent);}
+  .lm-b{background:var(--bg-soft);}
+  .svgv .ln-k{stroke-width:4;}
+  .nav-btn,.nav-btn:hover{color:#25397F;background:#fff;border-color:#C6D5EA;}
+  .nav-btn:hover{background:#EAF2FA;}
+  .counter,.hint{color:#3F4650;border-color:#C6D5EA;background:#fff;}
+  .foot-note{border-left-color:#00A5DE;}
+  .deck::before{content:"";position:fixed;right:1rem;bottom:4.2rem;width:21rem;height:16.6rem;background:none no-repeat center/contain;opacity:.07;pointer-events:none;}
+  .slide--dark{z-index:2;}
+  .slide .slide-inner{position:relative;z-index:1;}
+
+  
+  /* ===== Parte I: narrativa ===== */
+  .act{display:grid;grid-template-columns:1fr 18rem;gap:2.6rem;align-items:center;}
+  .kick{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;}
+  ul.bullets.tl{gap:.75rem;}
+  ul.bullets.tl li{font-size:1.02rem;line-height:1.4;}
+  .ask{margin-top:1.1rem;border-left:4px solid #00A5DE;background:var(--bg-soft);border-radius:0 .7rem .7rem 0;padding:.65rem 1rem;box-shadow:0 1px 3px rgba(27,42,94,.07);}
+  .ask .q{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);font-weight:700;}
+  .ask .a{font-size:1.02rem;color:var(--text-strong);font-weight:700;margin:.15rem 0 .1rem;line-height:1.3;}
+  .ask .f{font-size:.86rem;color:var(--text-muted);}
+  .stackwrap .sub-h{text-align:center;margin-bottom:.6rem;}
+  .stack{display:flex;flex-direction:column;gap:.45rem;align-items:center;}
+  .lyr{min-width:8.4rem;border-radius:.7rem;padding:.6rem .5rem;text-align:center;border:1.5px dashed var(--border);color:var(--text-muted);line-height:1.2;transition:background .3s;}
+  .lyr b{display:block;font-size:.9rem;} .lyr span{font-size:.7rem;}
+  .lyr.l1{width:100%;} .lyr.l2{width:88%;} .lyr.l3{width:76%;} .lyr.l4{width:64%;} .lyr.l5{width:52%;}
+  .lyr.past{background:var(--chip-bg);border:1.5px solid var(--border);color:var(--text-strong);}
+  .lyr.cur{background:var(--accent);border:1.5px solid var(--accent);color:var(--bg);}
+  .lyr.cur span{opacity:.88;}
+  .facts2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem;}
+  .facts2 .stat{margin:0;padding:.7rem .9rem;}
+  .facts2 .stat .num{font-size:1.6rem;}
+  .verbs.v5{gap:.6rem;margin-top:0;}
+  .verbs.v5 .verb{padding:.65rem .6rem;}
+  .verbs.v5 .verb svg{width:1.8rem;height:1.8rem;margin-bottom:.4rem;}
+  .verbs.v5 .verb h3{font-size:.95rem;margin-bottom:.25rem;}
+  .verbs.v5 .verb p{font-size:.74rem;line-height:1.35;}
+  .gh{display:grid;grid-template-columns:1fr 2.4rem 1fr;gap:.6rem;align-items:center;margin:1.2rem 0 1.2rem;}
+  .gh-card{background:var(--bg-soft);border:1px solid var(--border);border-radius:1rem;padding:1.4rem 1.4rem;box-shadow:0 1px 3px rgba(27,42,94,.07);}
+  .gh-card.hl{background:var(--accent);border-color:var(--accent);}
+  .gh-n{font-size:3.4rem;font-weight:700;line-height:1;color:var(--text-strong);}
+  .gh-y{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:.5rem 0 .6rem;font-weight:700;}
+  .gh-card p{font-size:1.02rem;line-height:1.4;color:var(--text);}
+  .gh-card.hl .gh-n,.gh-card.hl .gh-y,.gh-card.hl p{color:var(--bg);}
+  .gh-ar{text-align:center;font-size:1.5rem;color:var(--accent);font-weight:700;}
+  .gh-q{border-left:4px solid #00A5DE;padding:.2rem 0 .2rem 1.1rem;}
+  .gh-q .q1{font-size:1.5rem;font-weight:700;color:var(--text-strong);margin-bottom:.3rem;}
+  .gh-q p{font-size:1.05rem;color:var(--text-muted);}
+  .archwrap{max-width:61rem;margin:0 auto;}
+
+  /* sem transicoes: slides diretos e completos */
+  *,*::before,*::after{transition:none !important;animation:none !important;scroll-behavior:auto !important;}
+  .step,.step>div{opacity:1 !important;transform:none !important;pointer-events:auto !important;}
+  /* marca */
+  .brand{position:fixed;top:1rem;right:2.4rem;z-index:15;display:flex;align-items:center;gap:.6rem;pointer-events:none;}
+  .brand img{height:2.1rem;width:auto;display:block;}
+  .brand .lg-c{display:none;} .brand .lg-w{display:block;}
+  .brand .bw{font:700 1.5rem/1 var(--font);color:#fff;letter-spacing:-.01em;}
+  .brand .bar{width:2px;height:2rem;background:#00A5DE;}
+  .brand .bs{font:400 .72rem/1.25 var(--font);color:#E8EEF9;}
+  body.on-dark .brand .lg-c{display:none;} body.on-dark .brand .lg-w{display:block;}
+  body.on-dark .brand .bw{color:#fff;} body.on-dark .brand .bs{color:#E8EEF9;}
+  body.is-cover .brand{right:auto;left:5.5rem;top:1.6rem;}
+
+
+  /* capa */
+  .slide--cover{padding-right:12%;background:linear-gradient(135deg,#4568AD 0%,#3A5A9C 100%);}
+  .slide--cover .slide-inner{max-width:none;}
+  .cover-art{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:36%;z-index:1;}
+  .cover-art img{width:100%;height:auto;display:block;}
+  .cover-eyebrow{color:#CDEFFC;font-weight:700;letter-spacing:.16em;}
+  .cover-title{font-size:2.9rem;color:#fff;max-width:21ch;}
+  .slide--cover .cover-sub{max-width:52ch;}
+  .cover-sub{color:#EAF0FA;}
+  .cover-meta{border-top-color:rgba(255,255,255,.3);color:#E8EEF9;}
+  .cover-meta strong{color:#fff;}
+
+  /* encerramento */
+  .slide--end .divider-title{color:#fff;}
+  .end-note{font-size:.9rem;color:#E8EEF9;margin-bottom:1.1rem;max-width:62ch;}
+
+
+
+
+
+
+
+
+
+
+
+  .portal{display:flex;align-items:center;gap:.9rem;justify-content:flex-end;}
+  .portal b{display:block;color:#fff;font-size:1rem;}
+  .portal span{color:#CDEFFC;font-size:.9rem;}
+</style>
+<meta name="referrer" content="no-referrer">
+</head>
+<body>
+<!-- Public presentation copy; speaker notes and individual contact details omitted. -->
+<svg id="sprite" aria-hidden="true" focusable="false">
+  <symbol id="s-yes" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="var(--accent)" stroke="var(--accent)" stroke-width="2"/></symbol>
+  <symbol id="s-half" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M12 3a9 9 0 0 0 0 18z" fill="var(--accent)"/></symbol>
+  <symbol id="s-no" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--text-muted)" stroke-width="2"/></symbol>
+</svg>
+<div class="progress" id="progress"></div>
+<div class="brand" id="brand" aria-label="ENAJU, Escola Nacional do Judiciário">
+  
+  <span class="bw">enaju</span><span class="bar"></span><span class="bs">Escola Nacional<br>do Judiciário</span>
+</div>
+
+<div class="deck" id="deck">
+
+
+<section class="slide slide--dark slide--cover active">
+  <div class="slide-inner">
+    <div class="cover-eyebrow">ENAJUS · Encontro de Administração da Justiça</div>
+    <div class="cover-title">A ENAJU e a Institucionalização da Educação Corporativa no Poder Judiciário</div>
+    <div class="cover-sub">Das escolas dos tribunais à Escola Nacional: trajetória normativa, marco institucional e agenda de consolidação.</div>
+    <div class="cover-meta">
+      <div><strong>Goiânia</strong>, 3 a 6 de novembro de 2026</div>
+      <div>Fabio Lopes Fernandes Ramos · Igor Caires Machado · Daniel Ribeiro Surdi de Avelar</div>
+      <div>Conselho Nacional de Justiça · Escola Nacional do Judiciário (ENAJU)</div>
+      <div>Tema de interesse: Governança em Sistemas de Justiça</div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <h1 class="slide-title">Entre 2010 e 2025</h1>
+    <div class="gh">
+      <div class="gh-card step" data-step="1"><div class="gh-n">CEAJud</div><div class="gh-y">6 de abril de 2010</div><p>A Res. CNJ 111 institui o Centro de Formação e Aperfeiçoamento de Servidores do Poder Judiciário.</p></div>
+      <div class="gh-ar step" data-step="2">→</div>
+      <div class="gh-card hl step" data-step="2"><div class="gh-n">ENAJU</div><div class="gh-y">22 de setembro de 2025</div><p>A Res. CNJ 643 transforma o CEAJud em Escola Nacional do Judiciário.</p></div>
+    </div>
+    <div class="gh-q step" data-step="3"><div class="q1">O que se acumulou entre as duas datas?</div><p>A resposta tem cinco mecanismos institucionais, organizados em camadas.</p></div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <div class="act">
+      <div>
+        <div class="kick">Mecanismo 1 · Ancoragem normativa · 1977 a 2006</div>
+        <h1 class="slide-title" style="margin-bottom:.9rem">A formação é ancorada em norma e em atos de hierarquia nacional</h1>
+        <ul class="bullets compact tl"><li class="step" data-step="1"><strong>1977</strong> · Antecedente: o TJMG cria a Escola Judicial Des. Edésio Fernandes, a pioneira.</li><li class="step" data-step="2"><strong>2004</strong> · A EC 45 institui o CNJ (art. 103-B), prevê a ENFAM (art. 105, par. único, I) e vincula cursos oficiais à promoção (art. 93).</li><li class="step" data-step="3"><strong>2006</strong> · A Res. STJ 3 institui a ENFAM, com competência regulatória sobre os cursos oficiais da magistratura.</li></ul>
+        <div class="ask step" data-step="4"><div class="q">Quem coordena a formação no Judiciário?</div><div class="a">Cada tribunal. Para os magistrados, a ENFAM.</div><div class="f">Próxima etapa: a coordenação nacional da formação dos servidores.</div></div>
+      </div>
+      <div class="stackwrap"><div class="sub-h">Cinco mecanismos, em camadas</div><div class="stack"><div class="lyr l5 future"><b>Mandato central ampliado</b><span>ENAJU · 2025</span></div><div class="lyr l4 future"><b>Governança em rede</b><span>RENEJUM · 2023</span></div><div class="lyr l3 future"><b>Planejamento e monitoramento</b><span>Res. 198 · Res. 325</span></div><div class="lyr l2 future"><b>Capacidades estatais</b><span>CEAJud · Res. 192</span></div><div class="lyr l1 cur"><b>Ancoragem normativa</b><span>EC 45 · ENFAM</span></div></div></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <div class="act">
+      <div>
+        <div class="kick">Mecanismo 2 · Capacidades estatais · 2010 a 2014</div>
+        <h1 class="slide-title" style="margin-bottom:.9rem">O CNJ institui a coordenação nacional da formação de servidores</h1>
+        <ul class="bullets compact tl"><li class="step" data-step="1"><strong>2010</strong> · A Res. 111 institui o CEAJud, unidade do CNJ para coordenar e promover a educação corporativa dos servidores.</li><li class="step" data-step="2"><strong>2012</strong> · A Res. 159 organiza as competências das escolas e do CEAJud e prevê planejamento anual e orçamentário (arts. 7.º e 8.º).</li><li class="step" data-step="3"><strong>2014</strong> · A Res. 192 institui a Política Nacional de Formação e Aperfeiçoamento dos Servidores.</li></ul>
+        <div class="ask step" data-step="4"><div class="q">Quem coordena a formação no Judiciário?</div><div class="a">O CNJ, pelo CEAJud, para os servidores.</div><div class="f">Próxima etapa: integrar a formação ao planejamento e à rede de escolas.</div></div>
+      </div>
+      <div class="stackwrap"><div class="sub-h">Cinco mecanismos, em camadas</div><div class="stack"><div class="lyr l5 future"><b>Mandato central ampliado</b><span>ENAJU · 2025</span></div><div class="lyr l4 future"><b>Governança em rede</b><span>RENEJUM · 2023</span></div><div class="lyr l3 future"><b>Planejamento e monitoramento</b><span>Res. 198 · Res. 325</span></div><div class="lyr l2 cur"><b>Capacidades estatais</b><span>CEAJud · Res. 192</span></div><div class="lyr l1 past"><b>Ancoragem normativa</b><span>EC 45 · ENFAM</span></div></div></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <div class="act">
+      <div>
+        <div class="kick">Mecanismos 3 e 4 · Planejamento e monitoramento; governança em rede · 2016 a 2023</div>
+        <h1 class="slide-title" style="margin-bottom:.9rem">A formação é integrada ao planejamento e organizada em rede</h1>
+        <ul class="bullets compact tl"><li class="step" data-step="1"><strong>2016</strong> · A Res. 240 institui a Política Nacional de Gestão de Pessoas e vincula desenvolvimento profissional ao planejamento institucional.</li><li class="step" data-step="2"><strong>2020</strong> · A Res. 325 estabelece a Estratégia Nacional 2021–2026, com execução colaborativa, monitoramento e avaliação.</li><li class="step" data-step="3"><strong>2023</strong> · A Res. ENFAM 1 institui a RENEJUM, rede nacional de escolas judiciais e da magistratura.</li></ul>
+        <div class="ask step" data-step="4"><div class="q">Quem coordena a formação no Judiciário?</div><div class="a">O CNJ planeja, e as escolas cooperam em rede.</div><div class="f">Próxima etapa: um órgão central de mandato ampliado para os servidores.</div></div>
+      </div>
+      <div class="stackwrap"><div class="sub-h">Cinco mecanismos, em camadas</div><div class="stack"><div class="lyr l5 future"><b>Mandato central ampliado</b><span>ENAJU · 2025</span></div><div class="lyr l4 cur"><b>Governança em rede</b><span>RENEJUM · 2023</span></div><div class="lyr l3 cur"><b>Planejamento e monitoramento</b><span>Res. 198 · Res. 325</span></div><div class="lyr l2 past"><b>Capacidades estatais</b><span>CEAJud · Res. 192</span></div><div class="lyr l1 past"><b>Ancoragem normativa</b><span>EC 45 · ENFAM</span></div></div></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <div class="act">
+      <div>
+        <div class="kick">Mecanismo 5 · Mandato central ampliado · 2025</div>
+        <h1 class="slide-title" style="margin-bottom:.7rem">Atribuições da ENAJU</h1>
+        <div class="sub-h" style="margin-bottom:.5rem">Res. CNJ 643/2025, art. 3.º</div>
+        <div class="atr"><div class="ah">Atribuição prevista no ato</div><div class="ah">Capacidade estatal</div><div class="atrrow step" data-step="1"><div>Formular e revisar a política nacional de formação</div><div><span class="cp">Implementar políticas</span></div></div><div class="atrrow step" data-step="2"><div>Articular escolas e centros de formação dos tribunais</div><div><span class="cp">Coordenar ações</span></div></div><div class="atrrow step" data-step="3"><div>Desenvolver trilhas presenciais, a distância e híbridas, em plataforma unificada</div><div><span class="cp">Implementar políticas</span></div></div><div class="atrrow step" data-step="4"><div>Realizar estudos e diagnósticos de necessidades de capacitação</div><div><span class="cp">Processar informação</span></div></div><div class="atrrow step" data-step="5"><div>Incentivar a pesquisa aplicada e a avaliação das ações educacionais</div><div><span class="cp">Adaptar rotinas</span></div></div></div>
+        <p class="cap step" data-step="6" style="font-size:.78rem;margin-top:.45rem">Capacidades segundo a Seção 1.4 do relatório (Skocpol, 1985; Gomide e Pires, 2014; Wu, Ramesh e Howlett, 2015).</p>
+        <div class="ask step" data-step="6"><div class="q">Quem coordena a formação no Judiciário?</div><div class="a">A ENAJU, órgão central do Sistema Nacional de Formação e Aperfeiçoamento de Servidores (art. 2.º).</div></div>
+      </div>
+      <div class="stackwrap"><div class="sub-h">Cinco mecanismos, em camadas</div><div class="stack"><div class="lyr l5 cur"><b>Mandato central ampliado</b><span>ENAJU · 2025</span></div><div class="lyr l4 past"><b>Governança em rede</b><span>RENEJUM · 2023</span></div><div class="lyr l3 past"><b>Planejamento e monitoramento</b><span>Res. 198 · Res. 325</span></div><div class="lyr l2 past"><b>Capacidades estatais</b><span>CEAJud · Res. 192</span></div><div class="lyr l1 past"><b>Ancoragem normativa</b><span>EC 45 · ENFAM</span></div></div></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p1">Parte I · A Escola</span><span class="sep">·</span><span>Fabio Lopes Fernandes Ramos</span></div>
+    <h1 class="slide-title" style="margin-bottom:.6rem">A ENAJU na arquitetura do sistema</h1>
+    <div class="archwrap"><svg class="svgv" viewBox="0 0 1100 400" role="img" aria-label="Arquitetura institucional formal da formação judicial">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker></defs>
+      <g class="step" data-step="1">
+        <rect class="bx" x="20" y="45" width="150" height="76" rx="12"/><text class="t1" x="95" y="92">CNJ</text>
+        <line class="ln" x1="172" y1="83" x2="288" y2="83" marker-end="url(#ar)"/><text class="t3" x="230" y="72">coordenação</text>
+        <rect class="bx-hl" x="290" y="38" width="220" height="90" rx="12"/><text class="t1" x="400" y="80">ENAJU</text><text class="t2" x="400" y="104">servidores</text>
+      </g>
+      <g class="step" data-step="2">
+        <rect class="bx" x="20" y="280" width="150" height="76" rx="12"/><text class="t1" x="95" y="327">STJ</text>
+        <line class="ln" x1="172" y1="318" x2="288" y2="318" marker-end="url(#ar)"/><text class="t3" x="230" y="307">vinculação</text>
+        <rect class="bx-hl" x="290" y="273" width="220" height="90" rx="12"/><text class="t1" x="400" y="315">ENFAM</text><text class="t2" x="400" y="339">magistrados</text>
+      </g>
+      <g class="step" data-step="3">
+        <line class="ln-d" x1="512" y1="100" x2="618" y2="172" marker-end="url(#ar)"/>
+        <line class="ln-d" x1="512" y1="300" x2="618" y2="228" marker-end="url(#ar)"/>
+        <text class="t3" x="548" y="130" style="text-anchor:start">articulação</text>
+        <text class="t3" x="548" y="285" style="text-anchor:start">articulação</text>
+        <rect class="bx" x="620" y="140" width="250" height="120" rx="12"/>
+        <text class="t1" x="745" y="184" style="font-size:17px">Escolas judiciais,</text>
+        <text class="t1" x="745" y="208" style="font-size:17px">escolas de servidores</text>
+        <text class="t1" x="745" y="232" style="font-size:17px">e centros de formação</text>
+      </g>
+      <g class="step" data-step="4">
+        <line class="ln-k" x1="838" y1="138" x2="906" y2="92" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="t3" x="840" y="105" style="text-anchor:end">cooperação</text>
+        <rect class="bx" x="910" y="50" width="170" height="90" rx="12"/>
+        <text class="t1" x="995" y="88" style="font-size:16px">Redes de cooperação</text>
+        <text class="t1" x="995" y="112" style="font-size:16px">e compartilhamento</text>
+      </g>
+      <g class="step" data-step="5">
+        <line class="ln" x1="838" y1="262" x2="906" y2="316" marker-end="url(#ar)"/>
+        <text class="t3" x="834" y="305" style="text-anchor:end">execução e alcance</text>
+        <rect class="bx" x="910" y="270" width="170" height="90" rx="12"/>
+        <text class="t1" x="995" y="310" style="font-size:16px">Tribunais e</text>
+        <text class="t1" x="995" y="334" style="font-size:16px">unidades judiciárias</text>
+      </g>
+    </svg></div>
+    <p class="cap" style="margin-top:.3rem;font-size:.8rem">Vínculos previstos em norma, e não fluxos de trabalho observados.</p>
+    <div class="qa step" data-step="6" style="margin-top:.8rem">
+      <div class="qa-box"><h3>Junho de 2026</h3><p>A Portaria Presidência 257 aprova a estrutura organizacional e o Regimento Interno, com um Sistema de Avaliação Institucional Contínuo.</p></div>
+      <div class="qa-ar">→</div>
+      <div class="qa-box q"><h3>Pergunta da pesquisa</h3><p>Como acompanhar e demonstrar, com evidência, a consolidação da ENAJU?</p></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Problema e relevância</h1>
+    <p class="lede" style="margin-bottom:.9rem;max-width:none">A educação corporativa é uma dimensão da capacidade organizacional do Judiciário, e não apenas um serviço de apoio.</p>
+    <div class="pcs">
+      <div class="pc step" data-step="1"><div class="sub-h">Relevância</div><h3>Formação como capacidade organizacional</h3><p>Magistrados e servidores estão distribuídos por ramos, tribunais e unidades territoriais. O desenvolvimento profissional envolve oferta educacional, diagnóstico de competências, coordenação entre escolas, adaptação de rotinas e integração ao planejamento.</p></div>
+      <div class="pc step" data-step="2"><div class="sub-h">Objeto</div><h3>Evolução institucional, de 2004 a 2025</h3><p>Sequência documentada de mudanças normativas e organizacionais: estruturas nacionais, ampliação do público, integração com planejamento e gestão de pessoas, cooperação entre escolas e atribuições de monitoramento e avaliação.</p></div>
+      <div class="pc q step" data-step="3"><div class="sub-h">Problema</div><h3>Desenho denso, sem instrumento de diagnóstico</h3><p>Após vinte e um anos, a política dispõe de desenho normativo denso e de órgão central com mandato amplo. Falta um instrumento que distinga o instituído do que está em funcionamento.</p></div>
+    </div>
+    <p class="foot-note step" data-step="4">Sem essa distinção, a criação de normas tende a ser lida como evidência de funcionamento, o que afeta a análise acadêmica e a gestão da política.</p>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Problema de pesquisa, lacunas e questões</h1>
+    <p class="lede" style="margin-bottom:.7rem;max-width:none;font-size:.95rem">Problema: como se constituiu a política nacional de formação do Judiciário, e como distinguir, nela, o instituído do que está em funcionamento.</p>
+    <div class="map3">
+      <div class="mh">Lacuna na literatura</div><div></div><div class="mh">Questão de pesquisa</div><div></div><div class="mh">Objetivo específico</div>
+      <div class="m3row step" data-step="1"><div class="mb">Na literatura examinada, não foi identificada reconstrução integrada da trajetória normativa de 2004 a 2025, que articule magistrados e servidores sob a perspectiva da institucionalização.</div><div class="ma">→</div><div class="mb q"><b>Analítica.</b> Como a trajetória reconfigurou a educação corporativa no Judiciário, e em que medida a criação da ENAJU é marco dela?</div><div class="ma">→</div><div class="mb">(i) Reconstruir e periodizar a trajetória, com critérios documentais explícitos.<br>(ii) Interpretar os mecanismos organizacionais que a atravessam.</div></div>
+      <div class="m3row step" data-step="2"><div class="mb">Na mesma literatura, não foi identificado instrumento que distinga, de forma operacional, o instituído do implementado, monitorado e incorporado à revisão institucional.</div><div class="ma">→</div><div class="mb q"><b>Aplicada.</b> Que dimensões e níveis de evidência orientam a avaliação da consolidação da ENAJU?</div><div class="ma">→</div><div class="mb">(iii) Propor estrutura preliminar de diagnóstico e avaliação da consolidação da política.</div></div>
+    </div>
+    <div class="thesis step" data-step="3" style="margin-top:.8rem"><h3>Tese</h3><p>A educação corporativa do Judiciário passou por transformação institucional acumulativa, e a ENAJU é marco dessa trajetória em sentido delimitado: o marco é de desenho institucional.</p></div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Referencial teórico</h1>
+    <p class="lede" style="margin-bottom:.6rem;max-width:none;font-size:.92rem">Eixo principal: institucionalização. Eixo funcional: capacidades estatais. Cada literatura delimita um tipo de evidência.</p>
+    <div class="table-wrap step" data-step="1">
+      <table class="lit">
+        <thead><tr><th>Literatura</th><th>Autores</th><th>Função na análise</th></tr></thead>
+        <tbody>
+          <tr><td>Institucionalização e mudança gradual</td><td>North (1990); Selznick (1996); Pierson (2004); Mahoney e Thelen (2010)</td><td>Explicar formalização, continuidade e tipo de mudança</td></tr>
+          <tr><td>Isomorfismo e desacoplamento</td><td>Meyer e Rowan (1977); DiMaggio e Powell (1983)</td><td>Limitar a leitura da norma como prova de prática</td></tr>
+          <tr><td>Educação corporativa e competências</td><td>Meister (1998); Allen (2002)</td><td>Interpretar o alinhamento educacional</td></tr>
+          <tr><td>Aprendizagem organizacional</td><td>Crossan, Lane e White (1999); Baldwin e Ford (1988)</td><td>Distinguir níveis de resultado educacional</td></tr>
+          <tr><td>Capacidades estatais</td><td>Gomide e Pires (2014); Wu, Ramesh e Howlett (2015)</td><td>Relacionar formação e capacidade de implementação</td></tr>
+          <tr><td>Implementação de políticas</td><td>Pressman e Wildavsky (1984); Hill e Hupe (2014)</td><td>Delimitar inferências e orientar a avaliação</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot-note step" data-step="2">A advertência do isomorfismo entra como limite interpretativo em todo o relatório: estruturas formais podem ficar desacopladas das práticas.</p>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Delineamento e justificativa do método</h1>
+    <div class="jx">
+      <div class="jh">Escolha metodológica</div><div class="jh">Justificativa</div>
+      <div class="jxrow step" data-step="1"><div>Delineamento histórico-documental, descritivo e interpretativo</div><div>O objeto é o desenho institucional, e não há registro público consolidado de funcionamento sob o novo arranjo.</div></div><div class="jxrow step" data-step="1"><div>Fontes oficiais e auditáveis: CNJ, Planalto, STJ e ENFAM</div><div>Rastreabilidade: cada ato registrado com número, data, fonte, situação normativa, URL e data de acesso (Apêndice A).</div></div><div class="jxrow step" data-step="1"><div>Unidade de análise: o dispositivo normativo</div><div>Dá granularidade para atribuir competências e desloca a codificação da narrativa institucional para o texto da norma.</div></div><div class="jxrow step" data-step="2"><div>Critérios de marco (C1 a C4) definidos antes da análise</div><div>Para que a conclusão não reproduza a premissa.</div></div><div class="jxrow step" data-step="2"><div>Critérios aplicados também a atos concorrentes</div><div>Mitiga a leitura promocional, dado que os autores são servidores da ENAJU.</div></div><div class="jxrow step" data-step="2"><div>Categorias derivadas da literatura (Quadro 7)</div><div>Vincula a codificação ao referencial: seis categorias, depois agregadas em cinco mecanismos.</div></div><div class="jxrow step" data-step="3"><div>Codificação pelo primeiro autor, revisão dos demais por consenso</div><div>Limite declarado: sem índice de concordância entre codificadores. A aferição integra a agenda de validação.</div></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Critérios de marco e seleção do corpus</h1>
+    <div class="strip step" data-step="1">
+      <div class="chip-n"><div class="n">14</div><div class="l">atos normativos de 2004 a 2025 (corpus)</div></div>
+      <div class="ar">→</div>
+      <div class="chip-n"><div class="n">5</div><div class="l">configurações candidatas, reunindo 6 atos</div></div>
+      <div class="ar">→</div>
+      <div class="chip-n hl"><div class="n">4</div><div class="l">critérios cumulativos de marco</div></div>
+    </div>
+    <div class="met">
+      <div class="step" data-step="1">
+        <div class="sub-h">Seleção</div>
+        <ul class="bullets compact sm">
+          <li><strong>Candidatas:</strong> atos que criam, transformam ou extinguem órgão nacional de formação, ou instituem política nacional aplicável a todo o sistema.</li>
+          <li><strong>Fora do teste:</strong> 8 atos que regulamentam competências, organizam instrumentos, estruturam apoio administrativo ou criam instâncias de cooperação.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="crit">
+          <div class="crit-i step" data-step="2"><div class="cn">C1</div><div><b>Criação ou transformação de órgão</b><span>O ato cria, transforma ou extingue órgão nacional de formação.</span></div></div>
+          <div class="crit-i step" data-step="2"><div class="cn">C2</div><div><b>Alteração da governança formal</b><span>O ato modifica a posição, a vinculação ou a coordenação do órgão.</span></div></div>
+          <div class="crit-i step" data-step="3"><div class="cn">C3</div><div><b>Modificação de competências ou instrumentos</b><span>O ato altera atribuições, instrumentos de gestão ou obrigações de acompanhamento.</span></div></div>
+          <div class="crit-i step" data-step="3"><div class="cn">C4</div><div><b>Ampliação do escopo do mandato central</b><span>O órgão acumula formulação, articulação, execução, diagnóstico e avaliação.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Achado 1: só a Res. CNJ 643/2025 cumpre C1 a C4</h1>
+    <p class="lede step" data-step="1" style="margin-bottom:.7rem;max-width:none;font-size:.95rem">Cinco configurações candidatas foram testadas contra os quatro critérios cumulativos.</p>
+    <div class="mx" id="critMx"></div>
+    <div class="keyrow">
+      <span><svg class="sym"><use href="#s-yes"/></svg>Sim</span>
+      <span><svg class="sym"><use href="#s-half"/></svg>Parcial</span>
+      <span><svg class="sym"><use href="#s-no"/></svg>Não</span>
+      <span>C1 órgão · C2 governança · C3 competências · C4 mandato central</span>
+    </div>
+    <p class="foot-note step" data-step="7">A Res. 643/2025 é o marco da política nacional de formação de servidores em sentido delimitado: marco de desenho institucional. A EC 45/2004 com a Res. STJ 3/2006 é o marco do subsistema da magistratura.</p>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title" style="margin-bottom:.6rem">Achado 2: quatro etapas e cinco mecanismos</h1>
+    <p class="lede" style="margin-bottom:.6rem;max-width:none;font-size:.92rem">Os mecanismos não se sucedem: acumulam-se e atravessam períodos. Cada marcador indica um ato do corpus.</p>
+    <div class="mc" id="mechMx"></div>
+    <p class="cap" style="font-size:.8rem;margin-top:.5rem">Tipo de mudança por etapa: criação de estrutura com competência regulatória; extensão de público; integração funcional; conversão com ampliação de mandato.</p>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Achado 3: a mudança é conversão com sobreposição</h1>
+    <div class="lay-wrap">
+      <div>
+        <div class="conv step" data-step="1">
+          <div class="box"><h3>CEAJud</h3><p>2010 · coordenação nacional de servidores</p></div>
+          <div class="arrow">→</div>
+          <div class="box to"><h3>ENAJU</h3><p>2025 · órgão central do sistema nacional</p></div>
+        </div>
+        <p class="cap step" data-step="1">A Res. 643/2025 converte o CEAJud: a estrutura existente é redirecionada a novo propósito e escopo, com o mesmo suporte administrativo. Substituição e deriva não se aplicam: nenhuma estrutura foi extinta e reposta, e a mudança foi deliberada e formalizada.</p>
+      </div>
+      <div class="layers step" data-step="2">
+        <div class="layer top"><b>Res. 643/2025 · novo mandato</b><span>2025</span></div>
+        <div class="layer"><b>Estratégia Nacional 2021–2026 (Res. 325)</b><span>2020</span></div>
+        <div class="layer"><b>Política Nacional de Gestão de Pessoas (Res. 240)</b><span>2016</span></div>
+        <div class="layer"><b>Política Nacional de Formação (Res. 192)</b><span>2014</span></div>
+      </div>
+    </div>
+    <div class="defs step" data-step="3">
+      <div class="def"><h3>Conversão</h3><p>Uma estrutura deliberadamente redirecionada a propósitos distintos dos originais (Mahoney e Thelen, 2010).</p></div>
+      <div class="def"><h3>Sobreposição</h3><p>As políticas de 2014, 2016 e 2020 permanecem vigentes e são acrescidas pelo novo mandato, sem substituição.</p></div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title" style="margin-bottom:6px;">Contribuição aplicada: matriz e avaliação em cinco níveis</h1>
+    <p class="lede" style="margin-bottom:.4rem;max-width:none;font-size:.88rem;">Matriz em dois módulos, com nove dimensões derivadas do corpus e da literatura. A condição documental é registrada antes do nível.</p>
+    <div class="bd" id="board"></div>
+    <div class="lv step" data-step="6"><span class="lvl">Avaliação em cinco níveis</span><span class="lvc">1 Oferta</span><i>→</i><span class="lvc">2 Aprendizagem</span><i>→</i><span class="lvc">3 Transferência</span><i>→</i><span class="lvc">4 Resultado organizacional</span><i>→</i><span class="lvc">5 Resultado sistêmico</span></div><p class="doc-cond" style="margin-top:.4rem;font-size:.72rem;line-height:1.35">Módulo A: ENAJU. Módulo B: escolas dos tribunais. Condição documental: ED, ND, NL, II, NA. Dimensões ancoradas em Wu et al. (2015), Meister (1998), Allen (2002), Hill e Hupe (2014), Crossan et al. (1999), Baldwin e Ford (1988), Gomide e Pires (2014) e Cingolani (2013).</p>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag p2">Parte II · A Pesquisa</span><span class="sep">·</span><span>Igor Caires Machado</span></div>
+    <h1 class="slide-title">Alcance, validação e agenda</h1>
+    <p class="lede step" data-step="1" style="margin-bottom:.4rem;font-size:.9rem;max-width:none">Hierarquia de evidências: o relatório documenta os níveis 1 e 2 e, de modo limitado, o nível 3.</p>
+    <div class="stairs flat step" data-step="1">
+      <div class="stair in"><div class="no">1</div><div class="tt">Norma de criação</div><div class="ds">Existência formal</div></div>
+      <div class="stair in"><div class="no">2</div><div class="tt">Regulamento</div><div class="ds">Desenho institucional</div></div>
+      <div class="stair part"><div class="no">3</div><div class="tt">Registro administrativo</div><div class="ds">Oferta registrada</div></div>
+      <div class="stair"><div class="no">4</div><div class="tt">Indicador educacional</div><div class="ds">Aprendizagem, transferência</div></div>
+      <div class="stair"><div class="no">5</div><div class="tt">Avaliação de resultado</div><div class="ds">Mudança organizacional</div></div>
+      <div class="stair"><div class="no">6</div><div class="tt">Desenho causal</div><div class="ds">Atribuição de efeito</div></div>
+    </div>
+    <div class="reach step" data-step="1" style="margin-top:.5rem"><span><i class="sw sw-in"></i>Alcançado</span><span><i class="sw sw-part"></i>Alcançado de modo limitado</span><span><i class="sw sw-out"></i>Agenda de acompanhamento</span></div>
+    <div class="two">
+      <div class="road-col step" data-step="2"><h3>Cinco passos para consolidar a ENAJU</h3>
+        <ol class="rc">
+          <li>Estabelecer linha de base documental antes de fixar metas.</li>
+          <li>Concluir a validação da matriz antes de uso comparativo.</li>
+          <li>Planejar equipe e orçamento conforme a amplitude do mandato.</li>
+          <li>Definir apoio diferenciado às unidades de menor capacidade instalada.</li>
+          <li>Fazer os resultados da avaliação retornarem ao desenho das ações.</li>
+        </ol>
+      </div>
+      <div class="road-col step" data-step="3"><h3>Validação da matriz, em seis etapas</h3>
+        <ol class="rc">
+          <li>Validação de conteúdo por especialistas.</li>
+          <li>Teste cognitivo com gestores e equipes de escolas.</li>
+          <li>Aplicação piloto em unidades de capacidades distintas.</li>
+          <li>Confiabilidade entre avaliadores independentes.</li>
+          <li>Revisão dos descritores, com prioridade aos níveis 2 e 4.</li>
+          <li>Validação externa com registros de governança, planos e indicadores.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag pr">Reserva</span><span class="sep">·</span><span>Apoio às perguntas</span></div>
+    <h1 class="slide-title">49 anos de formação judicial, de 1977 a 2026</h1>
+    <div class="legend">
+      <span><i class="mk mk-m"></i>Magistratura</span>
+      <span><i class="mk mk-s"></i>Servidores</span>
+      <span><i class="mk mk-a"></i>Ambas</span>
+    </div>
+    <svg class="rm-axis" viewBox="0 0 1100 128" role="img" aria-label="Linha do tempo de 1977 a 2026 com os três ciclos da Estratégia Nacional">
+      <line class="ax" x1="30" y1="40" x2="84" y2="40"/>
+      <path class="ax" d="M92 30l8 20M104 30l8 20"/>
+      <line class="ax" x1="120" y1="40" x2="1066" y2="40"/>
+      <rect class="cyc" x="395.5" y="94" width="204" height="24" rx="6"/>
+      <rect class="cyc" x="602" y="94" width="242" height="24" rx="6"/>
+      <rect class="cyc" x="847" y="94" width="203" height="24" rx="6"/>
+      <text class="cyc-t" x="497.5" y="110">Estratégia 2010–2014</text>
+      <text class="cyc-t" x="723" y="110">Estratégia 2015–2020</text>
+      <text class="cyc-t" x="948.5" y="110">Estratégia 2021–2026</text>
+      <g class="step" data-step="1"><circle class="d-m" cx="50" cy="40" r="9"/><text class="yr" x="50" y="70">1977</text></g>
+      <g class="step" data-step="2">
+        <circle class="d-a" cx="150" cy="40" r="9"/><text class="yr" x="150" y="70">2004</text>
+        <circle class="d-m" cx="231.8" cy="40" r="9"/><text class="yr" x="231.8" y="70">2006</text>
+        <circle class="d-s" cx="354.5" cy="40" r="9"/><text class="yr" x="354.5" y="70">2009</text>
+      </g>
+      <g class="step" data-step="3">
+        <circle class="d-s" cx="395.5" cy="40" r="9"/><text class="yr" x="395.5" y="70">2010</text>
+        <circle class="d-m" cx="436.4" cy="40" r="9"/><text class="yr" x="436.4" y="70">2011</text>
+        <circle class="d-a" cx="477.3" cy="40" r="9"/><text class="yr" x="477.3" y="70">2012</text>
+        <circle class="d-s" cx="559.1" cy="40" r="9"/><text class="yr" x="559.1" y="70">2014</text>
+      </g>
+      <g class="step" data-step="4">
+        <circle class="d-s" cx="640.9" cy="40" r="9"/><text class="yr" x="640.9" y="70">2016</text>
+        <circle class="d-a" cx="804.5" cy="40" r="9"/><text class="yr" x="804.5" y="70">2020</text>
+        <circle class="d-m" cx="927.3" cy="40" r="9"/><text class="yr" x="927.3" y="70">2023</text>
+      </g>
+      <g class="step" data-step="5">
+        <circle class="d-s" cx="1009.1" cy="40" r="9"/><text class="yr" x="1009.1" y="70">2025</text>
+        <circle class="d-now" cx="1050" cy="40" r="11"/><text class="yr" x="1050" y="70" style="fill:var(--text-strong);font-weight:800">2026</text>
+      </g>
+    </svg>
+    <div class="rm-cols">
+      <div class="rm-col step" data-step="1">
+        <h3>Antecedente</h3>
+        <div class="rm-it"><i class="mk mk-m"></i><span><b>1977</b> · Escola Judicial Des. Edésio Fernandes (TJMG), a pioneira</span></div>
+      </div>
+      <div class="rm-col step" data-step="2">
+        <h3>2004–2009 · Magistratura</h3>
+        <div class="rm-it"><i class="mk mk-a"></i><span><b>2004</b> · EC 45 e criação do CNJ</span></div>
+        <div class="rm-it"><i class="mk mk-m"></i><span><b>2006</b> · ENFAM instalada, 30 nov</span></div>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2009</b> · IN 25: Programa de Educação Corporativa</span></div>
+      </div>
+      <div class="rm-col step" data-step="3">
+        <h3>2010–2014 · Servidores</h3>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2010</b> · Res. 111: instituição do CEAJud</span></div>
+        <div class="rm-it"><i class="mk mk-m"></i><span><b>2011</b> · Res. ENFAM 1: cursos oficiais e carreira</span></div>
+        <div class="rm-it"><i class="mk mk-a"></i><span><b>2012</b> · Res. 159: escolas como unidades gestoras</span></div>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2014</b> · Res. 192: Política Nacional de Servidores</span></div>
+      </div>
+      <div class="rm-col step" data-step="4">
+        <h3>2016–2023 · Integração</h3>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2016</b> · Res. 240: Política de Gestão de Pessoas</span></div>
+        <div class="rm-it"><i class="mk mk-a"></i><span><b>2020</b> · Res. 325: Estratégia 2021–2026</span></div>
+        <div class="rm-it"><i class="mk mk-m"></i><span><b>2023</b> · Res. ENFAM 1: RENEJUM</span></div>
+      </div>
+      <div class="rm-col step" data-step="5">
+        <h3>2025–2026 · Escola Nacional</h3>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2025</b> · Res. 643: transformação do CEAJud em ENAJU, 22 set</span></div>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2025</b> · Portaria 362: grupo de trabalho, out</span></div>
+        <div class="rm-it"><i class="mk mk-s"></i><span><b>2026</b> · Portaria 257: estrutura e Regimento Interno, 11 jun</span></div>
+        <div class="rm-it now"><i class="mk mk-a"></i><span><b>2026</b> · ENAJUS, Goiânia, nov. Estamos aqui.</span></div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<section class="slide slide--refs">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag pr">Reserva</span><span class="sep">·</span><span>Apoio às perguntas</span></div>
+    <h1 class="slide-title" style="font-size:1.5rem;margin-bottom:.6rem">Referências: literatura (25)</h1>
+    <div class="rfcols"><p class="rf">Allen, M. (Ed.). (2002). The corporate university handbook: Designing, managing, and growing a successful program. AMACOM.</p><p class="rf">Argyris, C., &amp; Schön, D. A. (1978). Organizational learning: A theory of action perspective. Addison-Wesley.</p><p class="rf">Baldwin, T. T., &amp; Ford, J. K. (1988). Transfer of training: A review and directions for future research. Personnel Psychology, 41(1), 63–105.</p><p class="rf">Cingolani, L. (2013). The state of state capacity: A review of concepts, evidence and measures (UNU-MERIT Working Paper No. 2013-053). Maastricht University.</p><p class="rf">Crossan, M. M., Lane, H. W., &amp; White, R. E. (1999). An organizational learning framework: From intuition to institution. Academy of Management Review, 24(3), 522–537.</p><p class="rf">DiMaggio, P. J., &amp; Powell, W. W. (1983). The iron cage revisited: Institutional isomorphism and collective rationality in organizational fields. American Sociological Review, 48(2), 147–160.</p><p class="rf">Dutra, J. S. (2004). Competências: conceitos e instrumentos para a gestão de pessoas na empresa moderna. Atlas.</p><p class="rf">Fleury, M. T. L., &amp; Fleury, A. (2001). Construindo o conceito de competência. Revista de Administração Contemporânea, 5(spe), 183–196.</p><p class="rf">Gomide, A. de Á., &amp; Pires, R. R. C. (Orgs.). (2014). Capacidades estatais e democracia: arranjos institucionais de políticas públicas. Ipea.</p><p class="rf">Hill, M., &amp; Hupe, P. (2014). Implementing public policy (3rd ed.). SAGE.</p><p class="rf">Lascoumes, P., &amp; Le Galès, P. (2007). Introduction: Understanding public policy through its instruments – From the nature of instruments to the sociology of public policy instrumentation. Governance, 20(1), 1–21.</p><p class="rf">Lipsky, M. (1980). Street-level bureaucracy: Dilemmas of the individual in public services. Russell Sage Foundation.</p><p class="rf">Mahoney, J., &amp; Thelen, K. (Eds.). (2010). Explaining institutional change: Ambiguity, agency, and power. Cambridge University Press.</p><p class="rf">Meister, J. C. (1998). Corporate universities: Lessons in building a world-class work force (rev. ed.). McGraw-Hill.</p><p class="rf">Meyer, J. W., &amp; Rowan, B. (1977). Institutionalized organizations: Formal structure as myth and ceremony. American Journal of Sociology, 83(2), 340–363.</p><p class="rf">Nonaka, I., &amp; Takeuchi, H. (1995). The knowledge-creating company: How Japanese companies create the dynamics of innovation. Oxford University Press.</p><p class="rf">North, D. C. (1990). Institutions, institutional change and economic performance. Cambridge University Press.</p><p class="rf">OCDE. (2008). The challenge of capacity development: Working towards good practice. OECD Publishing.</p><p class="rf">Pantoja, M. J., Camões, M. R. S., &amp; Bergue, S. T. (Orgs.). (2010). Gestão de pessoas: bases teóricas e experiências no setor público. ENAP.</p><p class="rf">Pierson, P. (2004). Politics in time: History, institutions, and social analysis. Princeton University Press.</p><p class="rf">Pressman, J. L., &amp; Wildavsky, A. (1984). Implementation (3rd ed.). University of California Press.</p><p class="rf">Selznick, P. (1996). Institutionalism “old” and “new”. Administrative Science Quarterly, 41(2), 270–277.</p><p class="rf">Senge, P. M. (1990). The fifth discipline: The art and practice of the learning organization. Doubleday.</p><p class="rf">Skocpol, T. (1985). Bringing the state back in: Strategies of analysis in current research. In P. B. Evans, D. Rueschemeyer, &amp; T. Skocpol (Eds.), Bringing the state back in (pp. 3–43). Cambridge University Press.</p><p class="rf">Wu, X., Ramesh, M., &amp; Howlett, M. (2015). Policy capacity: A conceptual framework for understanding policy competences and capabilities. Policy and Society, 34(3–4), 165–171.</p></div>
+  </div>
+  
+</section>
+
+<section class="slide slide--refs">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag pr">Reserva</span><span class="sep">·</span><span>Apoio às perguntas</span></div>
+    <h1 class="slide-title" style="font-size:1.5rem;margin-bottom:.6rem">Referências: atos normativos (14)</h1>
+    <div class="rfcols"><p class="rf">Brasil. (2004). Emenda Constitucional n. 45, de 30 de dezembro de 2004. Altera dispositivos da Constituição Federal e dá outras providências. Diário Oficial da União, 31 dez. 2004. https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc45.htm. Acesso em 26 jul. 2026.</p><p class="rf">Brasil. (2006). Lei n. 11.364, de 26 de outubro de 2006. Dispõe sobre as atividades de apoio ao Conselho Nacional de Justiça e dá outras providências. Diário Oficial da União, 27 out. 2006. https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/L11364.htm. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2009a). Resolução n. 70, de 18 de março de 2009. Dispõe sobre o Planejamento e a Gestão Estratégica no âmbito do Poder Judiciário e dá outras providências. DOU, Seção 1, n. 56, 24 mar. 2009, p. 89–91; DJE/CNJ n. 47, 25 mar. 2009, p. 5–18. https://atos.cnj.jus.br/atos/detalhar/118. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2009b). Instrução Normativa n. 25, de 24 de julho de 2009. Regulamenta o Programa de Educação Corporativa e dá outras providências. DJE/CNJ n. 133, 6 ago. 2009, p. 3–7. https://atos.cnj.jus.br/atos/detalhar/457. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2010). Resolução n. 111, de 6 de abril de 2010. Institui o Centro de Formação e Aperfeiçoamento de Servidores do Poder Judiciário – CEAJud e dá outras providências. DJE/CNJ n. 63, 9 abr. 2010, p. 8–9. https://atos.cnj.jus.br/atos/detalhar/130. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2012). Resolução n. 159, de 12 de novembro de 2012. Dispõe sobre as diretrizes administrativas e financeiras para a formação de magistrados e servidores do Poder Judiciário. https://atos.cnj.jus.br/atos/detalhar/972. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2014a). Resolução n. 192, de 8 de maio de 2014. Dispõe sobre a Política Nacional de Formação e Aperfeiçoamento dos Servidores do Poder Judiciário. DJE/CNJ n. 79, 9 maio 2014, p. 6. https://atos.cnj.jus.br/atos/detalhar/2012. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2014b). Resolução n. 198, de 1º de julho de 2014. Dispõe sobre o Planejamento e a Gestão Estratégica no âmbito do Poder Judiciário e dá outras providências. DJE/CNJ n. 114, 3 jul. 2014, p. 4–7; 16–19. https://atos.cnj.jus.br/atos/detalhar/2029. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2016). Resolução n. 240, de 9 de setembro de 2016. Dispõe sobre a Política Nacional de Gestão de Pessoas no âmbito do Poder Judiciário. DJe/CNJ n. 161, 12 set. 2016, p. 2–7. https://atos.cnj.jus.br/atos/detalhar/2342. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2020). Resolução n. 325, de 29 de junho de 2020. Dispõe sobre a Estratégia Nacional do Poder Judiciário 2021–2026 e dá outras providências. https://atos.cnj.jus.br/atos/detalhar/3365. Acesso em 26 jul. 2026.</p><p class="rf">Conselho Nacional de Justiça. (2025). Resolução n. 643, de 22 de setembro de 2025. Dispõe sobre a transformação do Centro de Aperfeiçoamento de Servidores do Poder Judiciário (Ceajud) em Escola Nacional do Judiciário (Enaju) e estabelece suas atribuições. DJE/CNJ n. 208, 23 set. 2025, p. 6–7. https://atos.cnj.jus.br/atos/detalhar/6313. Acesso em 26 jul. 2026.</p><p class="rf">Escola Nacional de Formação e Aperfeiçoamento de Magistrados. (2011). Resolução n. 1, de 6 de junho de 2011. Dispõe sobre o curso de formação para ingresso na magistratura e os cursos de aperfeiçoamento para fins de vitaliciamento e promoção dos magistrados. https://www.enfam.jus.br/institucional/legislacao/resolucoes-da-enfam/. Acesso em 26 jul. 2026.</p><p class="rf">Escola Nacional de Formação e Aperfeiçoamento de Magistrados. (2023). Resolução n. 1, de 1º de março de 2023. Dispõe sobre a instituição da Rede Nacional de Escolas Judiciais e da Magistratura – Renejum e dá outras providências. https://www.enfam.jus.br/institucional/legislacao/resolucoes-da-enfam/. Acesso em 26 jul. 2026.</p><p class="rf">Superior Tribunal de Justiça. (2006). Resolução n. 3, de 30 de novembro de 2006. Dispõe sobre a instituição da Escola Nacional de Formação e Aperfeiçoamento de Magistrados e dá outras providências. Diário da Justiça, 4 dez. 2006, Seção 1, p. 158. https://www.enfam.jus.br/wp-content/uploads/2014/04/Res_3_2006_Atualizado.pdf. Acesso em 26 jul. 2026.</p></div>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag pr">Reserva</span><span class="sep">·</span><span>Apoio às perguntas</span></div>
+    <h1 class="slide-title">Mais três interpretações</h1>
+    <ul class="bullets">
+      <li><strong>A centralização convive com autonomia administrativa por desenho.</strong> O art. 4.º preserva a autonomia dos órgãos. O arranjo é de coordenação sem subordinação.</li>
+      <li><strong>A governança em rede pode reduzir assimetrias entre as unidades.</strong> O apoio às unidades com menos equipe, dados e infraestrutura amplia esse efeito.</li>
+      <li><strong>A capacidade de aprendizagem cresce quando os resultados da avaliação retornam ao desenho das ações.</strong> A formalização cria o ambiente, e o uso dos resultados completa o ciclo.</li>
+    </ul>
+  </div>
+  
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <div class="eyebrow"><span class="part-tag pr">Reserva</span><span class="sep">·</span><span>Apoio às perguntas</span></div>
+    <h1 class="slide-title">Modelo lógico: da norma aos resultados</h1>
+    <div class="lm-row step" data-step="1">
+      <div class="lm-group"><span class="lbl">Cobertura do relatório: normas, mandato e desenho</span>
+        <div class="lm-b">Insumos</div><div class="lm-ar">→</div>
+        <div class="lm-b">Atividades</div><div class="lm-ar">→</div>
+        <div class="lm-b">Produtos</div>
+      </div>
+      <div class="lm-ar" style="margin-top:22px;">→</div>
+      <div class="lm-b fut step" data-step="2" style="margin-top:22px;flex:1;">Aprendizagem</div>
+    </div>
+    <div class="lm-down step" data-step="3">↓</div>
+    <div class="lm-row step" data-step="3">
+      <div class="lm-b fut">Resultados sistêmicos</div><div class="lm-ar">←</div>
+      <div class="lm-b fut">Resultados organizacionais</div><div class="lm-ar">←</div>
+      <div class="lm-b fut">Mudança de rotina</div><div class="lm-ar">←</div>
+      <div class="lm-b fut">Transferência</div>
+    </div>
+    <div class="lm-cap step" data-step="3">
+      <div>Condições críticas: aplicação, integridade dos dados e equidade</div><div class="sp"></div>
+      <div>Fontes futuras: testes, observação, indicadores e estudos</div><div class="sp"></div>
+      <div></div><div class="sp"></div>
+      <div>Pressupostos: recursos, governança, dados e suporte</div>
+    </div>
+    <p class="foot-note step" data-step="4">A cadeia depende de indicadores e desenhos avaliativos adequados a cada nível. Avaliação causal exige séries temporais, grupos comparáveis ou estratégias quase experimentais.</p>
+  </div>
+  
+</section>
+
+</div>
+
+<div id="notesPanel" aria-live="polite"><h4></h4><div id="notesBody"></div></div>
+<div class="navbar">
+  <button class="nav-btn" id="prevBtn" aria-label="Voltar">&larr; Anterior</button>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <div class="counter" id="counter">1 / 18</div>
+    <div class="hint">F tela cheia · R reserva</div>
+  </div>
+  <button class="nav-btn" id="nextBtn" aria-label="Avançar">Próximo &rarr;</button>
+</div>
+
+<script>
+(function(){
+  /* ---------- builders ---------- */
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+  function sym(k){ return '<svg class="sym" role="img" aria-label="'+({y:'Sim',h:'Parcial',n:'Não'}[k])+'"><use href="#s-'+({y:'yes',h:'half',n:'no'}[k])+'"/></svg>'; }
+
+  // criteria matrix
+  (function(){
+    var host=document.getElementById('critMx'); if(!host) return;
+    ['Configuração','C1','C2','C3','C4','Resultado'].forEach(function(t,i){ host.appendChild(el('div','h'+(i>0&&i<5?' c':''),t)); });
+    var rows=[
+      ['EC 45/2004 + Res. STJ 3/2006','yyyh','Marco do subsistema da magistratura; funções regulatórias sem execução, diagnóstico e avaliação'],
+      ['Res. CNJ 111/2010','yyyn','Cria coordenação nacional para servidores, sem condição de órgão central'],
+      ['Res. CNJ 192/2014','nnyn','Institui política nacional sem alterar estrutura de governança'],
+      ['Res. CNJ 240/2016','nnyn','Integra formação e gestão de pessoas sem alterar órgãos'],
+      ['Res. CNJ 643/2025','yyyy','Única configuração a atender cumulativamente aos quatro critérios']
+    ];
+    rows.forEach(function(r,i){
+      var last=i===rows.length-1, hl=last?' hl':'', ls=last?' last':'';
+      var row=el('div','mxrow step'); row.setAttribute('data-step',String(i+2));
+      row.appendChild(el('div',hl+ls,'<b style="color:var(--text-strong)">'+r[0]+'</b>'));
+      r[1].split('').forEach(function(k){ row.appendChild(el('div','c'+hl+ls,sym(k))); });
+      row.appendChild(el('div','res'+hl+ls,r[2]));
+      host.appendChild(row);
+    });
+  })();
+
+  // mechanisms
+  (function(){
+    var host=document.getElementById('mechMx'); if(!host) return;
+    ['Mecanismo','Etapa 1 · 2004–2009<small>Estruturação nacional da magistratura</small>','Etapa 2 · 2010–2014<small>Institucionalização da formação de servidores</small>','Etapa 3 · 2016–2023<small>Integração entre estratégia, gestão de pessoas e cooperação</small>','Etapa 4 · 2025<small>Criação da ENAJU</small>'].forEach(function(t){ host.appendChild(el('div','h',t)); });
+    var rows=[
+      ['Ancoragem normativa','EC 45; Res. STJ 3; Lei 11.364','Res. 111; Res. ENFAM 1/2011; Res. 159','','Res. 643, art. 1.º'],
+      ['Capacidades estatais','Res. 70','Res. 192','Res. 240','Res. 643, art. 3.º'],
+      ['Planejamento e monitoramento','IN 25','Res. 159, arts. 7.º e 8.º','Res. 198; Res. 325','Res. 643, art. 3.º'],
+      ['Governança em rede','','Res. 111; Res. 192','Res. ENFAM 1/2023','Res. 643, art. 4.º'],
+      ['Mandato central ampliado','','Res. 192','Res. 325','Res. 643, arts. 2.º e 3.º']
+    ];
+    rows.forEach(function(r,i){
+      var ls=(i===rows.length-1)?' lastr':'';
+      var row=el('div','mcrow step'); row.setAttribute('data-step',String(i+1));
+      row.appendChild(el('div','nm'+ls,r[0]));
+      for(var c=1;c<5;c++){
+        row.appendChild(r[c]? el('div','cell'+ls,'<i class="mk mk-s" style="background:var(--accent)"></i><span>'+r[c]+'</span>') : el('div','cell none'+ls,'–'));
+      }
+      host.appendChild(row);
+    });
+  })();
+
+  // board
+  (function(){
+    var host=document.getElementById('board'); if(!host) return;
+    var hs=['Dimensão','1 Inicial','2 Formalizado','3 Implementado','4 Monitorado','5 Incorporado à revisão'];
+    hs.forEach(function(t){ var d=el('div','h step',t); d.setAttribute('data-step','1'); host.appendChild(d); });
+    var rows=[
+      ['Mandato institucional','A','Atribuições em definição','Mandato formal exercido com registros','Mandato revisado por evidências de funcionamento'],
+      ['Governança','A·B','Papéis e fluxos em estruturação','Instâncias funcionam com registros','Decisões são monitoradas e revisadas'],
+      ['Planejamento','A·B','Ações organizadas por demandas imediatas','Plano integrado a prioridades institucionais','Planejamento revisado por avaliação'],
+      ['Portfólio formativo','A·B','Oferta reunida em ações avulsas','Portfólio estruturado por competências','Trilhas ajustadas por evidências de aprendizagem'],
+      ['Dados educacionais','A·B','Registros distribuídos entre sistemas ou unidades','Dados integrados e acompanhados','Dados usados para decisão e melhoria'],
+      ['Avaliação da aprendizagem','A·B','Registro de presença e satisfação','Pré/pós-teste ou avaliação prática','Resultados alteram desenho pedagógico'],
+      ['Transferência','B','Aplicação acompanhada de forma inicial','Aplicação verificada por instrumentos','Resultados orientam gestão e suporte'],
+      ['Cooperação em rede','A·B','Trocas e acordos pontuais','Projetos e conteúdos compartilhados','Coprodução avaliada e revisada'],
+      ['Equidade de capacidades','A','Apoio definido por demanda','Apoio orientado por capacidade instalada','Redução de lacunas monitorada']
+    ];
+    rows.forEach(function(r,i){
+      var lc=(i===rows.length-1)?' lastc':'';
+      var d=el('div','dm step'+lc,'<span>'+r[0]+'</span><span class="md">'+r[1]+'</span>'); d.setAttribute('data-step','1'); host.appendChild(d);
+      [[2,'an',r[2]],[5,'tbd','a construir na validação'],[3,'an',r[3]],[5,'tbd','a construir na validação'],[4,'an',r[4]]].forEach(function(c){
+        var x=el('div',c[1]+' step'+lc,c[2]); x.setAttribute('data-step',String(c[0])); host.appendChild(x);
+      });
+    });
+  })();
+
+  /* ---------- engine ---------- */
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  /* no maximo 2 etapas por slide (uma transicao) */
+  slides.forEach(function(s){ var els=Array.prototype.slice.call(s.querySelectorAll('.step')); var vals=[]; els.forEach(function(e){ var v=parseInt(e.getAttribute('data-step'),10)||0; if(v&&vals.indexOf(v)<0) vals.push(v); }); vals.sort(function(a,b){return a-b;}); if(vals.length>2){ els.forEach(function(e){ var v=parseInt(e.getAttribute('data-step'),10)||0; var i=vals.indexOf(v); if(i>=0) e.setAttribute('data-step',String(Math.floor(i*2/vals.length)+1)); }); } });
+  var total=slides.length, MAIN=18, cur=0, step=0, lastMain=0;
+  var progress=document.getElementById('progress'), counter=document.getElementById('counter');
+  var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+  var panel=document.getElementById('notesPanel'), notesBody=document.getElementById('notesBody');
+  function stepsOf(s){ return Array.prototype.slice.call(s.querySelectorAll('.step')); }
+  var maxes=slides.map(function(s){ var m=0; stepsOf(s).forEach(function(e){ var v=parseInt(e.getAttribute('data-step'),10)||0; if(v>m) m=v; }); return Math.min(m,1); });
+
+  function render(){
+    slides.forEach(function(s,i){ s.classList.toggle('active',i===cur); });
+    var s=slides[cur]; if(cur<MAIN) lastMain=cur;
+    document.body.classList.toggle('on-dark',s.classList.contains('slide--dark'));
+    document.body.classList.toggle('is-cover',cur===0);
+    stepsOf(s).forEach(function(e){ var v=parseInt(e.getAttribute('data-step'),10)||0; e.classList.add('on'); });
+    progress.style.width=(Math.min(cur+1,MAIN)/MAIN*100)+'%';
+    counter.textContent=(cur<MAIN?((cur+1)+' / '+MAIN):('Reserva '+(cur-MAIN+1)+' / '+(total-MAIN)))+(maxes[cur]>1?' · etapa '+step+'/'+maxes[cur]:'');
+    prevBtn.disabled=((cur===0||cur===MAIN) && step<=1);
+    nextBtn.disabled=(cur===(cur<MAIN?MAIN-1:total-1) && step>=maxes[cur]);
+    var n=s.querySelector('.notes'); notesBody.innerHTML=n?n.innerHTML:'';
+    try{ localStorage.setItem('enajus-deck-v3',String(cur)); }catch(e){}
+  }
+  function next(){
+    if(step<maxes[cur]){ step++; }
+    else if(cur<(cur<MAIN?MAIN-1:total-1)){ cur++; step=Math.min(1,maxes[cur]); }
+    render();
+  }
+  function prev(){
+    if(step>1){ step--; }
+    else if(cur>0 && cur!==MAIN){ cur--; step=maxes[cur]; }
+    render();
+  }
+  nextBtn.addEventListener('click',next);
+  prevBtn.addEventListener('click',prev);
+  document.addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k===' '||k==='PageDown'){ e.preventDefault(); next(); }
+    else if(k==='ArrowLeft'||k==='PageUp'){ e.preventDefault(); prev(); }
+    else if(k==='Home'){ e.preventDefault(); cur=0; step=Math.min(1,maxes[0]); render(); }
+    else if(k==='End'){ e.preventDefault(); cur=MAIN-1; step=maxes[cur]; render(); }
+    else if(k==='r'||k==='R'){ if(cur<MAIN){ lastMain=cur; cur=MAIN; step=Math.min(1,maxes[cur]); } else { cur=lastMain; step=maxes[cur]; } render(); }
+    else if(k==='n'||k==='N'){ panel.classList.toggle('open'); }
+    else if(k==='f'||k==='F'){
+      try{ if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); } else { document.exitFullscreen(); } }catch(err){}
+    }
+  });
+  var tx=null;
+  document.addEventListener('touchstart',function(e){ tx=e.changedTouches[0].clientX; },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(tx===null) return; var dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>50){ if(dx<0) next(); else prev(); } tx=null;
+  },{passive:true});
+
+  try{
+    var sv=localStorage.getItem('enajus-deck-v3');
+    if(sv!==null){ var i=parseInt(sv,10); if(!isNaN(i)&&i>=0&&i<total){ cur=i; step=maxes[cur]; } }
+  }catch(e){}
+  if(cur===0){ step=Math.min(1,maxes[0]); }
+  render();
+})();
+</script>
+</body>
+</html>
