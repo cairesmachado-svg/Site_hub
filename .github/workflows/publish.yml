@@ -32,7 +32,7 @@ jobs:
           cp index.html styles.css script.js .nojekyll _site/
           cp -r assets publications _site/
           mkdir -p _site/en && cp en/index.html _site/en/
-          for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus; do
+          for slug in arenas regulatory-intermediaries arqjud pesquisa-agentiva labjus pjnps enaju; do
             mkdir -p "_site/projects/$slug/en"
             cp "projects/$slug/index.html" "_site/projects/$slug/index.html"
             cp "projects/$slug/en/index.html" "_site/projects/$slug/en/index.html"
