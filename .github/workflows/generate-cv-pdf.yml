@@ -63,7 +63,7 @@ jobs:
               page.apply_redactions()
               if replacement:
                   r=rects[0]
-                  font="helvB" if bold else "helv"
+                  font="hebo" if bold else "helv"
                   page.insert_text((r.x0, r.y1-1.5), replacement, fontsize=size, fontname=font, color=(0.28,0.31,0.34))
 
           doc.save(out, garbage=4, deflate=True)
