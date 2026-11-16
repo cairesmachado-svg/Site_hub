@@ -10,7 +10,7 @@ https://cairesmachado-svg.github.io/Site_hub/
 | `index.html` | Página inicial (raiz do site) |
 | `en/index.html` | Redireciona para a raiz (mantém links antigos) |
 | `publications/index.html` | Lista completa de publicações, com PDFs quando há arquivo público verificado |
-| `projects/<projeto>/en/index.html` | Páginas dos projetos: arenas, regulatory-intermediaries, arqjud, pesquisa-agentiva, labjus |
+| `projects/<projeto>/en/index.html` | Páginas dos projetos: arenas, regulatory-intermediaries, arqjud, pesquisa-agentiva, labjus, pjnps, enaju |
 | `projects/<projeto>/index.html` | Redireciona para a página do projeto |
 | `styles.css` | Sistema visual único para todas as páginas (barra marinho #05336B, fundo branco, Source Sans 3) |
 | `script.js` | Menu no celular e status do repositório nas páginas de projeto |
@@ -41,3 +41,11 @@ direta pela branch `main` geram o mesmo resultado.
 bash -c "$(python3 -c "import yaml;print([s for s in yaml.safe_load(open('.github/workflows/publish.yml'))['jobs']['build']['steps'] if s.get('name','').startswith('Prepare')][0]['run'])")"
 python3 -m http.server -d _site 8000
 ```
+
+## Atualização de conteúdo · 16/11/2026
+
+- Página inicial: seção de avanços recentes, projetos PJNPs 2.0 e ENAJU, links diretos para as páginas internas e atualização de apresentações passadas.
+- Páginas de projeto: ARENAS, Regulatory Intermediaries, ARQJUD e Agentic Scientific Research atualizadas com distinção entre trabalho em curso, validação pendente e resultados publicados.
+- Novas páginas de projeto: PJNPs 2.0 e ENAJU; o fluxo do GitHub Pages foi expandido para publicá-las.
+- Publicações: referências existentes mantidas; trabalhos em elaboração identificados como não publicados; ENAJUS 2026 já não é apresentado como evento futuro.
+- Rascunhos e dados privados não foram incorporados ao repositório público. Os títulos descritivos de trabalhos em curso não são títulos bibliográficos confirmados.
