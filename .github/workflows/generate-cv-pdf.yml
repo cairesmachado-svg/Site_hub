@@ -16,8 +16,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: cv-pdf-generation
+  cancel-in-progress: false
 
 jobs:
   generate:
@@ -87,21 +87,3 @@ jobs:
             git commit -m "Publish color CV without postdoctoral references"
             git push
           fi
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload site including fixed PDF
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-  deploy:
-    needs: generate
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
